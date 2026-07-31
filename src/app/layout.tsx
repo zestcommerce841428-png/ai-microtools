@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { categories, toolSummaries } from "@/lib/tools/summaries";
 import ThemeToggle from "@/components/ThemeToggle";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 // Runs before hydration to apply the saved/system theme without a flash of
@@ -39,10 +40,31 @@ export const metadata: Metadata = {
     url: SITE_URL,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
   },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE_URL}/tools?category={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/opengraph-image`,
 };
 
 export default function RootLayout({
@@ -58,6 +80,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white dark:bg-black">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <JsonLd data={websiteJsonLd} />
+        <JsonLd data={organizationJsonLd} />
         <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
             <Link href="/" className="font-semibold text-zinc-900 dark:text-zinc-50">

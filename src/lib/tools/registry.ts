@@ -7762,6 +7762,51 @@ export const tools: ToolConfig[] = [
       user: `Generate 4 knowledge base intro options for an article about: "${values.topic}". Tone: ${values.tone || "Clear & Simple"}. Return only a numbered list.`,
     }),
   },
+  {
+    slug: "emoji-generator",
+    name: "Emoji Generator",
+    tagline: "The right emoji combo for your caption, bio, or text.",
+    description:
+      "Free AI emoji generator. Describe your topic or mood and get ready-to-use emoji combinations for captions, bios, and messages.",
+    category: "Social Media",
+    resultCount: 12,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "topic",
+        label: "What's it for?",
+        placeholder: "e.g. a beach vacation caption, celebrating a promotion",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Fun", "Aesthetic", "Minimal", "Bold"],
+      },
+    ],
+    howTo: [
+      "Describe what the emojis are for — a caption, bio line, or message.",
+      "Pick a style.",
+      "Generate and paste your favorite combo directly into your post.",
+    ],
+    faq: [
+      {
+        question: "Will these display the same on every device?",
+        answer: "Mostly, but emoji rendering can vary slightly between iOS, Android, and platforms — preview your post before publishing if the exact look matters.",
+      },
+      {
+        question: "How many emojis are in each combo?",
+        answer: "Usually 3-6 — enough to add personality without overwhelming the text around them.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a social media expert who picks emoji combinations that fit a given topic or mood. Each result is 3-6 emojis only, no words, no explanations, no punctuation other than the emojis themselves. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 emoji combo options for: "${values.topic}". Style: ${values.style || "Fun"}. Return only a numbered list of emoji combos, no text.`,
+    }),
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolConfig | undefined {
