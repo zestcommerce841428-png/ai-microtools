@@ -1,13 +1,13 @@
 # AI Microtools
 
-47+ free, no-signup AI generators (business names, resumes, social bios, wedding speeches, and more) across Business, Marketing, Social Media, Career, Life Events, Fun, and Writing. Monetized by AdSense + affiliate links, not subscriptions — so the product goal is traffic and repeat use, not conversion.
+170+ free AI generators (business names, resumes, social bios, wedding speeches, and more) across Business, Marketing, Social Media, Career, Life Events, Fun, Writing, Ecommerce, and more. A free account is required to generate (no credit card, ever). Monetized by AdSense + affiliate links, not subscriptions — so the product goal is traffic and repeat use, not conversion.
 
 ## Stack
 
 - **Next.js 16.2** (App Router) + **Tailwind CSS**
 - **OpenRouter** for generation — see [Model choice](#model-choice) below
-- **Supabase** for response caching + per-IP daily rate limiting (optional locally, required in prod)
-- **Cloudflare** in front for DNS/proxy, Turnstile (bot protection), and edge caching
+- **Supabase** for Auth (accounts), response caching, and per-user daily rate limiting
+- **Cloudflare** Turnstile protects both generation requests and the signup/login/forgot-password forms (via Supabase Auth's built-in CAPTCHA support)
 - **Vercel** for hosting, with GitHub Actions running lint + build on every push/PR
 
 ## Model choice
@@ -22,11 +22,16 @@ last-resort fallback for reliability during a paid-model outage, not for routine
 
 1. Client submits the form → `POST /api/generate/[slug]`
 2. Cloudflare Turnstile token is verified (skipped if `TURNSTILE_SECRET_KEY` isn't set)
-3. Per-IP daily rate limit checked in Supabase (skipped if Supabase env vars aren't set)
-4. Input is hashed; if that hash is already in `generation_cache`, the cached result is returned — no OpenRouter call
-5. Otherwise OpenRouter is called (free model → cheap fallback), the result is cached, then returned
+3. The request is rejected with `401` unless the caller has a valid Supabase session — enforced
+   server-side regardless of what the UI does, so it can't be bypassed by calling the API directly.
+   The `ToolForm` component shows a signup/login popup client-side for a clean UX, but that's just a
+   convenience layer, not the actual security boundary.
+4. Per-user daily rate limit checked in Supabase (skipped if Supabase env vars aren't set)
+5. Input is hashed; if that hash is already in `generation_cache`, the cached result is returned — no OpenRouter call
+6. Otherwise OpenRouter is called (free model → cheap fallback), the result is cached and saved to the
+   user's `saved_generations` history, then returned
 
-This means **local dev works with zero setup beyond an OpenRouter key** — Supabase and Turnstile degrade gracefully to "off" until configured.
+This means **local dev works with zero setup beyond an OpenRouter key and a Supabase project** — Turnstile degrades gracefully to "off" until configured, but auth is always required since accounts are core to the product now.
 
 ## Local setup
 
@@ -39,9 +44,9 @@ npm run dev
 
 ## Before deploying
 
-1. **Supabase**: create a project, run [`supabase/schema.sql`](supabase/schema.sql) in the SQL editor, then set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
+1. **Supabase**: create a project, run [`supabase/schema.sql`](supabase/schema.sql) in the SQL editor, then set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (server) and `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` (browser, used by the Auth client).
 2. **OpenRouter**: set a monthly spend limit / only prepay the credit you're willing to risk — this is the actual hard cap on cost, not the app's own logic.
-3. **Cloudflare**: point your domain's DNS through Cloudflare (proxied), create a Turnstile widget, and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY`. This is what stops bots from running up your OpenRouter bill.
+3. **Cloudflare**: point your domain's DNS through Cloudflare (proxied), create a Turnstile widget, and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY`. Also enable Turnstile as Supabase Auth's CAPTCHA provider (Auth settings → Bot and Abuse Protection, or via the Management API's `config/auth` endpoint with `security_captcha_provider: "turnstile"`) so signup/login/password-reset are protected too, not just generation.
 4. **Vercel**: deploy the repo, add all env vars from `.env.example` in the project settings.
 5. **AdSense**: each tool page already has intro copy, a "How it works" section, and an FAQ — real content, not just a bare input box, which matters for AdSense approval. Add your AdSense script/ad units where `<AdSlot />` is rendered in [`src/app/tools/[slug]/page.tsx`](<src/app/tools/[slug]/page.tsx>).
 

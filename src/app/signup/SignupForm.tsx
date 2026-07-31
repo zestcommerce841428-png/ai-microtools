@@ -1,15 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { fieldClass, labelClass, buttonClass } from "@/components/authFormStyles";
+import TurnstileWidget from "@/components/TurnstileWidget";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+
+  const handleVerify = useCallback((token: string) => setTurnstileToken(token), []);
+  const needsVerification = Boolean(TURNSTILE_SITE_KEY) && !turnstileToken;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -20,7 +27,10 @@ export default function SignupForm() {
     const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${window.location.origin}/account` },
+      options: {
+        emailRedirectTo: `${window.location.origin}/account`,
+        captchaToken: turnstileToken ?? undefined,
+      },
     });
 
     setLoading(false);
@@ -66,7 +76,8 @@ export default function SignupForm() {
           autoComplete="new-password"
         />
       </label>
-      <button type="submit" disabled={loading} className={buttonClass}>
+      {TURNSTILE_SITE_KEY && <TurnstileWidget siteKey={TURNSTILE_SITE_KEY} onVerify={handleVerify} />}
+      <button type="submit" disabled={loading || needsVerification} className={buttonClass}>
         {loading ? "Creating account..." : "Sign up"}
       </button>
       {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}

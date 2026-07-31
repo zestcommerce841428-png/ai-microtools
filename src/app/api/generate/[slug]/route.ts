@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { getToolBySlug } from "@/lib/tools/registry";
 import { generateWithOpenRouter, parseListResponse } from "@/lib/ai/openrouter";
 import { getCachedResult, setCachedResult, hashInput } from "@/lib/ai/cache";
-import { checkAndIncrementRateLimit, checkAndIncrementUserRateLimit } from "@/lib/ai/rateLimit";
+import { checkAndIncrementUserRateLimit } from "@/lib/ai/rateLimit";
 import { verifyTurnstile } from "@/lib/ai/turnstile";
 import { saveGenerationForUser } from "@/lib/ai/history";
 import { createServerSupabaseClient } from "@/lib/supabase/serverAuth";
@@ -54,16 +54,21 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     return Response.json({ error: "Verification failed. Please retry." }, { status: 403 });
   }
 
-  // Signed-in users (optional — every tool works fine anonymously) get a
-  // higher daily limit keyed by account instead of IP.
+  // A free account is required to generate — this is enforced here regardless
+  // of what the UI does, so it can't be bypassed by calling the API directly.
   const sessionClient = await createServerSupabaseClient();
   const {
     data: { user: authUser },
   } = await sessionClient.auth.getUser();
 
-  const rateLimit = authUser
-    ? await checkAndIncrementUserRateLimit(authUser.id, tool.slug)
-    : await checkAndIncrementRateLimit(ip, tool.slug);
+  if (!authUser) {
+    return Response.json(
+      { error: "Please log in or sign up (free) to use this tool.", requiresAuth: true },
+      { status: 401 }
+    );
+  }
+
+  const rateLimit = await checkAndIncrementUserRateLimit(authUser.id, tool.slug);
 
   if (!rateLimit.allowed) {
     return Response.json(
@@ -76,9 +81,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
   const cached = await getCachedResult(tool.slug, inputHash);
   if (cached) {
-    if (authUser) {
-      await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, cached);
-    }
+    await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, cached);
     return Response.json({ results: cached, cached: true });
   }
 
@@ -126,10 +129,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   }
 
   await setCachedResult(tool.slug, inputHash, values, results, generated.model);
-
-  if (authUser) {
-    await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, results);
-  }
+  await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, results);
 
   return Response.json({ results, cached: false });
 }

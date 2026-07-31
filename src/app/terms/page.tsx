@@ -20,9 +20,9 @@ export default function TermsPage() {
       <h2>The service</h2>
       <p>
         {SITE_NAME} provides free, AI-generated text suggestions (names, messages, drafts, and
-        similar) with no signup required. The service is provided &ldquo;as is&rdquo; — we
-        don&apos;t guarantee uninterrupted availability, and results may be rate-limited per tool to
-        keep the service sustainable.
+        similar). A free account is required to generate results. The service is provided
+        &ldquo;as is&rdquo; — we don&apos;t guarantee uninterrupted availability, and results may be
+        rate-limited per tool to keep the service sustainable.
       </p>
 
       <h2>AI-generated content</h2>

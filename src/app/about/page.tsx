@@ -15,15 +15,18 @@ export default function AboutPage() {
     <StaticPage title={`About ${SITE_NAME}`}>
       <p>
         {SITE_NAME} is a collection of {toolSummaries.length}+ free, AI-powered generators —
-        business names, resumes, social bios, wedding speeches, product listings, and more. No
-        signup, no account, no credit card. Type something in, get results, copy what you like.
+        business names, resumes, social bios, wedding speeches, product listings, and more. A free
+        account is required to generate (it takes about 10 seconds), but there&apos;s never a
+        credit card or subscription involved. Type something in, get results, copy what you like.
       </p>
 
       <h2>Why it&apos;s free</h2>
       <p>
         There&apos;s no subscription because the goal isn&apos;t to sell you a plan — it&apos;s to
         be useful enough that you come back. The site is supported by ads and the occasional
-        affiliate link, which means it stays free to use no matter how often you need it.
+        affiliate link, which means it stays free to use no matter how often you need it. The free
+        account requirement exists to keep the service sustainable and abuse-free, not to charge
+        you anything.
       </p>
 
       <h2>How it works</h2>

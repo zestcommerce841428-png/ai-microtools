@@ -1,8 +1,11 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { ToolConfig } from "@/lib/tools/types";
 import TurnstileWidget from "./TurnstileWidget";
+import AuthGateModal from "./AuthGateModal";
+import { createClient } from "@/lib/supabase/client";
 
 // Only the serializable fields the form needs — passing the full ToolConfig
 // (which includes the buildPrompt function) would fail client-component
@@ -16,6 +19,7 @@ interface ToolFormProps {
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function ToolForm({ tool }: ToolFormProps) {
+  const pathname = usePathname();
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(tool.inputFields.map((field) => [field.name, field.options?.[0] ?? ""]))
   );
@@ -24,6 +28,21 @@ export default function ToolForm({ tool }: ToolFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+
+  // Server always enforces this via a 401 regardless of this client-side
+  // check — this is just so logged-out visitors get a clear prompt instead
+  // of a confusing generic error, without gating the page itself (tool pages
+  // stay fully server-rendered and crawlable; only the generate action is gated).
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data }) => {
+      const isLoggedIn = Boolean(data.session);
+      setLoggedIn(isLoggedIn);
+      if (!isLoggedIn) setShowAuthGate(true);
+    });
+  }, []);
 
   const handleVerify = useCallback((token: string) => setTurnstileToken(token), []);
 
@@ -31,6 +50,12 @@ export default function ToolForm({ tool }: ToolFormProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (!loggedIn) {
+      setShowAuthGate(true);
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setResults(null);
@@ -45,7 +70,11 @@ export default function ToolForm({ tool }: ToolFormProps) {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong. Please try again.");
+        if (data.requiresAuth) {
+          setShowAuthGate(true);
+        } else {
+          setError(data.error ?? "Something went wrong. Please try again.");
+        }
         return;
       }
 
@@ -65,6 +94,10 @@ export default function ToolForm({ tool }: ToolFormProps) {
 
   return (
     <div className="w-full max-w-2xl">
+      {showAuthGate && (
+        <AuthGateModal redirectTo={pathname} onDismiss={() => setShowAuthGate(false)} />
+      )}
+
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"

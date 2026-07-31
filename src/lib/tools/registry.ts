@@ -6,7 +6,7 @@ export const tools: ToolConfig[] = [
     name: "Business Name Generator",
     tagline: "Get 10 brandable name ideas in seconds.",
     description:
-      "Free AI business name generator. Enter what your business does and get instant, brandable name ideas — no signup required.",
+      "Free AI business name generator. Enter what your business does and get instant, brandable name ideas.",
     category: "Business",
     resultCount: 10,
     maxTokens: 220,
@@ -38,7 +38,7 @@ export const tools: ToolConfig[] = [
       },
       {
         question: "Is this free?",
-        answer: "Yes, completely free with no signup or limits beyond fair daily use.",
+        answer: "Yes — a free account is required to generate, but there's never a credit card or subscription.",
       },
     ],
     buildPrompt: (values) => ({

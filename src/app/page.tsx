@@ -22,18 +22,26 @@ export default function Home() {
     <div className="flex flex-1 flex-col">
       <section className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 py-24 text-center">
         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-5xl">
-          Free AI Tools, Zero Signup
+          Free AI Tools, One-Time Signup
         </h1>
         <p className="max-w-xl text-lg text-zinc-600 dark:text-zinc-400">
           {toolSummaries.length}+ AI-powered generators for business names, resumes, social bios,
-          wedding speeches, and more — generated instantly, no account needed.
+          wedding speeches, and more. Free forever — just sign up once to start generating.
         </p>
-        <Link
-          href="/tools"
-          className="rounded-full bg-zinc-900 px-6 py-3 font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
-        >
-          Browse all {toolSummaries.length} tools
-        </Link>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link
+            href="/signup"
+            className="rounded-full bg-zinc-900 px-6 py-3 font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+          >
+            Sign up free
+          </Link>
+          <Link
+            href="/tools"
+            className="rounded-full border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
+          >
+            Browse all {toolSummaries.length} tools
+          </Link>
+        </div>
       </section>
 
       <section className="mx-auto w-full max-w-5xl px-4 pb-16">

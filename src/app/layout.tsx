@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 });
 
 const title = "AI Microtools — Free AI Generators";
-const description = `${toolSummaries.length}+ free AI-powered generators for business names, slogans, bios, resumes, and more. No signup, no credit card.`;
+const description = `${toolSummaries.length}+ free AI-powered generators for business names, slogans, bios, resumes, and more. Free account required, no credit card.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

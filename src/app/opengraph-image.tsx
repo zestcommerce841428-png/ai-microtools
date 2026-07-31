@@ -23,7 +23,7 @@ export default function Image() {
       >
         <div style={{ display: "flex", fontSize: 40, fontWeight: 700 }}>AI Microtools</div>
         <div style={{ display: "flex", marginTop: 32, fontSize: 68, fontWeight: 800, lineHeight: 1.1 }}>
-          Free AI Tools, Zero Signup
+          Free AI Tools, One-Time Signup
         </div>
         <div style={{ display: "flex", marginTop: 28, fontSize: 32, color: "#a1a1aa" }}>
           {toolSummaries.length}+ AI-powered generators — business names, resumes, social bios, and more.

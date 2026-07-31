@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Free AI Tools",
-  description: `Browse ${toolSummaries.length}+ free AI-powered generators — no signup required.`,
+  description: `Browse ${toolSummaries.length}+ free AI-powered generators — free account required to generate.`,
   alternates: { canonical: `${SITE_URL}/tools` },
 };
 
@@ -36,7 +36,7 @@ export default async function ToolsIndexPage({
       <div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">Free AI Tools</h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          {toolSummaries.length}+ tools. No signup. No credit card. Just generate.
+          {toolSummaries.length}+ tools. Free forever — sign up once to start generating.
         </p>
       </div>
 
