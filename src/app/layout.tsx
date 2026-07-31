@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { categories, toolSummaries } from "@/lib/tools/summaries";
 import ThemeToggle from "@/components/ThemeToggle";
+import AuthStatus from "@/components/AuthStatus";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
@@ -100,6 +101,7 @@ export default function RootLayout({
               >
                 Blog
               </Link>
+              <AuthStatus />
               <ThemeToggle />
             </nav>
           </div>

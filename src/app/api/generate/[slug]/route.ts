@@ -2,8 +2,10 @@ import type { NextRequest } from "next/server";
 import { getToolBySlug } from "@/lib/tools/registry";
 import { generateWithOpenRouter, parseListResponse } from "@/lib/ai/openrouter";
 import { getCachedResult, setCachedResult, hashInput } from "@/lib/ai/cache";
-import { checkAndIncrementRateLimit } from "@/lib/ai/rateLimit";
+import { checkAndIncrementRateLimit, checkAndIncrementUserRateLimit } from "@/lib/ai/rateLimit";
 import { verifyTurnstile } from "@/lib/ai/turnstile";
+import { saveGenerationForUser } from "@/lib/ai/history";
+import { createServerSupabaseClient } from "@/lib/supabase/serverAuth";
 
 // Web Crypto (used for hashing) is available on both runtimes; edge keeps
 // this cheap and fast since there's no Node-specific API in the hot path.
@@ -52,7 +54,17 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     return Response.json({ error: "Verification failed. Please retry." }, { status: 403 });
   }
 
-  const rateLimit = await checkAndIncrementRateLimit(ip, tool.slug);
+  // Signed-in users (optional — every tool works fine anonymously) get a
+  // higher daily limit keyed by account instead of IP.
+  const sessionClient = await createServerSupabaseClient();
+  const {
+    data: { user: authUser },
+  } = await sessionClient.auth.getUser();
+
+  const rateLimit = authUser
+    ? await checkAndIncrementUserRateLimit(authUser.id, tool.slug)
+    : await checkAndIncrementRateLimit(ip, tool.slug);
+
   if (!rateLimit.allowed) {
     return Response.json(
       { error: "Daily limit reached for this tool. Try again tomorrow." },
@@ -64,6 +76,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
   const cached = await getCachedResult(tool.slug, inputHash);
   if (cached) {
+    if (authUser) {
+      await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, cached);
+    }
     return Response.json({ results: cached, cached: true });
   }
 
@@ -111,6 +126,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   }
 
   await setCachedResult(tool.slug, inputHash, values, results, generated.model);
+
+  if (authUser) {
+    await saveGenerationForUser(authUser.id, tool.slug, tool.name, values, results);
+  }
 
   return Response.json({ results, cached: false });
 }

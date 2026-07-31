@@ -1,16 +1,20 @@
 import type { NextConfig } from "next";
 
 // Turnstile's widget script runs in the browser and needs its own iframe/script
-// origin allowed; everything else stays locked to 'self'. Next.js still needs
-// 'unsafe-inline' for its own hydration bootstrap script and Tailwind's inline
-// styles — tightening further would require a nonce-based setup.
+// origin allowed; the Supabase Auth client (signup/login/reset/session) calls
+// the Supabase API directly from the browser, so its origin needs connect-src.
+// Everything else stays locked to 'self'. Next.js still needs 'unsafe-inline'
+// for its own hydration bootstrap script and Tailwind's inline styles —
+// tightening further would require a nonce-based setup.
+const supabaseOrigin = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
-  "connect-src 'self' https://challenges.cloudflare.com",
+  `connect-src 'self' https://challenges.cloudflare.com ${supabaseOrigin}`.trim(),
   "frame-src https://challenges.cloudflare.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

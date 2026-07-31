@@ -2,6 +2,7 @@ import { sha256Hex } from "@/lib/hash";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const DAILY_LIMIT_PER_IP_PER_TOOL = Number(process.env.DAILY_LIMIT_PER_IP_PER_TOOL ?? 20);
+const DAILY_LIMIT_PER_USER_PER_TOOL = Number(process.env.DAILY_LIMIT_PER_USER_PER_TOOL ?? 100);
 
 export async function checkAndIncrementRateLimit(
   ip: string,
@@ -32,6 +33,41 @@ export async function checkAndIncrementRateLimit(
     .upsert(
       { ip_hash: ipHash, day, tool_slug: toolSlug, count: currentCount + 1 },
       { onConflict: "ip_hash,day,tool_slug" }
+    );
+
+  return { allowed: true };
+}
+
+/** Higher limit for signed-in users, keyed by user_id instead of IP — one of
+ *  the few real perks of creating an (optional) account. */
+export async function checkAndIncrementUserRateLimit(
+  userId: string,
+  toolSlug: string
+): Promise<{ allowed: boolean }> {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return { allowed: true };
+
+  const day = new Date().toISOString().slice(0, 10);
+
+  const { data: existing } = await supabase
+    .from("user_rate_limits")
+    .select("count")
+    .eq("user_id", userId)
+    .eq("day", day)
+    .eq("tool_slug", toolSlug)
+    .maybeSingle();
+
+  const currentCount = existing?.count ?? 0;
+
+  if (currentCount >= DAILY_LIMIT_PER_USER_PER_TOOL) {
+    return { allowed: false };
+  }
+
+  await supabase
+    .from("user_rate_limits")
+    .upsert(
+      { user_id: userId, day, tool_slug: toolSlug, count: currentCount + 1 },
+      { onConflict: "user_id,day,tool_slug" }
     );
 
   return { allowed: true };
