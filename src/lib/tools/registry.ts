@@ -2131,6 +2131,685 @@ export const tools: ToolConfig[] = [
       user: `Generate 8 video hook lines for a video about: "${values.topic}". Style: ${values.style || "Curiosity Gap"}. Return only a numbered list.`,
     }),
   },
+
+  // --- Ecommerce ---
+  {
+    slug: "amazon-product-title-generator",
+    name: "Amazon Product Title Generator",
+    tagline: "Titles built to match how shoppers actually search.",
+    description:
+      "Free AI Amazon product title generator. Describe your product and get keyword-rich, listing-ready title options.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. stainless steel water bottle, 32oz, insulated, leak-proof",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "category",
+        label: "Category",
+        type: "select",
+        options: ["Home & Kitchen", "Electronics", "Beauty", "Sports & Outdoors", "General"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and its key details (size, material, key feature).",
+      "Pick the closest category.",
+      "Generate, then check your marketplace's current title length and style rules before publishing.",
+    ],
+    faq: [
+      {
+        question: "Will this follow Amazon's exact title rules?",
+        answer: "Amazon's title policies (length limits, banned phrases, capitalization rules) change and vary by category — always check current Seller Central guidelines before publishing.",
+      },
+      {
+        question: "Should I stuff in every keyword I can think of?",
+        answer: "No — Amazon penalizes keyword-stuffed titles. These are written to lead with the most important, search-relevant terms first.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce listing optimization expert who writes clear, keyword-rich Amazon product titles (leading with the most important search terms, avoiding keyword stuffing), each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 Amazon product title options for: "${values.product}". Category: ${values.category || "General"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "amazon-bullet-points-generator",
+    name: "Amazon Bullet Points Generator",
+    tagline: "Feature bullets that actually sell the benefit.",
+    description:
+      "Free AI Amazon bullet point generator. Describe your product's features and get benefit-focused listing bullets.",
+    category: "Ecommerce",
+    resultCount: 5,
+    maxTokens: 420,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key features",
+        placeholder: "e.g. wireless earbuds: 30hr battery, waterproof, noise cancelling",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Technical/Detailed", "Simple", "Premium"],
+      },
+    ],
+    howTo: [
+      "List your product's name and key features.",
+      "Pick a tone.",
+      "Generate — you'll get 5 bullets, one per feature, ready to paste into your listing.",
+    ],
+    faq: [
+      {
+        question: "How many bullets does Amazon allow?",
+        answer: "Most listings support 5 bullet points, which is what these are built for.",
+      },
+      {
+        question: "Should each bullet lead with a benefit or a feature?",
+        answer: "Both — these are written to open with the feature in caps-style emphasis, then explain the customer benefit, which is the standard high-converting format.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Amazon listing copywriter who writes feature bullets that open with the feature and explain the customer benefit, each 15-25 words, written as a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 Amazon-style bullet points for: "${values.product}". Tone: ${values.tone || "Persuasive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "etsy-shop-name-generator",
+    name: "Etsy Shop Name Generator",
+    tagline: "A name that fits your craft and your niche.",
+    description:
+      "Free AI Etsy shop name generator. Describe what you make or sell and get unique, on-brand shop name ideas.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "product",
+        label: "What do you make or sell?",
+        placeholder: "e.g. handmade ceramic mugs and planters",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Cozy/Handmade", "Modern/Minimal", "Playful", "Elegant"],
+      },
+    ],
+    howTo: [
+      "Describe what you make or sell.",
+      "Pick a style.",
+      "Generate — then check availability on Etsy before you commit.",
+    ],
+    faq: [
+      {
+        question: "How long can an Etsy shop name be?",
+        answer: "Etsy shop names must be 4-20 characters with no spaces — keep that in mind when picking a favorite.",
+      },
+      {
+        question: "Can I change my shop name later?",
+        answer: "Yes, Etsy allows shop name changes, though it's best to pick one you're happy sticking with for branding consistency.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a branding expert who names Etsy shops — short, memorable, no spaces, fitting Etsy's 4-20 character shop name limit. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 Etsy shop name ideas for a shop that sells: "${values.product}". Style: ${values.style || "Cozy/Handmade"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "etsy-listing-title-generator",
+    name: "Etsy Listing Title Generator",
+    tagline: "Titles that match Etsy search, not just look nice.",
+    description:
+      "Free AI Etsy listing title generator. Describe your item and get SEO-friendly, keyword-rich title options.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "item",
+        label: "Item name and key details",
+        placeholder: "e.g. handmade macrame wall hanging, boho style, cotton rope",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Boho", "Minimal", "Vintage", "Modern"],
+      },
+    ],
+    howTo: [
+      "Describe your item and its key details.",
+      "Pick the style that fits.",
+      "Generate and use your favorite, checking it fits Etsy's title length limit.",
+    ],
+    faq: [
+      {
+        question: "How long can an Etsy title be?",
+        answer: "Etsy allows up to 140 characters — these are written keyword-first so the most important terms show up even if truncated.",
+      },
+      {
+        question: "Should I separate keywords with commas or spaces?",
+        answer: "Etsy's search doesn't require commas, but many sellers use them for readability — feel free to adjust punctuation to your preference.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Etsy SEO expert who writes keyword-front-loaded listing titles under 140 characters, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 Etsy listing title options for: "${values.item}". Style: ${values.style || "Boho"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "product-meta-description-generator",
+    name: "Product Meta Description Generator",
+    tagline: "The snippet that gets the click from Google.",
+    description:
+      "Free AI product meta description generator. Describe your product and get SEO meta descriptions for your store's product pages.",
+    category: "Ecommerce",
+    resultCount: 5,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key selling point",
+        placeholder: "e.g. organic cotton baby onesies, 3-pack, hypoallergenic",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Informative", "Urgent", "Friendly"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and its main selling point.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your store platform's meta description field.",
+    ],
+    faq: [
+      {
+        question: "How long should a meta description be?",
+        answer: "Google typically shows up to about 155-160 characters — these are written to fit within that.",
+      },
+      {
+        question: "Does a meta description affect SEO ranking directly?",
+        answer: "Not ranking directly, but a compelling one improves click-through rate from search results, which matters for traffic.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce SEO copywriter who writes meta descriptions under 160 characters, each on a single line, ending with a soft call to action. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 product meta description options for: "${values.product}". Tone: ${values.tone || "Persuasive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "abandoned-cart-email-generator",
+    name: "Abandoned Cart Email Generator",
+    tagline: "Win back the sale without sounding desperate.",
+    description:
+      "Free AI abandoned cart email generator. Describe your product and get ready-to-use recovery email copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 750,
+    inputFields: [
+      {
+        name: "product",
+        label: "What did they leave in their cart?",
+        placeholder: "e.g. a leather weekender bag",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly Nudge", "Urgency/Discount", "Helpful", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe what was left in the cart.",
+      "Pick a tone.",
+      "Generate, then drop your favorite into your email platform's abandoned cart flow.",
+    ],
+    faq: [
+      {
+        question: "Should I offer a discount in this email?",
+        answer: "Try the Urgency/Discount tone if you're comfortable offering one — otherwise the Friendly Nudge or Helpful tones work well without discounting.",
+      },
+      {
+        question: "How many abandoned cart emails should I send?",
+        answer: "Most stores send a short sequence of 2-3 over several days — generate a couple of different tones to use across that sequence.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce email marketer who writes short abandoned cart recovery emails (60-90 words each, written as a single paragraph with no line breaks within an item, including a clear call to action). You respond only with a numbered list — no preamble.",
+      user: `Generate 4 abandoned cart email options for a customer who left this in their cart: "${values.product}". Tone: ${values.tone || "Friendly Nudge"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "product-launch-announcement-generator",
+    name: "Product Launch Announcement Generator",
+    tagline: "Announce it like it matters, because it does.",
+    description:
+      "Free AI product launch announcement generator. Describe your new product and get social/email-ready launch copy.",
+    category: "Ecommerce",
+    resultCount: 5,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "product",
+        label: "What are you launching?",
+        placeholder: "e.g. a new limited-edition scent for our candle line",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Elegant", "Playful", "Straightforward"],
+      },
+    ],
+    howTo: [
+      "Describe what you're launching.",
+      "Pick a tone.",
+      "Generate and use your favorite for social posts, emails, or your homepage banner.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for a restock, not just a new product?",
+        answer: "Yes — just describe it as a restock or 'back in stock' in the input and the tone will adapt.",
+      },
+      {
+        question: "Is this suitable for both email and social media?",
+        answer: "Yes, these are written short enough to work as a social caption or the opening line of a launch email.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce marketing copywriter who writes short, exciting product launch announcements (1-2 sentences each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 5 product launch announcement options for: "${values.product}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "sale-promo-copy-generator",
+    name: "Discount & Sale Promo Copy Generator",
+    tagline: "Sale copy that creates urgency without feeling cheap.",
+    description:
+      "Free AI sale promo copy generator. Describe your discount and get ready-to-use promo lines for social, email, or banners.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "sale",
+        label: "What's the offer?",
+        placeholder: "e.g. 20% off all winter coats, ends Sunday",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Urgent", "Fun", "Premium", "Straightforward"],
+      },
+    ],
+    howTo: [
+      "Describe the offer and any deadline.",
+      "Pick a tone.",
+      "Generate and use your favorite on a banner, email subject, or social post.",
+    ],
+    faq: [
+      {
+        question: "Should I include the exact discount amount?",
+        answer: "Yes — specific numbers ('20% off') generally outperform vague ones ('big savings') in promo copy.",
+      },
+      {
+        question: "Can I use this for a flash sale with a countdown?",
+        answer: "Yes — mention the short deadline in your input and pick the Urgent tone for copy that emphasizes it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a retail marketing copywriter who writes short, punchy sale promo lines. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 sale promo copy options for this offer: "${values.sale}". Tone: ${values.tone || "Urgent"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "return-policy-generator",
+    name: "Return Policy Generator",
+    tagline: "A clear starting draft for your store's return policy.",
+    description:
+      "Free AI return policy generator. Describe your store's return rules and get a customer-friendly policy draft to edit.",
+    category: "Ecommerce",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 900,
+    inputFields: [
+      {
+        name: "rules",
+        label: "Describe your return rules",
+        placeholder: "e.g. 30-day returns, unused items only, customer pays return shipping",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Formal", "Concise"],
+      },
+    ],
+    howTo: [
+      "Describe your return window and any conditions (unused, original packaging, who pays shipping).",
+      "Pick a tone.",
+      "Generate, then have this reviewed against your local consumer protection laws before publishing.",
+    ],
+    faq: [
+      {
+        question: "Is this legal advice?",
+        answer: "No — this is a plain-language starting draft, not legal advice. Return policy requirements vary by country and state, so have a qualified professional review it before publishing.",
+      },
+      {
+        question: "Can I edit the sections after generating?",
+        answer: "Yes — treat it as a template. Adjust the return window, exclusions, and process to match your actual store rules exactly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce policy writer who drafts clear, customer-friendly return policies covering: return window, item condition requirements, refund method and timing, who pays return shipping, and how to start a return. Use plain text section headers and short paragraphs, no markdown symbols like # or **. This is a plain-language template, not legal advice. Respond only with the policy draft — no preamble or closing remarks.",
+      user: `Generate a return policy draft based on these rules: "${values.rules}". Tone: ${values.tone || "Friendly"}.`,
+    }),
+  },
+  {
+    slug: "shipping-policy-generator",
+    name: "Shipping Policy Generator",
+    tagline: "Set clear shipping expectations before checkout, not after.",
+    description:
+      "Free AI shipping policy generator. Describe your shipping options and get a clear policy draft to edit.",
+    category: "Ecommerce",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 900,
+    inputFields: [
+      {
+        name: "rules",
+        label: "Describe your shipping options",
+        placeholder: "e.g. ships within 2 business days, free shipping over $50, US only",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Formal", "Concise"],
+      },
+    ],
+    howTo: [
+      "Describe your processing time, shipping cost/thresholds, and regions you ship to.",
+      "Pick a tone.",
+      "Generate, then double-check it matches your actual carrier commitments before publishing.",
+    ],
+    faq: [
+      {
+        question: "Is this legal advice?",
+        answer: "No — this is a plain-language starting draft, not legal advice. Shipping-related disclosure requirements vary by region, so have this reviewed before publishing.",
+      },
+      {
+        question: "Should I mention delays for holidays or high-demand periods?",
+        answer: "It's a good practice — add a note about seasonal delays in your input if that applies to your store.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce policy writer who drafts clear shipping policies covering: processing time, shipping cost and free-shipping thresholds, regions served, and estimated delivery times. Use plain text section headers and short paragraphs, no markdown symbols like # or **. This is a plain-language template, not legal advice. Respond only with the policy draft — no preamble or closing remarks.",
+      user: `Generate a shipping policy draft based on these details: "${values.rules}". Tone: ${values.tone || "Friendly"}.`,
+    }),
+  },
+  {
+    slug: "review-response-generator",
+    name: "Review Response Generator",
+    tagline: "A thoughtful reply, whether the review is glowing or rough.",
+    description:
+      "Free AI review response generator. Paste a customer review and get a professional, on-brand reply draft.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 700,
+    inputFields: [
+      {
+        name: "review",
+        label: "Paste (or summarize) the customer review",
+        placeholder: "e.g. Loved the product but shipping took way longer than expected.",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm & Grateful", "Professional", "Apologetic", "Concise"],
+      },
+    ],
+    howTo: [
+      "Paste or summarize the review you're responding to.",
+      "Pick a tone that fits — Apologetic works well for a negative review.",
+      "Generate, then personalize with specifics before posting your reply.",
+    ],
+    faq: [
+      {
+        question: "Should I respond to negative reviews publicly?",
+        answer: "Generally yes — a calm, helpful public reply shows other shoppers you take feedback seriously, even if you also follow up privately.",
+      },
+      {
+        question: "Should I offer a refund or replacement in the public reply?",
+        answer: "It's usually better to invite them to contact you directly to resolve specifics, rather than negotiating resolution details in a public reply.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer experience manager who writes thoughtful, genuine responses to customer reviews, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 response options to this customer review: "${values.review}". Tone: ${values.tone || "Warm & Grateful"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "product-comparison-copy-generator",
+    name: "Product Comparison Copy Generator",
+    tagline: "Highlight what makes your product the better pick.",
+    description:
+      "Free AI product comparison copy generator. Describe your product's advantages and get clear comparison talking points.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "advantages",
+        label: "What makes your product better or different?",
+        placeholder: "e.g. lasts 2x longer, made from recycled materials, lifetime warranty",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Confident", "Factual", "Friendly", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe what makes your product better or different — without naming a specific competitor.",
+      "Pick a tone.",
+      "Generate and use your favorites in a comparison table, landing page, or ad.",
+    ],
+    faq: [
+      {
+        question: "Can I name a specific competitor?",
+        answer: "We'd recommend against it — describe your advantage in general terms (e.g. 'vs. standard options') to avoid factual or legal disputes over comparative claims.",
+      },
+      {
+        question: "Do I need to back up these claims?",
+        answer: "Yes — only use claims you can support. Comparative advertising claims can carry legal risk if they're inaccurate or unsubstantiated.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a marketing copywriter who writes honest, confident comparison talking points that highlight a product's advantages without naming or disparaging specific competitors. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 comparison talking points highlighting these advantages: "${values.advantages}". Tone: ${values.tone || "Confident"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "influencer-outreach-email-generator",
+    name: "Influencer Outreach Email Generator",
+    tagline: "A pitch that doesn't read like a mass DM.",
+    description:
+      "Free AI influencer outreach email generator. Describe your brand and offer to get a personalized-feeling pitch draft.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 750,
+    inputFields: [
+      {
+        name: "offer",
+        label: "Your brand and what you're offering",
+        placeholder: "e.g. a skincare brand offering a free product + affiliate commission",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Professional", "Casual"],
+      },
+    ],
+    howTo: [
+      "Describe your brand and what you're offering the creator.",
+      "Pick a tone.",
+      "Generate, then personalize with the creator's name and something specific about their content.",
+    ],
+    faq: [
+      {
+        question: "Should I personalize this before sending?",
+        answer: "Definitely — add the creator's name and reference something specific about their content. Generic-sounding outreach gets ignored or marked as spam.",
+      },
+      {
+        question: "Should I mention FTC/disclosure requirements?",
+        answer: "Yes — if the collaboration is paid or gifted, remind the creator that sponsored content typically needs to be disclosed per advertising regulations in their region.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand partnerships manager who writes warm, non-spammy influencer outreach emails (70-100 words each, single paragraph, no line breaks within an item, with a placeholder for the creator's name). You respond only with a numbered list — no preamble.",
+      user: `Generate 4 influencer outreach email drafts for this offer: "${values.offer}". Tone: ${values.tone || "Friendly"}. Use "[Creator's Name]" as a placeholder. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "loyalty-program-name-generator",
+    name: "Loyalty Program Name Generator",
+    tagline: "A rewards program name people actually remember.",
+    description:
+      "Free AI loyalty program name generator. Describe your brand and get catchy, on-brand rewards program name ideas.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "brand",
+        label: "What's your brand or store about?",
+        placeholder: "e.g. a sustainable activewear brand",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Playful", "Premium", "Simple", "On-Brand Pun"],
+      },
+    ],
+    howTo: [
+      "Describe your brand or store.",
+      "Pick a style.",
+      "Generate and use your favorite to name your rewards or points program.",
+    ],
+    faq: [
+      {
+        question: "Should the program name include the word 'rewards' or 'points'?",
+        answer: "Not necessarily — a distinctive name (like 'The Circle' or 'VIP Crew') often stands out more than a generic 'Rewards Program' label.",
+      },
+      {
+        question: "Can I use this for a referral program instead?",
+        answer: "Yes — the same short, memorable naming approach works well for referral programs too.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand strategist who names customer loyalty and rewards programs — short, memorable, on-brand. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 loyalty program name ideas for: "${values.brand}". Style: ${values.style || "Playful"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "packaging-thank-you-card-generator",
+    name: "Packaging Thank-You Card Generator",
+    tagline: "The little note that makes an order feel personal.",
+    description:
+      "Free AI thank-you card generator for order packaging. Describe your brand and get short, warm insert card messages.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "brand",
+        label: "What's your brand or product?",
+        placeholder: "e.g. a small-batch candle company",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Playful", "Minimal", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe your brand or what you sell.",
+      "Pick a tone.",
+      "Generate and print your favorite as a small insert card for your packaging.",
+    ],
+    faq: [
+      {
+        question: "How long should a packaging insert message be?",
+        answer: "Short — these are written to fit comfortably on a small card, usually 1-2 sentences.",
+      },
+      {
+        question: "Should I include a discount code for their next order?",
+        answer: "It's a nice touch — add a line like 'Use CODE for 10% off your next order' if you want to encourage repeat purchases.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand copywriter who writes short, warm thank-you messages for order packaging inserts, 1-2 sentences each, single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 packaging thank-you card messages for: "${values.brand}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolConfig | undefined {

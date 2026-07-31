@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
-import { categories } from "@/lib/tools/summaries";
+import { categories, toolSummaries } from "@/lib/tools/summaries";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,8 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 const title = "AI Microtools — Free AI Generators";
-const description =
-  "47+ free AI-powered generators for business names, slogans, bios, resumes, and more. No signup, no credit card.";
+const description = `${toolSummaries.length}+ free AI-powered generators for business names, slogans, bios, resumes, and more. No signup, no credit card.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -56,19 +55,27 @@ export default function RootLayout({
             <Link href="/" className="font-semibold text-zinc-900 dark:text-zinc-50">
               AI Microtools
             </Link>
-            <Link
-              href="/tools"
-              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            >
-              All Tools
-            </Link>
+            <nav className="flex items-center gap-5">
+              <Link
+                href="/tools"
+                className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              >
+                All Tools
+              </Link>
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              >
+                Blog
+              </Link>
+            </nav>
           </div>
         </header>
 
         <main className="flex flex-1 flex-col">{children}</main>
 
         <footer className="border-t border-zinc-200 px-4 py-10 dark:border-zinc-800">
-          <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 sm:flex-row sm:justify-between">
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 sm:flex-row sm:justify-between">
             <div className="max-w-sm">
               <p className="font-semibold text-zinc-900 dark:text-zinc-50">{SITE_NAME}</p>
               <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
@@ -76,6 +83,7 @@ export default function RootLayout({
               </p>
             </div>
             <nav aria-label="Tool categories" className="flex flex-col gap-2 text-sm">
+              <p className="font-medium text-zinc-900 dark:text-zinc-100">Categories</p>
               {categories.map((category) => (
                 <Link
                   key={category}
@@ -85,6 +93,24 @@ export default function RootLayout({
                   {category} tools
                 </Link>
               ))}
+            </nav>
+            <nav aria-label="Site" className="flex flex-col gap-2 text-sm">
+              <p className="font-medium text-zinc-900 dark:text-zinc-100">Site</p>
+              <Link href="/about" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                About
+              </Link>
+              <Link href="/blog" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                Blog
+              </Link>
+              <Link href="/contact" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                Contact
+              </Link>
+              <Link href="/privacy-policy" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                Terms of Service
+              </Link>
             </nav>
           </div>
         </footer>
