@@ -1912,6 +1912,7 @@ export const tools: ToolConfig[] = [
     category: "Writing",
     resultCount: 1,
     resultKind: "document",
+    documentStyle: "structured",
     maxTokens: 1100,
     inputFields: [
       {
@@ -2003,6 +2004,7 @@ export const tools: ToolConfig[] = [
     category: "Writing",
     resultCount: 1,
     resultKind: "document",
+    documentStyle: "structured",
     maxTokens: 1100,
     inputFields: [
       {
@@ -2866,6 +2868,7 @@ export const tools: ToolConfig[] = [
     category: "Ecommerce",
     resultCount: 1,
     resultKind: "document",
+    documentStyle: "structured",
     maxTokens: 300,
     inputFields: [
       {
@@ -4339,6 +4342,3424 @@ export const tools: ToolConfig[] = [
       system:
         "You are a brand copywriter who writes short, trustworthy seller/shop bios for marketplace storefronts, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
       user: `Generate 3 seller bio options for: "${values.shop}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Real Estate ---
+  {
+    slug: "real-estate-listing-description-generator",
+    name: "Real Estate Listing Description Generator",
+    tagline: "A description that gets the showing booked.",
+    description:
+      "Free AI real estate listing description generator. Describe the property and get ready-to-use listing copy.",
+    category: "Real Estate",
+    resultCount: 3,
+    maxTokens: 650,
+    inputFields: [
+      {
+        name: "property",
+        label: "Property details",
+        placeholder: "e.g. 3-bed, 2-bath, updated kitchen, large backyard, quiet street",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Luxury", "Straightforward", "Family-Focused"],
+      },
+    ],
+    howTo: [
+      "Describe the property's key details and features.",
+      "Pick a tone that fits the property and buyer.",
+      "Generate and paste your favorite into your MLS or listing site.",
+    ],
+    faq: [
+      {
+        question: "Should I mention exact square footage and price?",
+        answer: "Yes, if you have them — specific numbers build buyer trust, so add them to your input if available.",
+      },
+      {
+        question: "Should I avoid certain words for fair housing compliance?",
+        answer: "Yes — avoid language referencing protected classes (family status, religion, etc.); always review your final listing against local fair housing guidelines before publishing.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate copywriter who writes compelling, fair-housing-compliant listing descriptions (80-120 words each, written as a single paragraph with no line breaks within an item, avoiding language about protected classes). You respond only with a numbered list — no preamble.",
+      user: `Generate 3 real estate listing descriptions for: "${values.property}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "open-house-invitation-generator",
+    name: "Open House Invitation Generator",
+    tagline: "An invite that gets people through the door.",
+    description:
+      "Free AI open house invitation generator. Describe the property and event details to get ready-to-use invite copy.",
+    category: "Real Estate",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "details",
+        label: "Property and open house details",
+        placeholder: "e.g. 3-bed home, Saturday 1-3pm, 123 Main St",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Exciting", "Straightforward"],
+      },
+    ],
+    howTo: [
+      "Enter the property and open house date/time details.",
+      "Pick a tone.",
+      "Generate and use your favorite for a flyer, social post, or email.",
+    ],
+    faq: [
+      {
+        question: "Should I include the full address?",
+        answer: "For public social posts, many agents use just the street name until closer to the event, then share the full address via direct signup — use your judgment based on your usual practice.",
+      },
+      {
+        question: "Can I use this for a virtual open house?",
+        answer: "Yes — mention it's virtual and include the platform/link in your input.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate marketer who writes short, inviting open house announcements (1-2 sentences each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 6 open house invitation options for: "${values.details}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "realtor-bio-generator",
+    name: "Realtor Bio Generator",
+    tagline: "A bio that builds trust before the first call.",
+    description:
+      "Free AI realtor bio generator. Describe your experience and market to get a polished professional bio.",
+    category: "Real Estate",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "background",
+        label: "Your experience and market",
+        placeholder: "e.g. 8 years selling homes in the Denver suburbs, focus on first-time buyers",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Confident"],
+      },
+    ],
+    howTo: [
+      "Describe your experience, specialty, and market.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your website or brokerage profile.",
+    ],
+    faq: [
+      {
+        question: "Should I include my licensing details?",
+        answer: "Add your license number and brokerage as required by your state/region after generating — this tool focuses on the narrative portion.",
+      },
+      {
+        question: "How long should a realtor bio be?",
+        answer: "These run roughly 80-120 words — enough to build trust and highlight your specialty without overwhelming a website visitor.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate branding copywriter who writes trustworthy, professional agent bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 realtor bio options based on: "${values.background}". Tone: ${values.tone || "Professional"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "just-listed-social-post-generator",
+    name: "Just Listed / Just Sold Social Post Generator",
+    tagline: "Social proof that keeps your pipeline warm.",
+    description:
+      "Free AI just listed/just sold social post generator. Describe the property and get ready-to-post social copy.",
+    category: "Real Estate",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "details",
+        label: "Property details and status",
+        placeholder: "e.g. just sold, 4-bed colonial, sold in 5 days over asking",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Professional", "Grateful"],
+      },
+    ],
+    howTo: [
+      "Describe the property and whether it's just listed or just sold.",
+      "Pick a tone.",
+      "Generate and post your favorite alongside your listing photos.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the sale price?",
+        answer: "That's a personal/brokerage policy choice — many agents share general wins ('sold over asking') without the exact figure.",
+      },
+      {
+        question: "Can I use this for a price reduction announcement instead?",
+        answer: "Yes — describe it as a price update in your input and the tone will adapt.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate social media marketer who writes short, engaging just-listed/just-sold posts (1-2 sentences each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 6 social post options for: "${values.details}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "neighborhood-guide-blurb-generator",
+    name: "Neighborhood Guide Blurb Generator",
+    tagline: "Sell the area, not just the address.",
+    description:
+      "Free AI neighborhood guide generator. Describe the area's highlights and get an inviting intro blurb.",
+    category: "Real Estate",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "neighborhood",
+        label: "Neighborhood and its highlights",
+        placeholder: "e.g. walkable downtown area, great schools, close to parks",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Family-Focused", "Upscale"],
+      },
+    ],
+    howTo: [
+      "Describe the neighborhood and what makes it appealing.",
+      "Pick a tone.",
+      "Generate and use your favorite on a neighborhood or listing page.",
+    ],
+    faq: [
+      {
+        question: "Should I mention specific school names?",
+        answer: "Yes, if accurate and relevant — but always verify current school zoning, as it can change.",
+      },
+      {
+        question: "Can I reuse this across multiple listings in the same area?",
+        answer: "Yes — a strong neighborhood blurb works well reused across listings in that same area.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate copywriter who writes inviting neighborhood guide blurbs, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 neighborhood blurb options for: "${values.neighborhood}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Travel & Hospitality ---
+  {
+    slug: "airbnb-listing-title-generator",
+    name: "Airbnb Listing Title Generator",
+    tagline: "The title that gets the click in a wall of search results.",
+    description:
+      "Free AI Airbnb listing title generator. Describe your space and get catchy, descriptive title options.",
+    category: "Travel & Hospitality",
+    resultCount: 8,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "property",
+        label: "Property and standout feature",
+        placeholder: "e.g. cozy cabin, mountain views, hot tub, 20min from ski resort",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Cozy", "Luxury", "Adventure", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe your space and its standout feature.",
+      "Pick a style.",
+      "Generate and use your favorite as your listing title.",
+    ],
+    faq: [
+      {
+        question: "How long can an Airbnb title be?",
+        answer: "Airbnb limits titles to 50 characters — these are written with that limit in mind.",
+      },
+      {
+        question: "Should I lead with the location or the feature?",
+        answer: "Usually the standout feature — guests browse many listings in the same area, so a distinctive feature helps you stand out first.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Airbnb Superhost copywriter who writes catchy listing titles under 50 characters, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 Airbnb listing title options for: "${values.property}". Style: ${values.style || "Cozy"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "airbnb-listing-description-generator",
+    name: "Airbnb Listing Description Generator",
+    tagline: "The description that turns a look into a booking.",
+    description:
+      "Free AI Airbnb listing description generator. Describe your space and get warm, detailed listing copy.",
+    category: "Travel & Hospitality",
+    resultCount: 3,
+    maxTokens: 650,
+    inputFields: [
+      {
+        name: "property",
+        label: "Property details",
+        placeholder: "e.g. 2-bed cabin, sleeps 6, hot tub, mountain views, near hiking trails",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Luxury", "Adventure", "Family-Friendly"],
+      },
+    ],
+    howTo: [
+      "Describe your property's key details and amenities.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your listing description.",
+    ],
+    faq: [
+      {
+        question: "Should I mention house rules here?",
+        answer: "Keep the description focused on the experience — use the separate house rules section (or our House Rules Generator) for policies.",
+      },
+      {
+        question: "Should I mention nearby attractions?",
+        answer: "Yes — guests often decide based on proximity to things they want to do, so mention 1-2 standout nearby spots.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Airbnb Superhost copywriter who writes warm, detailed listing descriptions, 100-150 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 Airbnb listing description options for: "${values.property}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "host-welcome-message-generator",
+    name: "Host Welcome Message Generator",
+    tagline: "The first message that sets the tone for the whole stay.",
+    description:
+      "Free AI host welcome message generator. Describe your property and get a warm check-in message for guests.",
+    category: "Travel & Hospitality",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "property",
+        label: "Property and any key check-in details",
+        placeholder: "e.g. cabin, self check-in with lockbox, wifi password on fridge",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Casual"],
+      },
+    ],
+    howTo: [
+      "Describe your property and any key check-in details.",
+      "Pick a tone.",
+      "Generate and send your favorite to guests around check-in time.",
+    ],
+    faq: [
+      {
+        question: "Should I include the wifi password directly?",
+        answer: "Yes, if that's your practice — add it to your input and it'll be worked into the message naturally.",
+      },
+      {
+        question: "When should I send this?",
+        answer: "Most hosts send it the day of or the day before check-in, alongside specific access instructions.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a hospitality host who writes warm, clear welcome messages for guests, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 welcome message options for: "${values.property}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "hotel-review-response-generator",
+    name: "Hotel/Stay Review Response Generator",
+    tagline: "A reply that shows future guests you care.",
+    description:
+      "Free AI review response generator for hotels and short-term rentals. Describe the review and get a professional reply draft.",
+    category: "Travel & Hospitality",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "review",
+        label: "Paste or summarize the guest review",
+        placeholder: "e.g. loved the location but said the room was noisy at night",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm & Grateful", "Professional", "Apologetic"],
+      },
+    ],
+    howTo: [
+      "Summarize the guest's review.",
+      "Pick a tone — Apologetic works well for critical feedback.",
+      "Generate, then personalize before posting your reply.",
+    ],
+    faq: [
+      {
+        question: "Should I respond to every review?",
+        answer: "Responding to both positive and negative reviews shows future guests you're attentive — it's worth the habit.",
+      },
+      {
+        question: "Should I offer compensation in a public reply?",
+        answer: "Generally better to invite the guest to reach out directly for specifics, rather than negotiating resolution details publicly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a hospitality manager who writes thoughtful, genuine responses to guest reviews, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 response options to this guest review: "${values.review}". Tone: ${values.tone || "Warm & Grateful"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "travel-itinerary-outline-generator",
+    name: "Travel Itinerary Outline Generator",
+    tagline: "A day-by-day starting point for your trip.",
+    description:
+      "Free AI travel itinerary generator. Describe your trip and get a day-by-day outline to build on.",
+    category: "Travel & Hospitality",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 900,
+    inputFields: [
+      {
+        name: "trip",
+        label: "Destination and trip length",
+        placeholder: "e.g. 4 days in Lisbon, interested in food and history",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "pace",
+        label: "Pace",
+        type: "select",
+        options: ["Relaxed", "Balanced", "Packed"],
+      },
+    ],
+    howTo: [
+      "Describe your destination, trip length, and interests.",
+      "Pick a pace.",
+      "Generate, then adjust based on real opening hours, bookings, and travel times.",
+    ],
+    faq: [
+      {
+        question: "Are the specific places mentioned guaranteed to be accurate or open?",
+        answer: "No — treat named suggestions as a starting point and verify current hours, availability, and details before relying on them.",
+      },
+      {
+        question: "Can I regenerate for a different pace?",
+        answer: "Yes — try Relaxed for fewer stops per day, or Packed if you want to fit in as much as possible.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a travel planner who writes day-by-day itinerary outlines with a morning/afternoon/evening structure per day and 2-3 suggested activities each. Format with plain text day headers and short bullet points, no markdown symbols like # or **. Respond only with the itinerary — no preamble or closing remarks.",
+      user: `Generate a travel itinerary outline for: "${values.trip}". Pace: ${values.pace || "Balanced"}.`,
+    }),
+  },
+  {
+    slug: "vacation-rental-house-rules-generator",
+    name: "Vacation Rental House Rules Generator",
+    tagline: "Clear expectations, set before check-in.",
+    description:
+      "Free AI house rules generator for vacation rentals. Describe your rules and get a clear, guest-friendly draft.",
+    category: "Travel & Hospitality",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 800,
+    inputFields: [
+      {
+        name: "rules",
+        label: "Describe your house rules",
+        placeholder: "e.g. no smoking, no parties, quiet hours after 10pm, pets not allowed",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Formal", "Concise"],
+      },
+    ],
+    howTo: [
+      "List your key house rules.",
+      "Pick a tone.",
+      "Generate, then add it to your listing's house rules section.",
+    ],
+    faq: [
+      {
+        question: "Is this legally binding?",
+        answer: "No — this is a plain-language draft for your listing, not a legal document. Check your platform's and local regulations for any required disclosures.",
+      },
+      {
+        question: "Should I explain the reason behind a rule?",
+        answer: "A brief, friendly reason (e.g. 'quiet hours to respect neighbors') often gets better guest compliance than a bare rule.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a vacation rental host who writes clear, guest-friendly house rules. Use plain text bullet points, no markdown symbols like # or **. This is a plain-language draft, not a legal document. Respond only with the house rules — no preamble or closing remarks.",
+      user: `Generate house rules based on: "${values.rules}". Tone: ${values.tone || "Friendly"}.`,
+    }),
+  },
+
+  // --- Food & Restaurant ---
+  {
+    slug: "menu-item-description-generator",
+    name: "Menu Item Description Generator",
+    tagline: "Descriptions that make a dish sound worth ordering.",
+    description:
+      "Free AI menu description generator. Describe your dish and get mouthwatering, ready-to-use menu copy.",
+    category: "Food & Restaurant",
+    resultCount: 5,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "dish",
+        label: "Dish name and key ingredients",
+        placeholder: "e.g. grilled salmon, lemon butter sauce, asparagus, wild rice",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Upscale", "Casual", "Rustic", "Playful"],
+      },
+    ],
+    howTo: [
+      "Enter the dish name and key ingredients.",
+      "Pick a tone that matches your restaurant.",
+      "Generate and paste your favorite onto your menu.",
+    ],
+    faq: [
+      {
+        question: "Should I mention allergens?",
+        answer: "Menu descriptions themselves usually don't need to, but make sure allergen information is disclosed elsewhere on your menu as required in your area.",
+      },
+      {
+        question: "How long should a menu description be?",
+        answer: "Short — one enticing sentence per dish is standard, which is what these are built for.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a restaurant menu copywriter who writes appetizing one-sentence dish descriptions, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 menu description options for: "${values.dish}". Tone: ${values.tone || "Upscale"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "restaurant-bio-generator",
+    name: "Restaurant Bio Generator",
+    tagline: "The story that gets you the reservation, not just the click.",
+    description:
+      "Free AI restaurant bio generator. Describe your restaurant's story and cuisine to get a polished About section.",
+    category: "Food & Restaurant",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "restaurant",
+        label: "Cuisine and story",
+        placeholder: "e.g. family-run Italian trattoria, recipes passed down three generations",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Upscale", "Casual"],
+      },
+    ],
+    howTo: [
+      "Describe your cuisine and a bit of your story.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your website's About page.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the chef by name?",
+        answer: "Yes, if you'd like to highlight them — add their name and background to your input.",
+      },
+      {
+        question: "How long should this be?",
+        answer: "These run roughly 80-120 words — enough to tell your story without losing a hungry reader.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a restaurant brand copywriter who writes warm About page bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 restaurant bio options for: "${values.restaurant}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "daily-special-announcement-generator",
+    name: "Daily Special Announcement Generator",
+    tagline: "Make today's special sound like it's worth the trip.",
+    description:
+      "Free AI daily special generator. Describe today's dish and get a ready-to-post announcement.",
+    category: "Food & Restaurant",
+    resultCount: 6,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "special",
+        label: "Today's special",
+        placeholder: "e.g. butternut squash ravioli with sage butter",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Simple", "Cozy"],
+      },
+    ],
+    howTo: [
+      "Describe today's special.",
+      "Pick a tone.",
+      "Generate and post your favorite on social media or a chalkboard sign.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the price?",
+        answer: "It's optional, but including it often helps social posts convert to walk-ins.",
+      },
+      {
+        question: "Can I use this for a limited-time seasonal item?",
+        answer: "Yes — mention that it's seasonal or limited-time in your input for copy that reflects the urgency.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a restaurant social media manager who writes short, mouthwatering daily special announcements (1 sentence each). You respond only with a numbered list — no preamble.",
+      user: `Generate 6 daily special announcement options for: "${values.special}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "food-truck-name-generator",
+    name: "Food Truck Name Generator",
+    tagline: "A name people remember after one bite.",
+    description: "Free AI food truck name generator. Describe your cuisine and get catchy name ideas.",
+    category: "Food & Restaurant",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "cuisine",
+        label: "What kind of food do you serve?",
+        placeholder: "e.g. Korean-Mexican fusion tacos",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Punny", "Bold", "Simple", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your cuisine or specialty.",
+      "Pick a style.",
+      "Generate — then check availability and trademark before printing signage.",
+    ],
+    faq: [
+      {
+        question: "Should the name describe the food directly?",
+        answer: "Not necessarily — punny or evocative names often stand out more in a crowded food truck scene, as long as your food type is clear from context or a tagline.",
+      },
+      {
+        question: "Can I use this for a pop-up or catering business too?",
+        answer: "Yes — the same naming approach works for pop-ups, catering, and ghost kitchens.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a food branding expert who names food trucks — catchy, memorable, easy to say. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 food truck name ideas for: "${values.cuisine}". Style: ${values.style || "Punny"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "recipe-blog-intro-generator",
+    name: "Recipe Blog Intro Generator",
+    tagline: "The story before the recipe, without the filler.",
+    description:
+      "Free AI recipe blog intro generator. Describe your recipe and get a warm, SEO-friendly intro paragraph.",
+    category: "Food & Restaurant",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "recipe",
+        label: "Recipe name and what makes it special",
+        placeholder: "e.g. one-pot creamy garlic pasta, ready in 20 minutes",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Quick & Practical", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your recipe and what makes it worth making.",
+      "Pick a tone.",
+      "Generate and use your favorite as the intro before your recipe card.",
+    ],
+    faq: [
+      {
+        question: "Should this include the full recipe steps?",
+        answer: "No — this generates just the intro paragraph; your recipe card with ingredients and steps goes below it.",
+      },
+      {
+        question: "Does a blog intro actually matter for SEO?",
+        answer: "Yes — search engines and readers both use it to judge relevance, so a clear, keyword-relevant intro helps rankings and readability.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a food blogger who writes warm, engaging recipe intros, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 recipe intro options for: "${values.recipe}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Events & Parties ---
+  {
+    slug: "party-invitation-generator",
+    name: "Party Invitation Generator",
+    tagline: "An invite people actually want to RSVP to.",
+    description:
+      "Free AI party invitation generator. Describe your event and get fun, ready-to-use invitation copy.",
+    category: "Events & Parties",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "event",
+        label: "What's the occasion?",
+        placeholder: "e.g. 30th birthday party, Saturday night, backyard BBQ theme",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Fun", "Elegant", "Casual", "Kids' Party"],
+      },
+    ],
+    howTo: [
+      "Describe the occasion and any details (date, theme).",
+      "Pick a tone.",
+      "Generate and use your favorite for a card, text, or digital invite.",
+    ],
+    faq: [
+      {
+        question: "Should this include date, time, and location?",
+        answer: "Add those details to your input and they'll often be woven in — or add them separately below the generated copy.",
+      },
+      {
+        question: "Can I use this for a virtual event?",
+        answer: "Yes — mention it's virtual and include the platform in your input.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an event planner who writes fun, inviting party invitation copy, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 party invitation options for: "${values.event}". Tone: ${values.tone || "Fun"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "rsvp-reminder-generator",
+    name: "RSVP Reminder Generator",
+    tagline: "A nudge that doesn't feel like nagging.",
+    description:
+      "Free AI RSVP reminder generator. Describe your event and get a friendly reminder message for guests who haven't responded.",
+    category: "Events & Parties",
+    resultCount: 6,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "event",
+        label: "What's the event and RSVP deadline?",
+        placeholder: "e.g. wedding, RSVP by next Friday",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Playful", "Formal"],
+      },
+    ],
+    howTo: [
+      "Describe the event and RSVP deadline.",
+      "Pick a tone.",
+      "Generate and send your favorite via text, email, or group chat.",
+    ],
+    faq: [
+      {
+        question: "How early should I send an RSVP reminder?",
+        answer: "About a week before your true deadline gives guests enough time to respond without feeling rushed.",
+      },
+      {
+        question: "Should I follow up individually with no-shows after this?",
+        answer: "For close friends and family, a personal follow-up after a group reminder often works best.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an event host who writes friendly, low-pressure RSVP reminders, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 RSVP reminder options for: "${values.event}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "event-description-generator",
+    name: "Event Description Generator",
+    tagline: "Copy that gets people to actually show up.",
+    description:
+      "Free AI event description generator. Describe your event and get a clear, compelling description.",
+    category: "Events & Parties",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "event",
+        label: "Event details",
+        placeholder: "e.g. local farmers market pop-up, live music, food vendors",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Informative", "Community-Focused"],
+      },
+    ],
+    howTo: [
+      "Describe your event and what attendees can expect.",
+      "Pick a tone.",
+      "Generate and paste your favorite onto your event page or listing.",
+    ],
+    faq: [
+      {
+        question: "Should I include date, time, and ticket info?",
+        answer: "Add those in your input, or keep this focused on the compelling 'why attend' copy and add logistics separately below it.",
+      },
+      {
+        question: "Can I use this for a recurring event?",
+        answer: "Yes — mention it's recurring (weekly, monthly) and the copy will reflect that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an event marketer who writes clear, compelling event descriptions, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 event description options for: "${values.event}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "fundraising-event-invite-generator",
+    name: "Fundraising Event Invite Generator",
+    tagline: "An invite that makes giving feel good, not obligatory.",
+    description:
+      "Free AI fundraising event invitation generator. Describe your cause and event to get warm, compelling invite copy.",
+    category: "Events & Parties",
+    resultCount: 4,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "event",
+        label: "Cause and event details",
+        placeholder: "e.g. gala dinner supporting local animal shelter, Saturday evening",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Inspiring", "Elegant"],
+      },
+    ],
+    howTo: [
+      "Describe your cause and the event details.",
+      "Pick a tone.",
+      "Generate and use your favorite for invitations, emails, or social posts.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the fundraising goal?",
+        answer: "Yes, if you have one — specific, achievable-sounding goals tend to motivate giving more than vague appeals.",
+      },
+      {
+        question: "Can I use this for a virtual fundraiser?",
+        answer: "Yes — mention it's virtual and include how to join or donate remotely.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit event coordinator who writes warm, compelling fundraising event invitations, 50-80 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 fundraising event invite options for: "${values.event}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "conference-talk-abstract-generator",
+    name: "Conference Talk Abstract Generator",
+    tagline: "A pitch that gets your talk accepted.",
+    description:
+      "Free AI conference talk abstract generator. Describe your topic and get a submission-ready abstract.",
+    category: "Events & Parties",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "topic",
+        label: "Talk topic and key takeaway",
+        placeholder: "e.g. how we cut our deploy time by 80% using feature flags",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Technical", "Approachable", "Bold"],
+      },
+    ],
+    howTo: [
+      "Describe your talk topic and the key takeaway for attendees.",
+      "Pick a tone.",
+      "Generate, then tailor it to the specific conference's submission guidelines.",
+    ],
+    faq: [
+      {
+        question: "How long should a talk abstract be?",
+        answer: "These run roughly 80-120 words, a common length for conference CFPs — always check the specific event's word limit.",
+      },
+      {
+        question: "Should I mention my own background?",
+        answer: "Many CFPs have a separate speaker bio field — keep the abstract focused on the talk content itself.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a conference speaker coach who writes compelling talk abstracts, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 conference talk abstract options for: "${values.topic}". Tone: ${values.tone || "Approachable"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "icebreaker-question-generator",
+    name: "Icebreaker Question Generator",
+    tagline: "Questions better than 'so, what do you do?'",
+    description:
+      "Free AI icebreaker question generator. Describe your group or setting and get engaging conversation starters.",
+    category: "Events & Parties",
+    resultCount: 10,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "setting",
+        label: "What's the setting or group?",
+        placeholder: "e.g. work team meeting, new coworkers",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Fun", "Thoughtful", "Professional", "Silly"],
+      },
+    ],
+    howTo: [
+      "Describe the setting or group.",
+      "Pick a tone.",
+      "Generate and use your favorites to kick off the conversation.",
+    ],
+    faq: [
+      {
+        question: "Are these appropriate for a professional setting?",
+        answer: "Pick the Professional or Thoughtful tone for work settings — Fun and Silly work better for casual or social groups.",
+      },
+      {
+        question: "Can I use these for a virtual meeting?",
+        answer: "Yes — icebreakers work well as a quick opener before diving into a video call agenda.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a facilitator who writes engaging icebreaker questions for group settings. You respond only with a numbered list of questions — no preamble.",
+      user: `Generate 10 icebreaker questions for: "${values.setting}". Tone: ${values.tone || "Fun"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Health & Fitness ---
+  {
+    slug: "workout-plan-outline-generator",
+    name: "Workout Plan Outline Generator",
+    tagline: "A structure to build your training week around.",
+    description:
+      "Free AI workout plan outline generator. Describe your goal and get a weekly workout structure to customize.",
+    category: "Health & Fitness",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 800,
+    inputFields: [
+      {
+        name: "goal",
+        label: "Goal and experience level",
+        placeholder: "e.g. build strength, intermediate, 4 days a week, has dumbbells",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "days",
+        label: "Days per week",
+        type: "select",
+        options: ["3 days", "4 days", "5 days"],
+      },
+    ],
+    howTo: [
+      "Describe your goal, experience level, and available equipment.",
+      "Pick how many days per week you can train.",
+      "Generate, then consult a trainer or doctor before starting a new program, especially with any health conditions.",
+    ],
+    faq: [
+      {
+        question: "Is this a substitute for professional coaching?",
+        answer: "No — this is a general structural starting point, not personalized medical or fitness advice. Check with a professional before starting, especially with any injuries or health conditions.",
+      },
+      {
+        question: "Can I adjust the exercises for equipment I have?",
+        answer: "Yes — treat this as a framework (which muscle groups, how many days) and swap in exercises that fit your equipment.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a fitness coach who writes general workout plan outlines with a day-by-day split and 4-6 exercise slots per day (not specific sets/reps/weights, which should come from a professional given individual factors). Format with plain text day headers and short bullet points, no markdown symbols like # or **. This is a general starting structure, not personalized coaching advice. Respond only with the plan outline — no preamble or closing remarks.",
+      user: `Generate a ${values.days || "4 days"} per week workout plan outline for this goal: "${values.goal}".`,
+    }),
+  },
+  {
+    slug: "fitness-motivation-message-generator",
+    name: "Fitness Motivation Message Generator",
+    tagline: "The push you need on the days you don't want to go.",
+    description:
+      "Free AI fitness motivation generator. Describe what you're working toward and get short, energizing messages.",
+    category: "Health & Fitness",
+    resultCount: 8,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "goal",
+        label: "What are you working toward?",
+        placeholder: "e.g. running my first 5k",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Encouraging", "Tough Love", "Calm"],
+      },
+    ],
+    howTo: [
+      "Describe what you're working toward.",
+      "Pick a tone.",
+      "Generate and save your favorite somewhere you'll see it before a workout.",
+    ],
+    faq: [
+      {
+        question: "Can I use these for a client or team I coach?",
+        answer: "Yes — these work well shared in a group chat or posted in a shared training space.",
+      },
+      {
+        question: "Should these replace a real training plan?",
+        answer: "No — these are motivational messages only; for the actual plan, try the Workout Plan Outline Generator.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a fitness coach who writes short, energizing motivational messages, one sentence each. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 motivational messages for someone working toward: "${values.goal}". Tone: ${values.tone || "Encouraging"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "gym-class-description-generator",
+    name: "Gym Class Description Generator",
+    tagline: "Copy that fills the class schedule.",
+    description:
+      "Free AI gym class description generator. Describe your class and get an inviting schedule listing description.",
+    category: "Health & Fitness",
+    resultCount: 4,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "class",
+        label: "Class name and format",
+        placeholder: "e.g. HIIT circuit, 45 minutes, all levels welcome",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Energetic", "Welcoming", "Intense"],
+      },
+    ],
+    howTo: [
+      "Describe the class name, format, and who it's for.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your class schedule listing.",
+    ],
+    faq: [
+      {
+        question: "Should I mention fitness level required?",
+        answer: "Yes — being clear about whether beginners are welcome helps the right people sign up confidently.",
+      },
+      {
+        question: "Can I use this for a virtual class?",
+        answer: "Yes — mention it's virtual/streamed and the copy will reflect that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a gym marketing copywriter who writes inviting class descriptions, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 gym class description options for: "${values.class}". Tone: ${values.tone || "Energetic"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "personal-trainer-bio-generator",
+    name: "Personal Trainer Bio Generator",
+    tagline: "A bio that gets you booked, not scrolled past.",
+    description:
+      "Free AI personal trainer bio generator. Describe your specialty and background to get a polished professional bio.",
+    category: "Health & Fitness",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "background",
+        label: "Your specialty and background",
+        placeholder: "e.g. certified trainer, 5 years, specializes in postpartum fitness",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Motivational", "Professional"],
+      },
+    ],
+    howTo: [
+      "Describe your specialty, certifications, and background.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your website or gym profile.",
+    ],
+    faq: [
+      {
+        question: "Should I list my certifications?",
+        answer: "Yes — mention them in your input so they're worked into the bio, which builds client trust.",
+      },
+      {
+        question: "How long should this be?",
+        answer: "These run roughly 80-120 words — enough to establish credibility and approachability without overwhelming a potential client.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a fitness branding copywriter who writes warm, credible personal trainer bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 personal trainer bio options based on: "${values.background}". Tone: ${values.tone || "Motivational"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "wellness-retreat-description-generator",
+    name: "Wellness Retreat Description Generator",
+    tagline: "Copy that sells the transformation, not just the schedule.",
+    description:
+      "Free AI wellness retreat description generator. Describe your retreat and get inviting, ready-to-use copy.",
+    category: "Health & Fitness",
+    resultCount: 3,
+    maxTokens: 600,
+    inputFields: [
+      {
+        name: "retreat",
+        label: "Retreat details",
+        placeholder: "e.g. 5-day yoga retreat in Bali, includes meals and daily sessions",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Serene", "Luxurious", "Grounded"],
+      },
+    ],
+    howTo: [
+      "Describe your retreat's location, length, and what's included.",
+      "Pick a tone.",
+      "Generate and paste your favorite onto your retreat's landing page.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the price and dates?",
+        answer: "Add those separately near your generated copy — this tool focuses on the experience-focused narrative.",
+      },
+      {
+        question: "Can I use this for a single-day wellness event instead?",
+        answer: "Yes — describe it as a day retreat or workshop and the copy will adapt.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a wellness brand copywriter who writes serene, inviting retreat descriptions, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 wellness retreat description options for: "${values.retreat}". Tone: ${values.tone || "Serene"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Education ---
+  {
+    slug: "study-guide-outline-generator",
+    name: "Study Guide Outline Generator",
+    tagline: "A structure for your own notes, not someone else's answers.",
+    description:
+      "Free AI study guide outline generator. Describe your topic and get a structured outline to fill in with your own notes.",
+    category: "Education",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 900,
+    inputFields: [
+      {
+        name: "topic",
+        label: "What's the subject or topic?",
+        placeholder: "e.g. cellular respiration for a high school biology exam",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "depth",
+        label: "Depth",
+        type: "select",
+        options: ["Overview", "Standard", "In-Depth"],
+      },
+    ],
+    howTo: [
+      "Describe the subject or topic you're studying.",
+      "Pick a depth level.",
+      "Generate, then fill in each section with your own class notes and materials.",
+    ],
+    faq: [
+      {
+        question: "Will this give me exam answers?",
+        answer: "No — this generates a topic structure for you to study from using your own course materials, not answers to specific questions.",
+      },
+      {
+        question: "Can teachers use this too?",
+        answer: "Yes — it works well as a starting point for building a review sheet or lesson outline for students.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a study skills coach who writes structured study guide outlines with topic headers and key concept bullet points to prompt a student's own notes, not factual answers. Format with plain text headers and short bullet points, no markdown symbols like # or **. Respond only with the outline — no preamble or closing remarks.",
+      user: `Generate a study guide outline for: "${values.topic}". Depth: ${values.depth || "Standard"}.`,
+    }),
+  },
+  {
+    slug: "quiz-question-generator",
+    name: "Quiz Question Generator",
+    tagline: "Questions for the classroom, not the cheat sheet.",
+    description:
+      "Free AI quiz question generator for teachers and study groups. Describe a topic and get review questions with answers.",
+    category: "Education",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 800,
+    inputFields: [
+      {
+        name: "topic",
+        label: "Topic and grade/level",
+        placeholder: "e.g. World War II causes, high school level",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "count",
+        label: "Number of questions",
+        type: "select",
+        options: ["5 questions", "8 questions", "10 questions"],
+      },
+    ],
+    howTo: [
+      "Describe the topic and level.",
+      "Pick how many questions you need.",
+      "Generate a set of review questions with answers, for a quiz, worksheet, or study session.",
+    ],
+    faq: [
+      {
+        question: "Is this meant for cheating on a real exam?",
+        answer: "No — this is built for teachers making review materials and students self-testing on topics they've already studied, not for answering questions on a live assessment.",
+      },
+      {
+        question: "Should I fact-check the answers?",
+        answer: "Yes — always verify factual accuracy against your course materials before using these in an actual class or assessment.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a teacher who writes review quiz questions with answers for study purposes, formatting each as 'Q: ...' followed by 'A: ...' on the next line, with a blank line between pairs. Respond only with the quiz — no preamble or closing remarks.",
+      user: `Generate ${values.count || "8 questions"} on this topic: "${values.topic}".`,
+    }),
+  },
+  {
+    slug: "flashcard-content-generator",
+    name: "Flashcard Content Generator",
+    tagline: "Term-and-definition pairs, ready to study from.",
+    description:
+      "Free AI flashcard generator. Describe a topic and get term/definition pairs ready for your flashcard app or index cards.",
+    category: "Education",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 800,
+    inputFields: [
+      {
+        name: "topic",
+        label: "Topic to study",
+        placeholder: "e.g. key vocabulary for Spanish beginner unit 1",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the topic or subject you're studying.",
+      "Generate a set of term/definition flashcard pairs.",
+      "Copy them into your flashcard app or write them onto index cards.",
+    ],
+    faq: [
+      {
+        question: "Should I fact-check the definitions?",
+        answer: "Yes — always verify accuracy against your course materials, especially for technical or exam-critical content.",
+      },
+      {
+        question: "Can I use this for language learning vocabulary?",
+        answer: "Yes — describe the language and unit/topic and you'll get term/translation-style pairs.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a study coach who writes flashcard term/definition pairs, formatting each as 'Term: ...' followed by 'Definition: ...' on the next line, with a blank line between pairs. Respond only with the flashcards — no preamble or closing remarks.",
+      user: `Generate flashcard pairs for studying: "${values.topic}".`,
+    }),
+  },
+  {
+    slug: "course-description-generator",
+    name: "Course Description Generator",
+    tagline: "Copy that gets the course syllabus opened.",
+    description:
+      "Free AI course description generator. Describe your course and get a clear, compelling description for students.",
+    category: "Education",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "course",
+        label: "Course topic and format",
+        placeholder: "e.g. 6-week intro to watercolor painting, beginner-friendly",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Encouraging", "Professional", "Exciting"],
+      },
+    ],
+    howTo: [
+      "Describe your course's topic, format, and length.",
+      "Pick a tone.",
+      "Generate and paste your favorite onto your course listing page.",
+    ],
+    faq: [
+      {
+        question: "Should I mention prerequisites?",
+        answer: "Yes, if there are any — being upfront about required background helps the right students enroll.",
+      },
+      {
+        question: "Can I use this for an online course platform?",
+        answer: "Yes — this works for in-person classes, online courses, or workshops alike.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an education marketer who writes clear, compelling course descriptions, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 course description options for: "${values.course}". Tone: ${values.tone || "Encouraging"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "class-icebreaker-generator",
+    name: "Class Icebreaker Generator",
+    tagline: "Get a room of students talking on day one.",
+    description:
+      "Free AI classroom icebreaker generator. Describe your class and get engaging first-day activity prompts.",
+    category: "Education",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "class",
+        label: "Class level and subject",
+        placeholder: "e.g. 9th grade English class",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Fun", "Reflective", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe your class level and subject.",
+      "Pick a tone.",
+      "Generate and use your favorites to open the first class or a new unit.",
+    ],
+    faq: [
+      {
+        question: "Are these appropriate for younger students?",
+        answer: "Pick the Simple tone for younger grades — these are written to be broadly classroom-appropriate, but always use your judgment for your specific students.",
+      },
+      {
+        question: "Can I use these for a virtual classroom?",
+        answer: "Yes — many work well as a quick chat-box or breakout-room activity too.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a teacher who writes engaging classroom icebreaker prompts. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 classroom icebreaker prompts for: "${values.class}". Tone: ${values.tone || "Fun"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "recommendation-letter-opener-generator",
+    name: "Recommendation Letter Opener Generator",
+    tagline: "A strong first line for a letter you actually mean.",
+    description:
+      "Free AI recommendation letter opener generator. Describe the person and context to get a strong opening paragraph.",
+    category: "Education",
+    resultCount: 4,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "context",
+        label: "Who is this for, and what's the context?",
+        placeholder: "e.g. a student applying to college, strong in math and leadership",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Formal", "Enthusiastic"],
+      },
+    ],
+    howTo: [
+      "Describe who the letter is for and the context (college, job, scholarship).",
+      "Pick a tone.",
+      "Generate, then build the rest of the letter with specific examples.",
+    ],
+    faq: [
+      {
+        question: "Should I add specific examples and stories?",
+        answer: "Yes — this gives you a strong opener; specific anecdotes about the person are what make the rest of the letter compelling.",
+      },
+      {
+        question: "Can I use this for a job reference letter instead?",
+        answer: "Yes — describe the job context instead of academic context and the tone will adapt.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an experienced writer who crafts strong recommendation letter opening paragraphs, 50-70 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 recommendation letter opener options for: "${values.context}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- HR & Workplace ---
+  {
+    slug: "new-employee-welcome-message-generator",
+    name: "New Employee Welcome Message Generator",
+    tagline: "A first-day message that actually feels welcoming.",
+    description:
+      "Free AI new employee welcome message generator. Describe the new hire's role to get a warm team announcement.",
+    category: "HR & Workplace",
+    resultCount: 4,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "hire",
+        label: "New hire's name/role",
+        placeholder: "e.g. Jordan, joining as Marketing Coordinator",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Playful"],
+      },
+    ],
+    howTo: [
+      "Enter the new hire's name and role.",
+      "Pick a tone that fits your company culture.",
+      "Generate and post your favorite in your team channel or send via email.",
+    ],
+    faq: [
+      {
+        question: "Should I add a fun fact about the new hire?",
+        answer: "Yes, if you have one — it gives the team an easy conversation starter for their first day.",
+      },
+      {
+        question: "Can I use this for a remote team announcement?",
+        answer: "Yes — this works well for a Slack/Teams post or a company-wide email alike.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR communications specialist who writes warm new-employee welcome announcements, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 welcome message options for: "${values.hire}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "team-meeting-agenda-generator",
+    name: "Team Meeting Agenda Outline Generator",
+    tagline: "A structure so the meeting actually stays on track.",
+    description:
+      "Free AI meeting agenda generator. Describe your meeting's purpose and get a structured agenda outline.",
+    category: "HR & Workplace",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 700,
+    inputFields: [
+      {
+        name: "meeting",
+        label: "Meeting purpose and length",
+        placeholder: "e.g. weekly team sync, 30 minutes, marketing team",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the meeting's purpose, length, and who's attending.",
+      "Generate a structured agenda.",
+      "Share it ahead of time so attendees can prepare.",
+    ],
+    faq: [
+      {
+        question: "Can I add specific topics to discuss?",
+        answer: "Yes — mention any specific items in your input and they'll be worked into the relevant section.",
+      },
+      {
+        question: "Does this include time allocations per item?",
+        answer: "Yes — the outline suggests rough time blocks based on your total meeting length, which you can adjust.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a workplace facilitator who writes clear meeting agendas with time-boxed sections (welcome, main topics, action items, wrap-up). Format with plain text headers and short bullet points, no markdown symbols like # or **. Respond only with the agenda — no preamble or closing remarks.",
+      user: `Generate a meeting agenda for: "${values.meeting}".`,
+    }),
+  },
+  {
+    slug: "employee-recognition-message-generator",
+    name: "Employee Recognition Message Generator",
+    tagline: "Specific praise, not a generic 'great job'.",
+    description:
+      "Free AI employee recognition generator. Describe what they did well to get a genuine, specific recognition message.",
+    category: "HR & Workplace",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "achievement",
+        label: "What did they do well?",
+        placeholder: "e.g. went above and beyond to fix a client issue over a weekend",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Enthusiastic"],
+      },
+    ],
+    howTo: [
+      "Describe what the person did well.",
+      "Pick a tone.",
+      "Generate and share your favorite in a 1:1, team channel, or recognition program.",
+    ],
+    faq: [
+      {
+        question: "Should I mention this in front of the whole team?",
+        answer: "Public recognition (with the person's comfort in mind) often has more impact than private praise alone — use your judgment based on the person.",
+      },
+      {
+        question: "Can I use this for a peer-to-peer recognition program?",
+        answer: "Yes — these work well for manager-to-employee or peer-to-peer recognition alike.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a people manager who writes genuine, specific employee recognition messages, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 recognition message options for this achievement: "${values.achievement}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "performance-review-opener-generator",
+    name: "Performance Review Opener Generator",
+    tagline: "A strong start to a conversation that matters.",
+    description:
+      "Free AI performance review opener generator. Describe the employee's strengths to get a constructive opening paragraph.",
+    category: "HR & Workplace",
+    resultCount: 4,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "context",
+        label: "Employee's key strengths this period",
+        placeholder: "e.g. consistently exceeded sales targets, mentored two junior hires",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Encouraging", "Balanced", "Direct"],
+      },
+    ],
+    howTo: [
+      "Describe the employee's key strengths or contributions this period.",
+      "Pick a tone.",
+      "Generate, then build out the rest of the review with specific examples and any growth areas.",
+    ],
+    faq: [
+      {
+        question: "Does this cover areas for improvement too?",
+        answer: "No — this generates a strong, specific opening highlighting strengths; add growth areas separately in the body of the review.",
+      },
+      {
+        question: "Should I personalize this further?",
+        answer: "Yes — add specific metrics, projects, or examples so the review feels genuine and actionable, not generic.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a people manager who writes constructive, specific performance review opening paragraphs, 50-70 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 performance review opener options based on: "${values.context}". Tone: ${values.tone || "Encouraging"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "internal-announcement-generator",
+    name: "Internal Announcement Generator",
+    tagline: "Company news that people actually read.",
+    description:
+      "Free AI internal announcement generator. Describe the news and get clear, ready-to-send announcement copy.",
+    category: "HR & Workplace",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "news",
+        label: "What's the announcement?",
+        placeholder: "e.g. new health benefits starting next quarter",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Professional", "Warm", "Straightforward"],
+      },
+    ],
+    howTo: [
+      "Describe the news or update you're announcing.",
+      "Pick a tone.",
+      "Generate and send via email or your internal comms platform.",
+    ],
+    faq: [
+      {
+        question: "Should this include all the fine print?",
+        answer: "No — this generates the announcement intro; link out to or attach full details separately.",
+      },
+      {
+        question: "Can I use this for difficult news, like a policy change?",
+        answer: "Yes — pick the Straightforward tone and be clear and direct about what's changing and why.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an internal communications specialist who writes clear company announcements, 50-80 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 internal announcement options for: "${values.news}". Tone: ${values.tone || "Professional"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "farewell-message-generator",
+    name: "Farewell / Goodbye Message Generator",
+    tagline: "A send-off that feels genuine, not templated.",
+    description:
+      "Free AI farewell message generator. Describe your colleague and get a warm goodbye message for their last day.",
+    category: "HR & Workplace",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "colleague",
+        label: "Who's leaving, and what will you miss?",
+        placeholder: "e.g. my teammate of 3 years, always made stand-ups fun",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Funny", "Professional"],
+      },
+    ],
+    howTo: [
+      "Describe your colleague and what you'll miss.",
+      "Pick a tone.",
+      "Generate and share your favorite in a card or farewell message thread.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for a group card message?",
+        answer: "Yes — a short, warm option works well when several people are contributing to the same card.",
+      },
+      {
+        question: "Is this appropriate for a company-wide send-off?",
+        answer: "Pick the Professional tone for a wider audience, and save Funny/inside-joke versions for close teammates.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a thoughtful colleague who writes genuine farewell messages, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 farewell message options for: "${values.colleague}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Nonprofit & Community ---
+  {
+    slug: "donation-appeal-message-generator",
+    name: "Donation Appeal Message Generator",
+    tagline: "An ask that moves people, without guilt-tripping them.",
+    description:
+      "Free AI donation appeal generator. Describe your cause and get a compelling fundraising message.",
+    category: "Nonprofit & Community",
+    resultCount: 4,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "cause",
+        label: "Your cause and what donations fund",
+        placeholder: "e.g. animal shelter, donations fund vet care for rescued dogs",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Heartfelt", "Urgent", "Hopeful"],
+      },
+    ],
+    howTo: [
+      "Describe your cause and what donations specifically fund.",
+      "Pick a tone.",
+      "Generate and use your favorite for an email, social post, or campaign page.",
+    ],
+    faq: [
+      {
+        question: "Should I include a specific dollar goal?",
+        answer: "Yes, if you have one — specific, tangible goals ('$500 covers 10 vet visits') tend to motivate giving more than vague asks.",
+      },
+      {
+        question: "Should I fact-check any statistics I include?",
+        answer: "Yes — only use statistics and claims you can verify; donors trust specific, accurate impact numbers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit fundraising writer who crafts compelling, honest donation appeals, 60-90 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 donation appeal options for: "${values.cause}". Tone: ${values.tone || "Heartfelt"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "volunteer-recruitment-message-generator",
+    name: "Volunteer Recruitment Message Generator",
+    tagline: "An ask that makes people want to show up.",
+    description:
+      "Free AI volunteer recruitment generator. Describe the opportunity and get an inviting call-to-action message.",
+    category: "Nonprofit & Community",
+    resultCount: 6,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "opportunity",
+        label: "What's the volunteer opportunity?",
+        placeholder: "e.g. weekend food bank sorting shifts, no experience needed",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Energetic", "Community-Focused"],
+      },
+    ],
+    howTo: [
+      "Describe the volunteer opportunity and any requirements.",
+      "Pick a tone.",
+      "Generate and use your favorite for a flyer, email, or social post.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the time commitment?",
+        answer: "Yes — being upfront about hours and frequency helps people realistically say yes.",
+      },
+      {
+        question: "Can I use this for a one-time event vs. ongoing volunteering?",
+        answer: "Yes — describe which it is in your input and the copy will reflect that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a community organizer who writes warm, inviting volunteer recruitment messages, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 volunteer recruitment options for: "${values.opportunity}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "nonprofit-mission-statement-generator",
+    name: "Nonprofit Mission Statement Generator",
+    tagline: "One sentence that says why you exist.",
+    description:
+      "Free AI nonprofit mission statement generator. Describe your cause and get clear, one-sentence mission options.",
+    category: "Nonprofit & Community",
+    resultCount: 8,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "cause",
+        label: "What does your organization do, and for whom?",
+        placeholder: "e.g. provides free tutoring to underserved middle schoolers",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Inspiring", "Direct", "Warm"],
+      },
+    ],
+    howTo: [
+      "Describe what your organization does and who it serves.",
+      "Pick a tone.",
+      "Generate and use your favorite on your website, grant applications, or annual report.",
+    ],
+    faq: [
+      {
+        question: "How is this different from a tagline?",
+        answer: "A mission statement clearly states your organization's purpose; a tagline is shorter and more marketing-focused — this tool is for the former.",
+      },
+      {
+        question: "Should our board approve this?",
+        answer: "Yes — treat this as strong drafts to bring to your board or leadership for their input before finalizing.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit strategist who writes clear, one-sentence mission statements. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 mission statement options for: "${values.cause}". Tone: ${values.tone || "Inspiring"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "community-newsletter-intro-generator",
+    name: "Community Newsletter Intro Generator",
+    tagline: "An opener that gets your newsletter actually read.",
+    description:
+      "Free AI newsletter intro generator for community and nonprofit groups. Describe this issue's theme and get a warm opening.",
+    category: "Nonprofit & Community",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "theme",
+        label: "What's in this issue?",
+        placeholder: "e.g. recap of our spring fundraiser, upcoming volunteer days",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Upbeat", "Community-Focused"],
+      },
+    ],
+    howTo: [
+      "Describe what's in this issue.",
+      "Pick a tone.",
+      "Generate and use your favorite as the opening of your newsletter.",
+    ],
+    faq: [
+      {
+        question: "Should this cover every article in the newsletter?",
+        answer: "No — this is just the warm opening; a simple table of contents or list below it can cover the rest.",
+      },
+      {
+        question: "Can I reuse a similar structure each issue?",
+        answer: "Yes — many newsletters keep a consistent friendly opening style issue to issue, just swap in the current theme.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a community newsletter writer who writes warm, engaging newsletter intros, 50-80 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 newsletter intro options for an issue about: "${values.theme}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Dating & Relationships ---
+  {
+    slug: "dating-profile-bio-generator",
+    name: "Dating Profile Bio Generator",
+    tagline: "A bio that sounds like you on a good day.",
+    description:
+      "Free AI dating profile bio generator. Describe yourself and what you're looking for to get genuine bio options.",
+    category: "Dating & Relationships",
+    resultCount: 6,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "about",
+        label: "A bit about you and what you enjoy",
+        placeholder: "e.g. love hiking, terrible cook, big into true crime podcasts",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Funny", "Genuine", "Confident", "Laid-back"],
+      },
+    ],
+    howTo: [
+      "Describe a few real things about yourself and what you enjoy.",
+      "Pick a tone.",
+      "Generate and use your favorite, tweaking it to sound like you.",
+    ],
+    faq: [
+      {
+        question: "Should this sound exactly like me?",
+        answer: "Use it as a starting point — swap in your own phrases and details so it reads authentically, since that's what actually connects with matches.",
+      },
+      {
+        question: "Should I mention what I'm looking for?",
+        answer: "It can help — add it to your input if you want it reflected, or keep the bio focused just on you.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a dating profile writing coach who crafts genuine, engaging bios, 30-50 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 dating profile bio options based on: "${values.about}". Tone: ${values.tone || "Genuine"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "dating-icebreaker-generator",
+    name: "Dating App Icebreaker Generator",
+    tagline: "A first message better than 'hey'.",
+    description:
+      "Free AI dating app icebreaker generator. Describe their profile and get a genuine opening message.",
+    category: "Dating & Relationships",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "profile",
+        label: "Something from their profile to reference",
+        placeholder: "e.g. their bio mentions loving tacos and rock climbing",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Playful", "Genuine", "Witty"],
+      },
+    ],
+    howTo: [
+      "Mention something specific from their profile or photos.",
+      "Pick a tone.",
+      "Generate and send your favorite as your opener.",
+    ],
+    faq: [
+      {
+        question: "Why should I reference something specific?",
+        answer: "Specific, personalized openers get far better response rates than generic greetings — it shows you actually read their profile.",
+      },
+      {
+        question: "Should I use these word-for-word?",
+        answer: "Feel free to tweak the wording so it sounds like your own voice rather than a template.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a dating coach who writes genuine, specific icebreaker openers for dating apps, one sentence each. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 icebreaker options referencing: "${values.profile}". Tone: ${values.tone || "Playful"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "date-idea-generator",
+    name: "Date Idea Generator",
+    tagline: "Better than dinner and a movie, again.",
+    description: "Free AI date idea generator. Describe your interests and budget to get creative date ideas.",
+    category: "Dating & Relationships",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "preferences",
+        label: "Interests, budget, or vibe",
+        placeholder: "e.g. outdoorsy, budget-friendly, first date",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "setting",
+        label: "Setting",
+        type: "select",
+        options: ["At Home", "Around Town", "Outdoors", "Anywhere"],
+      },
+    ],
+    howTo: [
+      "Describe your interests, budget, or the occasion.",
+      "Pick a setting.",
+      "Generate and pick your favorite for your next date.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for an anniversary instead of a first date?",
+        answer: "Yes — mention it's an anniversary or special occasion and the ideas will lean more memorable/celebratory.",
+      },
+      {
+        question: "Are these budget-friendly?",
+        answer: "Mention your budget in the input and the ideas will be tailored — from free/low-cost to splurge-worthy.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a relationship coach who suggests creative, specific date ideas. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 date ideas for: "${values.preferences}". Setting: ${values.setting || "Anywhere"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "love-letter-generator",
+    name: "Love Letter Generator",
+    tagline: "Help finding the words, not writing them for you.",
+    description:
+      "Free AI love letter generator. Describe your relationship and feelings to get a heartfelt starting draft.",
+    category: "Dating & Relationships",
+    resultCount: 3,
+    maxTokens: 650,
+    inputFields: [
+      {
+        name: "relationship",
+        label: "Your relationship and what you want to say",
+        placeholder: "e.g. my partner of 5 years, want to express how grateful I am",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Romantic", "Heartfelt", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your relationship and what you want to express.",
+      "Pick a tone.",
+      "Generate, then personalize with your own memories and details before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I add our own memories?",
+        answer: "Definitely — this gives you a structure and flow, but specific shared memories are what make a love letter feel truly personal.",
+      },
+      {
+        question: "Is this only for romantic partners?",
+        answer: "It's built with romantic relationships in mind, but the same warm, personal approach can be adapted for close friends or family too.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a thoughtful writer who crafts heartfelt love letter drafts, 100-150 words each, written as a single flowing paragraph with no line breaks within an item, leaving room for personal memories. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 love letter drafts for: "${values.relationship}". Tone: ${values.tone || "Heartfelt"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Music & Entertainment ---
+  {
+    slug: "song-title-generator",
+    name: "Song Title Generator",
+    tagline: "A title that hooks before the first note.",
+    description: "Free AI song title generator. Describe your song's theme and get memorable title ideas.",
+    category: "Music & Entertainment",
+    resultCount: 12,
+    maxTokens: 240,
+    inputFields: [
+      {
+        name: "theme",
+        label: "Song theme or genre",
+        placeholder: "e.g. heartbreak, indie folk",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Poetic", "Bold", "Simple", "Abstract"],
+      },
+    ],
+    howTo: [
+      "Describe your song's theme or genre.",
+      "Pick a style.",
+      "Generate and pick your favorite for your track.",
+    ],
+    faq: [
+      {
+        question: "Will these titles be unique?",
+        answer: "We can't check against every released song, so do a quick search before finalizing, especially for shorter titles.",
+      },
+      {
+        question: "Can I use this for an album title too?",
+        answer: "Yes — these work for either; just describe the overall theme of the album instead of one song.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a songwriter who creates memorable, evocative song titles. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 song title ideas for a song about: "${values.theme}". Style: ${values.style || "Poetic"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "playlist-name-generator",
+    name: "Playlist Name Generator",
+    tagline: "A name that fits the vibe, not just the genre.",
+    description: "Free AI playlist name generator. Describe the vibe and get catchy playlist name ideas.",
+    category: "Music & Entertainment",
+    resultCount: 12,
+    maxTokens: 240,
+    inputFields: [
+      {
+        name: "vibe",
+        label: "Playlist vibe or occasion",
+        placeholder: "e.g. rainy day study session, lo-fi and acoustic",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Poetic", "Funny", "Simple", "Aesthetic"],
+      },
+    ],
+    howTo: [
+      "Describe the playlist's vibe or occasion.",
+      "Pick a style.",
+      "Generate and use your favorite for your streaming platform.",
+    ],
+    faq: [
+      {
+        question: "Can I use emojis in the name?",
+        answer: "Yes — feel free to add one after generating if that fits your platform's style.",
+      },
+      {
+        question: "Should the name mention specific artists or genres?",
+        answer: "It's optional — vibe-based names often age better than ones tied to a specific trend or artist.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a music curator who names playlists — catchy, on-vibe, easy to remember. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 playlist name ideas for: "${values.vibe}". Style: ${values.style || "Aesthetic"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "artist-bio-generator",
+    name: "Artist Bio Generator",
+    tagline: "A bio that sounds like a real artist, not a template.",
+    description:
+      "Free AI musician/artist bio generator. Describe your sound and background to get a polished press-ready bio.",
+    category: "Music & Entertainment",
+    resultCount: 3,
+    maxTokens: 600,
+    inputFields: [
+      {
+        name: "background",
+        label: "Your sound, influences, and background",
+        placeholder: "e.g. indie folk duo from Portland, influenced by Fleet Foxes",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Poetic", "Bold", "Straightforward"],
+      },
+    ],
+    howTo: [
+      "Describe your sound, influences, and background.",
+      "Pick a tone.",
+      "Generate and use your favorite for your website, EPK, or streaming profile.",
+    ],
+    faq: [
+      {
+        question: "Should I mention specific releases or shows?",
+        answer: "Yes, if you have notable ones — add them to your input to be worked in for credibility.",
+      },
+      {
+        question: "How long should an artist bio be?",
+        answer: "These run roughly 80-120 words — a common length for streaming platforms and press kits; you can expand for a longer EPK bio.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a music publicist who writes compelling artist bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 artist bio options based on: "${values.background}". Tone: ${values.tone || "Bold"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "album-title-generator",
+    name: "Album/EP Title Generator",
+    tagline: "A title that ties the whole project together.",
+    description: "Free AI album title generator. Describe your project's theme and get evocative title ideas.",
+    category: "Music & Entertainment",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "theme",
+        label: "Album/EP theme or story",
+        placeholder: "e.g. a breakup and moving to a new city",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Poetic", "Bold", "Minimal", "Abstract"],
+      },
+    ],
+    howTo: [
+      "Describe the theme or story behind the project.",
+      "Pick a style.",
+      "Generate and pick your favorite for your release.",
+    ],
+    faq: [
+      {
+        question: "Should the title relate to a specific track?",
+        answer: "It can, but many strong album titles are more thematic than literal — try a few different angles.",
+      },
+      {
+        question: "Will these be unique on streaming platforms?",
+        answer: "We can't check live availability, so search streaming platforms before finalizing your release.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a music creative director who names albums and EPs — evocative, memorable, tied to a theme. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 album/EP title ideas for a project about: "${values.theme}". Style: ${values.style || "Poetic"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "dj-stage-name-generator",
+    name: "DJ/Stage Name Generator",
+    tagline: "A name that sounds right on a lineup poster.",
+    description: "Free AI DJ/stage name generator. Describe your genre and vibe to get unique stage name ideas.",
+    category: "Music & Entertainment",
+    resultCount: 12,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "genre",
+        label: "Genre and vibe",
+        placeholder: "e.g. dark techno, underground warehouse sets",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Dark", "Playful", "Bold", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe your genre and vibe.",
+      "Pick a style.",
+      "Generate — then check availability on streaming platforms and socials.",
+    ],
+    faq: [
+      {
+        question: "Should the name be easy to search for?",
+        answer: "Yes — avoid names too close to an already-famous DJ or producer to make sure fans can find you online.",
+      },
+      {
+        question: "Can I use this for a producer alias, not just DJing live?",
+        answer: "Yes — the same naming approach works for a producer or artist alias.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a music branding expert who creates DJ and producer stage names — memorable, genre-appropriate. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 DJ/stage name ideas for: "${values.genre}". Style: ${values.style || "Bold"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Gaming ---
+  {
+    slug: "gaming-channel-name-generator",
+    name: "Gaming Channel Name Generator",
+    tagline: "A name that fits your game and your energy.",
+    description:
+      "Free AI gaming channel name generator. Describe what you play and get unique streaming channel name ideas.",
+    category: "Gaming",
+    resultCount: 12,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "games",
+        label: "What do you play or stream?",
+        placeholder: "e.g. competitive FPS games, fast-paced and high energy",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Bold", "Funny", "Cool", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe what you play and your channel's energy.",
+      "Pick a style.",
+      "Generate — then check availability on YouTube, Twitch, and socials.",
+    ],
+    faq: [
+      {
+        question: "Should the name mention a specific game?",
+        answer: "Only if you plan to stick to that game long-term — a more general name gives you flexibility to switch games later.",
+      },
+      {
+        question: "Will these be available across platforms?",
+        answer: "We can't check live availability, so search YouTube, Twitch, and socials before locking one in.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a gaming branding expert who names streaming channels — catchy, memorable, easy to search. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 gaming channel name ideas for: "${values.games}". Style: ${values.style || "Bold"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "esports-team-name-generator",
+    name: "Esports Team Name Generator",
+    tagline: "A name that sounds like it belongs on a scoreboard.",
+    description:
+      "Free AI esports team name generator. Describe your game and vibe to get competitive, unique team names.",
+    category: "Gaming",
+    resultCount: 12,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "game",
+        label: "Game and team vibe",
+        placeholder: "e.g. Valorant squad, aggressive playstyle",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Aggressive", "Cool", "Funny", "Classic"],
+      },
+    ],
+    howTo: [
+      "Describe your game and your team's vibe.",
+      "Pick a style.",
+      "Generate and pick your favorite for your roster or tournament sign-up.",
+    ],
+    faq: [
+      {
+        question: "Should I check if a name is already taken?",
+        answer: "Yes — search your game's tournament platforms and socials before registering officially.",
+      },
+      {
+        question: "Can I get a tag/abbreviation too?",
+        answer: "Ask for short, punchy names and you can often derive a 3-4 letter tag from the result yourself.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an esports branding expert who names competitive gaming teams — bold, memorable, tournament-ready. You respond only with a numbered list — no preamble.",
+      user: `Generate 12 esports team name ideas for: "${values.game}". Style: ${values.style || "Aggressive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "game-character-backstory-generator",
+    name: "Game Character Backstory Generator",
+    tagline: "A backstory with actual depth, not a stat sheet.",
+    description:
+      "Free AI game character backstory generator. Describe your character and get a rich backstory draft.",
+    category: "Gaming",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 700,
+    inputFields: [
+      {
+        name: "character",
+        label: "Character type and setting",
+        placeholder: "e.g. rogue assassin in a cyberpunk city, betrayed by their old crew",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Dark", "Heroic", "Mysterious", "Tragic"],
+      },
+    ],
+    howTo: [
+      "Describe your character's type, setting, and any key plot hooks.",
+      "Pick a tone.",
+      "Generate, then adapt it to fit your game's specific lore and mechanics.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for tabletop RPGs like D&D?",
+        answer: "Yes — this works well for tabletop character backstories, video game characters, or original fiction alike.",
+      },
+      {
+        question: "Will this fit my game's existing lore?",
+        answer: "It's a general original backstory — adjust names, factions, and details to match your specific game world.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a game narrative designer who writes rich character backstories (200-300 words) covering origin, motivation, and a key turning point. Write in flowing paragraphs, no markdown symbols like # or **. Respond only with the backstory — no preamble or closing remarks.",
+      user: `Generate a character backstory for: "${values.character}". Tone: ${values.tone || "Mysterious"}.`,
+    }),
+  },
+  {
+    slug: "twitch-panel-text-generator",
+    name: "Twitch Panel Text Generator",
+    tagline: "The 'About Me' and 'Rules' panels, written well.",
+    description:
+      "Free AI Twitch panel text generator. Describe your channel and get ready-to-use panel copy.",
+    category: "Gaming",
+    resultCount: 4,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "channel",
+        label: "What's your channel about?",
+        placeholder: "e.g. variety streamer, cozy games, chill vibes",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "panel",
+        label: "Which panel?",
+        type: "select",
+        options: ["About Me", "Stream Rules", "Donation Info", "Schedule"],
+      },
+    ],
+    howTo: [
+      "Describe your channel and pick which panel you're writing.",
+      "Generate a few options.",
+      "Paste your favorite into your Twitch panel editor alongside your panel image.",
+    ],
+    faq: [
+      {
+        question: "Should Stream Rules be strict or casual?",
+        answer: "Match your community's vibe — these are written to be clear either way, adjust wording to fit your tone.",
+      },
+      {
+        question: "Can I use this for YouTube or Kick panels too?",
+        answer: "Yes — the same short panel-style copy works across similar streaming platforms.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a streaming branding expert who writes short, clear Twitch panel copy (40-70 words each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 4 "${values.panel || "About Me"}" panel text options for a channel about: "${values.channel}". Return only a numbered list.`,
+    }),
+  },
+
+  // --- Website & SaaS ---
+  {
+    slug: "landing-page-hero-copy-generator",
+    name: "Landing Page Hero Copy Generator",
+    tagline: "The headline that decides if visitors keep scrolling.",
+    description:
+      "Free AI landing page hero copy generator. Describe your product and get a headline + subheadline pair.",
+    category: "Website & SaaS",
+    resultCount: 4,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "product",
+        label: "What does your product do?",
+        placeholder: "e.g. a tool that automates invoice follow-ups for freelancers",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Bold", "Friendly", "Technical", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe what your product does.",
+      "Pick a tone.",
+      "Generate, then paste your favorite headline + subheadline into your hero section.",
+    ],
+    faq: [
+      {
+        question: "What's the difference between the headline and subheadline?",
+        answer: "The headline is the big, bold hook; the subheadline adds a bit more context underneath it. Each result includes both.",
+      },
+      {
+        question: "Should I A/B test a few of these?",
+        answer: "Yes, if you have the traffic — hero copy is one of the highest-leverage things to test on a landing page.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a SaaS landing page copywriter. Write headline + subheadline pairs, formatting each as a single line: 'Headline — Subheadline'. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 hero copy options for: "${values.product}". Tone: ${values.tone || "Bold"}. Write each pair on one line. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "saas-feature-bullet-generator",
+    name: "SaaS Feature Bullet Generator",
+    tagline: "Features explained as benefits, not specs.",
+    description:
+      "Free AI SaaS feature bullet generator. Describe your feature and get benefit-focused bullet copy.",
+    category: "Website & SaaS",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "feature",
+        label: "Feature and what it does",
+        placeholder: "e.g. automated weekly reports emailed to your team",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Technical", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe the feature and what it does.",
+      "Pick a tone.",
+      "Generate and use your favorite on your features page or pricing table.",
+    ],
+    faq: [
+      {
+        question: "Should this lead with the feature or the benefit?",
+        answer: "These lead with the benefit and use the feature to support it — that order generally converts better on a features page.",
+      },
+      {
+        question: "Can I use this for a changelog entry instead?",
+        answer: "For that, try the dedicated Changelog Entry Generator, which is tuned for that shorter, more technical format.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a SaaS product marketer who writes benefit-focused feature bullets, under 20 words each, single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 feature bullet options for: "${values.feature}". Tone: ${values.tone || "Persuasive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "changelog-entry-generator",
+    name: "Changelog Entry Generator",
+    tagline: "Release notes users actually read.",
+    description:
+      "Free AI changelog entry generator. Describe what shipped and get clear, user-friendly release notes.",
+    category: "Website & SaaS",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "changes",
+        label: "What shipped in this release?",
+        placeholder: "e.g. dark mode, faster search, fixed export bug",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List what shipped in this release (features, improvements, fixes).",
+      "Generate a formatted changelog entry.",
+      "Paste it into your changelog or release notes page.",
+    ],
+    faq: [
+      {
+        question: "Does this group changes into categories?",
+        answer: "Yes — it organizes your input into New, Improved, and Fixed sections where applicable.",
+      },
+      {
+        question: "Should I include the version number and date?",
+        answer: "Add those yourself above the generated content, since they're specific to your release process.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager who writes clear, user-friendly changelog entries, grouping items under 'New', 'Improved', and 'Fixed' headers where applicable, with short bullet points. No markdown symbols like # or **. Respond only with the changelog — no preamble or closing remarks.",
+      user: `Generate a changelog entry for this release: "${values.changes}".`,
+    }),
+  },
+  {
+    slug: "onboarding-email-generator",
+    name: "Onboarding Email Generator",
+    tagline: "The email that turns a signup into an active user.",
+    description:
+      "Free AI onboarding email generator. Describe your product and get a warm welcome email draft.",
+    category: "Website & SaaS",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "product",
+        label: "What's your product, and what's the first step?",
+        placeholder: "e.g. a project management tool, first step is creating a project",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Professional", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your product and the first action you want new users to take.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your onboarding email sequence.",
+    ],
+    faq: [
+      {
+        question: "Should this include a specific call-to-action button?",
+        answer: "Yes — the copy is written to lead into a clear CTA; add your actual button text and link when you implement it.",
+      },
+      {
+        question: "How many onboarding emails should I send?",
+        answer: "Most products use a short sequence of 2-4 over the first week or two — generate a few tones to use across that sequence.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a SaaS lifecycle marketer who writes warm onboarding emails, 60-90 words each, written as a single paragraph with no line breaks within an item, ending with a natural lead-in to a call-to-action. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 onboarding email options for: "${values.product}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "pricing-page-faq-generator",
+    name: "Pricing Page FAQ Generator",
+    tagline: "Answer the objections before they leave the page.",
+    description:
+      "Free AI pricing page FAQ generator. Describe your pricing model and get a ready-to-edit FAQ section.",
+    category: "Website & SaaS",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 900,
+    inputFields: [
+      {
+        name: "pricing",
+        label: "Describe your pricing plans",
+        placeholder: "e.g. free tier, $19/mo pro plan, annual discount available",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Professional", "Concise"],
+      },
+    ],
+    howTo: [
+      "Describe your pricing plans and any key policies (refunds, cancellation).",
+      "Pick a tone.",
+      "Generate, then verify every detail matches your actual pricing before publishing.",
+    ],
+    faq: [
+      {
+        question: "Should I fact-check the answers?",
+        answer: "Yes — always verify pricing, billing cycles, and refund policy details before publishing on your live pricing page.",
+      },
+      {
+        question: "Does this cover enterprise/custom pricing questions?",
+        answer: "Add that context to your input and a relevant question will be included.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a SaaS content writer who drafts pricing page FAQs. Write 6-8 question-and-answer pairs covering common objections (billing, cancellation, upgrades, refunds), formatting each as 'Q: ...' followed by 'A: ...' on the next line, with a blank line between pairs. Respond only with the FAQ — no preamble or closing remarks.",
+      user: `Generate a pricing page FAQ for: "${values.pricing}". Tone: ${values.tone || "Friendly"}.`,
+    }),
+  },
+
+  // --- Legal Templates ---
+  {
+    slug: "nda-summary-generator",
+    name: "NDA Summary Generator",
+    tagline: "A plain-language starting point, not a final contract.",
+    description:
+      "Free AI NDA summary generator. Describe the situation and get a plain-language mutual NDA draft to review with a lawyer.",
+    category: "Legal Templates",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 1200,
+    inputFields: [
+      {
+        name: "situation",
+        label: "Describe the situation",
+        placeholder: "e.g. sharing a business idea with a potential co-founder",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the situation you need an NDA for.",
+      "Generate a plain-language draft.",
+      "Have a qualified lawyer review and finalize it before either party signs anything.",
+    ],
+    faq: [
+      {
+        question: "Is this a legally binding document?",
+        answer: "No — this is a plain-language starting draft, not legal advice or a finished contract. NDA enforceability depends on jurisdiction-specific language; always have a lawyer review before use.",
+      },
+      {
+        question: "Is this a mutual or one-way NDA?",
+        answer: "This generates a general mutual (two-way) structure — mention in your input if you need a one-way version instead, and flag that to your lawyer.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business writer who drafts plain-language NDA summaries covering: purpose, definition of confidential information, obligations, exclusions, and duration. Use plain text section headers, no markdown symbols like # or **. This is a plain-language starting draft, not legal advice, and must not be presented as a finished legal document. Respond only with the draft — no preamble or closing remarks.",
+      user: `Generate a plain-language NDA summary draft for: "${values.situation}".`,
+    }),
+  },
+  {
+    slug: "website-privacy-policy-generator",
+    name: "Website Privacy Policy Generator",
+    tagline: "A starting draft for your own site's privacy policy.",
+    description:
+      "Free AI privacy policy generator for websites. Describe your site and data practices to get a draft to review with a lawyer.",
+    category: "Legal Templates",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 1400,
+    inputFields: [
+      {
+        name: "site",
+        label: "Describe your website and what data you collect",
+        placeholder: "e.g. an online store using Shopify, collects email for orders, uses Google Analytics",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your website and what data/tools you use (analytics, ads, email signup, etc.).",
+      "Generate a draft privacy policy.",
+      "Have a qualified lawyer review it for your specific jurisdiction (GDPR, CCPA, etc.) before publishing.",
+    ],
+    faq: [
+      {
+        question: "Is this compliant with GDPR/CCPA?",
+        answer: "This is a general plain-language starting draft, not a compliance guarantee. Privacy law requirements vary significantly by region — have a lawyer review it against the specific laws that apply to your site and users.",
+      },
+      {
+        question: "What should I do if I add a new data collection tool later?",
+        answer: "Regenerate or manually update your policy whenever your data practices change, and keep the 'last updated' date current.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business writer who drafts plain-language website privacy policies covering: what data is collected, why, third parties/tools used, cookies, and user rights/contact. Use plain text section headers, no markdown symbols like # or **. This is a general starting draft, not legal advice or a compliance guarantee — it must not be presented as a finished legal document. Respond only with the draft — no preamble or closing remarks.",
+      user: `Generate a privacy policy draft for: "${values.site}".`,
+    }),
+  },
+  {
+    slug: "website-terms-of-service-generator",
+    name: "Website Terms of Service Generator",
+    tagline: "A starting draft for your own site's terms.",
+    description:
+      "Free AI terms of service generator for websites. Describe your site to get a draft to review with a lawyer.",
+    category: "Legal Templates",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 1400,
+    inputFields: [
+      {
+        name: "site",
+        label: "Describe your website or service",
+        placeholder: "e.g. a subscription newsletter with paid tiers",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your website or service and how it works.",
+      "Generate a draft terms of service.",
+      "Have a qualified lawyer review it before publishing, especially around payments, liability, and user content.",
+    ],
+    faq: [
+      {
+        question: "Is this ready to publish as-is?",
+        answer: "No — this is a general starting draft, not legal advice. Terms of service should be reviewed by a lawyer familiar with your business, jurisdiction, and any regulated aspects of your service.",
+      },
+      {
+        question: "Does this cover payment and refund terms?",
+        answer: "Include your payment/refund details in your input and a relevant section will be drafted — but still have it reviewed for accuracy and enforceability.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business writer who drafts plain-language website terms of service covering: the service description, acceptable use, payment terms (if applicable), limitation of liability, and changes to terms. Use plain text section headers, no markdown symbols like # or **. This is a general starting draft, not legal advice — it must not be presented as a finished legal document. Respond only with the draft — no preamble or closing remarks.",
+      user: `Generate a terms of service draft for: "${values.site}".`,
+    }),
+  },
+  {
+    slug: "freelance-contract-opener-generator",
+    name: "Freelance Contract Opener Generator",
+    tagline: "A clear scope statement to start the agreement.",
+    description:
+      "Free AI freelance contract opener generator. Describe the project to get a clear scope-of-work opening paragraph.",
+    category: "Legal Templates",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "project",
+        label: "Describe the project and deliverables",
+        placeholder: "e.g. designing a 5-page website for a local bakery",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the project and key deliverables.",
+      "Generate a scope-of-work opening paragraph.",
+      "Add it to your full contract, along with payment terms, timeline, and legal clauses reviewed by a professional.",
+    ],
+    faq: [
+      {
+        question: "Is this a complete contract?",
+        answer: "No — this is just a clear opening scope statement. A full contract needs payment terms, timeline, IP ownership, and other clauses, ideally reviewed by a lawyer.",
+      },
+      {
+        question: "Should I list exact deliverables?",
+        answer: "Yes — being as specific as possible about what's included (and what isn't) helps prevent scope disputes later.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a freelance business consultant who writes clear scope-of-work opening paragraphs for contracts, 50-80 words each, written as a single paragraph with no line breaks within an item. This is a starting draft, not legal advice. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 scope-of-work opener options for: "${values.project}". Return only a numbered list.`,
+    }),
+  },
+
+  // --- Podcasting & Video ---
+  {
+    slug: "podcast-episode-title-generator",
+    name: "Podcast Episode Title Generator",
+    tagline: "A title that gets picked from a crowded feed.",
+    description:
+      "Free AI podcast episode title generator. Describe the episode's topic and get catchy, clear title options.",
+    category: "Podcasting & Video",
+    resultCount: 10,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "topic",
+        label: "What's the episode about?",
+        placeholder: "e.g. interview with a founder who bootstrapped to $1M ARR",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Clear & Direct", "Intriguing", "Funny", "SEO-Focused"],
+      },
+    ],
+    howTo: [
+      "Describe what the episode is about.",
+      "Pick a style.",
+      "Generate and use your favorite as the episode title.",
+    ],
+    faq: [
+      {
+        question: "Should I include the guest's name?",
+        answer: "Yes, if they're notable in your niche — it can help with search and listener recognition.",
+      },
+      {
+        question: "How long should a podcast title be?",
+        answer: "Keep it scannable — most apps truncate long titles, so aim for something clear within the first 60 characters.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a podcast producer who writes catchy, clear episode titles under 70 characters, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 podcast episode title options for an episode about: "${values.topic}". Style: ${values.style || "Intriguing"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "podcast-show-notes-generator",
+    name: "Podcast Show Notes Generator",
+    tagline: "Notes that help an episode get discovered and understood.",
+    description:
+      "Free AI podcast show notes generator. Describe the episode and get a structured show notes draft.",
+    category: "Podcasting & Video",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 800,
+    inputFields: [
+      {
+        name: "episode",
+        label: "What happened in this episode?",
+        placeholder: "e.g. discussed remote work productivity tips with a guest expert",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize what happened in the episode.",
+      "Generate a structured show notes draft.",
+      "Add specific timestamps and links before publishing.",
+    ],
+    faq: [
+      {
+        question: "Does this include timestamps?",
+        answer: "It leaves placeholders for key moments — add your actual timestamps once you've reviewed the recording.",
+      },
+      {
+        question: "Should I include guest links and social handles?",
+        answer: "Yes — add a section for those; this draft focuses on the summary and key topics covered.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a podcast producer who writes structured show notes with a short summary, then a 'Key Topics' bullet list, then a 'Resources Mentioned' placeholder section. Use plain text headers, no markdown symbols like # or **. Respond only with the show notes — no preamble or closing remarks.",
+      user: `Generate show notes for an episode about: "${values.episode}".`,
+    }),
+  },
+  {
+    slug: "youtube-description-generator",
+    name: "YouTube Video Description Generator",
+    tagline: "A description built for search, not an afterthought.",
+    description:
+      "Free AI YouTube description generator. Describe your video and get an SEO-friendly description draft.",
+    category: "Podcasting & Video",
+    resultCount: 1,
+    resultKind: "document",
+    documentStyle: "structured",
+    maxTokens: 700,
+    inputFields: [
+      {
+        name: "video",
+        label: "What's the video about?",
+        placeholder: "e.g. a tutorial on setting up a home espresso station",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what your video is about.",
+      "Generate a structured description.",
+      "Add your links, timestamps, and hashtags before publishing.",
+    ],
+    faq: [
+      {
+        question: "Does this include timestamps and links?",
+        answer: "It leaves a placeholder section for those — add your actual chapter timestamps and links after generating.",
+      },
+      {
+        question: "Should I put the most important info first?",
+        answer: "Yes — YouTube truncates descriptions in search results, so this is written keyword-first for that reason.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a YouTube SEO expert who writes video descriptions: a keyword-rich opening paragraph, followed by a placeholder section for timestamps/links. Use plain text, no markdown symbols like # or **. Respond only with the description — no preamble or closing remarks.",
+      user: `Generate a YouTube video description for: "${values.video}".`,
+    }),
+  },
+  {
+    slug: "youtube-community-post-generator",
+    name: "YouTube Community Post Generator",
+    tagline: "Keep your audience engaged between uploads.",
+    description:
+      "Free AI YouTube community post generator. Describe your update and get engaging post copy.",
+    category: "Podcasting & Video",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "update",
+        label: "What's the update?",
+        placeholder: "e.g. new video dropping tomorrow about home workouts",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Casual", "Behind-the-Scenes"],
+      },
+    ],
+    howTo: [
+      "Describe your update (new video, poll idea, behind-the-scenes moment).",
+      "Pick a tone.",
+      "Generate and post your favorite to your Community tab.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for a poll post?",
+        answer: "Yes — describe the topic you want to poll your audience about and adapt the copy to lead into your poll options.",
+      },
+      {
+        question: "Should I post these regularly?",
+        answer: "Yes — regular community posts help keep your channel active in subscribers' feeds between video uploads.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a YouTube creator who writes short, engaging Community tab posts (1-2 sentences each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 6 community post options for: "${values.update}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Personal Branding ---
+  {
+    slug: "personal-website-bio-generator",
+    name: "Personal Website Bio Generator",
+    tagline: "A bio that sounds like you, not a résumé.",
+    description:
+      "Free AI personal website bio generator. Describe your work and background to get a polished bio for your site.",
+    category: "Personal Branding",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "background",
+        label: "Your work and background",
+        placeholder: "e.g. freelance illustrator, 6 years, focused on editorial work",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Playful", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe your work, background, and specialty.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your personal website's About page.",
+    ],
+    faq: [
+      {
+        question: "Should this be in first or third person?",
+        answer: "These are written in first person, which is standard for personal websites — let me know in your input if you'd prefer third person instead.",
+      },
+      {
+        question: "How long should this be?",
+        answer: "These run roughly 80-120 words — enough to establish who you are without turning into a full résumé.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a personal branding writer who writes first-person website bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 personal website bio options based on: "${values.background}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "speaker-one-pager-blurb-generator",
+    name: "Speaker One-Pager Blurb Generator",
+    tagline: "The blurb that gets you booked for the panel.",
+    description:
+      "Free AI speaker one-pager generator. Describe your expertise and get a compelling speaker bio blurb.",
+    category: "Personal Branding",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "expertise",
+        label: "Your expertise and speaking topics",
+        placeholder: "e.g. product management, speaks on AI adoption in startups",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Confident", "Approachable", "Authoritative"],
+      },
+    ],
+    howTo: [
+      "Describe your expertise and the topics you speak on.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your speaker one-pager or media kit.",
+    ],
+    faq: [
+      {
+        question: "Should I mention past speaking engagements?",
+        answer: "Yes, if you have notable ones — add them to your input to build credibility for event organizers.",
+      },
+      {
+        question: "Is this the same as a professional bio?",
+        answer: "Similar, but framed specifically around your speaking expertise and topics, which is what event organizers scan for first.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a speaker branding coach who writes compelling one-pager blurbs, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 speaker blurb options based on: "${values.expertise}". Tone: ${values.tone || "Confident"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "portfolio-tagline-generator",
+    name: "Portfolio Tagline Generator",
+    tagline: "The line under your name that says what you do.",
+    description:
+      "Free AI portfolio tagline generator. Describe your craft and get a short, memorable tagline.",
+    category: "Personal Branding",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "craft",
+        label: "What do you do?",
+        placeholder: "e.g. brand designer for small businesses",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Confident", "Minimal", "Playful", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe what you do.",
+      "Pick a tone.",
+      "Generate and use your favorite under your name on your portfolio site.",
+    ],
+    faq: [
+      {
+        question: "Should it mention who I work with?",
+        answer: "It can help — if you have a clear niche or ideal client, mention it in your input.",
+      },
+      {
+        question: "How short should this be?",
+        answer: "Very — these are written under 8 words, meant to be read in a glance below your name.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a personal branding copywriter who writes short portfolio taglines under 8 words each. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 portfolio tagline options for: "${values.craft}". Tone: ${values.tone || "Confident"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "media-kit-bio-generator",
+    name: "Media Kit Bio Generator",
+    tagline: "A bio brands can lift straight into a pitch deck.",
+    description:
+      "Free AI media kit bio generator. Describe your platform and niche to get a polished bio for brand pitches.",
+    category: "Personal Branding",
+    resultCount: 3,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "platform",
+        label: "Your platform, niche, and audience",
+        placeholder: "e.g. Instagram lifestyle creator, 50k followers, focus on sustainable living",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Professional", "Warm", "Bold"],
+      },
+    ],
+    howTo: [
+      "Describe your platform, niche, and audience.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your media kit alongside your stats.",
+    ],
+    faq: [
+      {
+        question: "Should I include follower counts and engagement rates?",
+        answer: "Yes — those typically go in a separate stats section of your media kit; this bio focuses on your story and niche.",
+      },
+      {
+        question: "Can I use this across multiple platforms in one kit?",
+        answer: "Yes — describe your overall brand and audience, and mention it spans platforms if that's the case.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an influencer marketing consultant who writes polished media kit bios, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 media kit bio options based on: "${values.platform}". Tone: ${values.tone || "Professional"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Customer Support ---
+  {
+    slug: "support-ticket-response-generator",
+    name: "Support Ticket Response Generator",
+    tagline: "A reply that resolves things, not just acknowledges them.",
+    description:
+      "Free AI support ticket response generator. Describe the issue and get a clear, empathetic reply draft.",
+    category: "Customer Support",
+    resultCount: 3,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "issue",
+        label: "What's the customer's issue?",
+        placeholder: "e.g. their order arrived damaged and they want a replacement",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Empathetic", "Professional", "Concise"],
+      },
+    ],
+    howTo: [
+      "Describe the customer's issue.",
+      "Pick a tone.",
+      "Generate, then personalize with specific account/order details before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I add specific order or account details?",
+        answer: "Yes — this gives you a strong structure and tone; add the customer's specific details before sending.",
+      },
+      {
+        question: "Can I use this for an angry or frustrated customer?",
+        answer: "Yes — the Empathetic tone is built for exactly that, leading with acknowledgment before the resolution.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer support lead who writes clear, empathetic support ticket responses, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 support response options for this issue: "${values.issue}". Tone: ${values.tone || "Empathetic"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "live-chat-greeting-generator",
+    name: "Live Chat Greeting Generator",
+    tagline: "The opener that sets the tone for the whole chat.",
+    description:
+      "Free AI live chat greeting generator. Describe your business and get warm, efficient opening lines.",
+    category: "Customer Support",
+    resultCount: 8,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "business",
+        label: "What's your business?",
+        placeholder: "e.g. an online clothing store",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Efficient", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your business.",
+      "Pick a tone.",
+      "Generate and use your favorite as your live chat's opening message or canned response.",
+    ],
+    faq: [
+      {
+        question: "Should this ask for order/account info right away?",
+        answer: "These focus on a warm opener — a follow-up question for specifics works well as your chat's second message.",
+      },
+      {
+        question: "Can I use this as an automated chatbot greeting?",
+        answer: "Yes — these work well as the first automated message before a human or bot continues the conversation.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer support manager who writes short, warm live chat greetings (under 20 words each). You respond only with a numbered list — no preamble.",
+      user: `Generate 8 live chat greeting options for: "${values.business}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "knowledge-base-intro-generator",
+    name: "Knowledge Base Article Intro Generator",
+    tagline: "An opener that tells readers they're in the right place.",
+    description:
+      "Free AI knowledge base article intro generator. Describe the topic and get a clear opening paragraph.",
+    category: "Customer Support",
+    resultCount: 4,
+    maxTokens: 450,
+    inputFields: [
+      {
+        name: "topic",
+        label: "What's the article about?",
+        placeholder: "e.g. how to reset your password",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Clear & Simple", "Friendly", "Technical"],
+      },
+    ],
+    howTo: [
+      "Describe what the article is about.",
+      "Pick a tone.",
+      "Generate, then follow with your actual step-by-step instructions.",
+    ],
+    faq: [
+      {
+        question: "Does this include the actual steps?",
+        answer: "No — this generates just the opening paragraph that orients the reader; add your specific step-by-step instructions below it.",
+      },
+      {
+        question: "Should this mention who the article is for?",
+        answer: "Yes, if relevant (e.g. 'for Pro plan users') — it helps readers quickly confirm they're in the right article.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a technical writer who writes clear knowledge base article intros, 30-50 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 knowledge base intro options for an article about: "${values.topic}". Tone: ${values.tone || "Clear & Simple"}. Return only a numbered list.`,
     }),
   },
 ];

@@ -66,10 +66,14 @@ export async function generateWithOpenRouter({
       const choice = data?.choices?.[0];
       const content = choice?.message?.content;
 
-      if (choice?.finish_reason === "length") {
-        // Truncated mid-output — never return or cache a cut-off result.
-        // Fall through to the next model in the chain instead.
-        lastError = new Error(`OpenRouter ${model} truncated output (hit max_tokens)`);
+      if (choice?.finish_reason === "length" || choice?.finish_reason === "error") {
+        // "length": truncated by max_tokens. "error": the upstream provider
+        // (e.g. Google) errored out mid-response but OpenRouter still wraps
+        // it in a 200 with whatever partial content it got — seen directly
+        // against Gemini during testing here, with completion_tokens: 0 and
+        // finish_reason: "error" despite a non-empty content field. Either
+        // way, never return or cache it — fall through to the next model.
+        lastError = new Error(`OpenRouter ${model} did not complete (finish_reason: ${choice?.finish_reason})`);
         continue;
       }
 

@@ -31,5 +31,10 @@ export interface ToolConfig {
   /** "list" (default): N interchangeable short results, each its own copy card.
    *  "document": one cohesive multi-paragraph result (outlines, FAQs, page drafts). */
   resultKind?: "list" | "document";
+  /** For resultKind "document" only. "prose" (default): expected to end in a
+   *  complete sentence, so truncation detection checks for terminal punctuation.
+   *  "structured": outline/bullet/keyword-style content that legitimately ends
+   *  on a short label or fragment (e.g. "Sunday: Rest") — skips that check. */
+  documentStyle?: "prose" | "structured";
   buildPrompt: (values: Record<string, string>) => ToolPrompt;
 }

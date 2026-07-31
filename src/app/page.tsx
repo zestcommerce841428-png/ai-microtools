@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { toolSummaries, categories } from "@/lib/tools/summaries";
+import { toolSummaries, categoryDescriptions, getCategoryCounts } from "@/lib/tools/summaries";
 
 const FEATURED_SLUGS = [
   "business-name-generator",
@@ -56,14 +56,20 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-5xl px-4 pb-24">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Browse by category</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {categories.map((category) => (
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {getCategoryCounts().map(({ category, count }) => (
             <Link
               key={category}
               href={`/tools?category=${encodeURIComponent(category)}`}
-              className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:border-zinc-500 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500 dark:hover:text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
             >
-              {category}
+              <div className="flex items-baseline justify-between gap-2">
+                <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{category}</h3>
+                <span className="shrink-0 text-xs font-medium text-zinc-500">{count} tools</span>
+              </div>
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                {categoryDescriptions[category] ?? ""}
+              </p>
             </Link>
           ))}
         </div>
