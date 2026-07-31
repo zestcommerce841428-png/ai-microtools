@@ -85,6 +85,23 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       ? [generated.text.trim()]
       : parseListResponse(generated.text).slice(0, tool.resultCount);
 
+  // Rare model quirk: an occasional degenerate reply (e.g. a single stray
+  // token) can slip through with finish_reason "stop", not "length" — this
+  // isn't truncation, so the openrouter.ts guard doesn't catch it. Never
+  // cache or serve that; it's worse to serve it forever than to ask for a retry.
+  const isDegenerate =
+    tool.resultKind !== "document" &&
+    tool.resultCount > 1 &&
+    results.length < Math.min(2, Math.ceil(tool.resultCount / 2));
+
+  if (isDegenerate) {
+    console.error(`Degenerate result for ${tool.slug}:`, results);
+    return Response.json(
+      { error: "Generation didn't return usable results. Please try again." },
+      { status: 502 }
+    );
+  }
+
   await setCachedResult(tool.slug, inputHash, values, results, generated.model);
 
   return Response.json({ results, cached: false });
