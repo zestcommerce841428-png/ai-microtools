@@ -84,43 +84,48 @@ export default function RootLayout({
         <main className="flex flex-1 flex-col">{children}</main>
 
         <footer className="border-t border-zinc-200 px-4 py-10 dark:border-zinc-800">
-          <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 sm:flex-row sm:justify-between">
-            <div className="max-w-sm">
-              <p className="font-semibold text-zinc-900 dark:text-zinc-50">{SITE_NAME}</p>
-              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
-                AI-generated suggestions — always verify names, trademarks, and availability before use.
-              </p>
-            </div>
-            <nav aria-label="Tool categories" className="flex flex-col gap-2 text-sm">
-              <p className="font-medium text-zinc-900 dark:text-zinc-100">Categories</p>
-              {categories.map((category) => (
-                <Link
-                  key={category}
-                  href={`/tools?category=${encodeURIComponent(category)}`}
-                  className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100"
-                >
-                  {category} tools
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
+            <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
+              <div className="max-w-sm">
+                <p className="font-semibold text-zinc-900 dark:text-zinc-50">{SITE_NAME}</p>
+                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
+                  AI-generated suggestions — always verify names, trademarks, and availability before use.
+                </p>
+              </div>
+              <nav aria-label="Tool categories" className="flex flex-col gap-2 text-sm">
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">Categories</p>
+                {categories.map((category) => (
+                  <Link
+                    key={category}
+                    href={`/tools?category=${encodeURIComponent(category)}`}
+                    className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100"
+                  >
+                    {category} tools
+                  </Link>
+                ))}
+              </nav>
+              <nav aria-label="Site" className="flex flex-col gap-2 text-sm">
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">Site</p>
+                <Link href="/about" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                  About
                 </Link>
-              ))}
-            </nav>
-            <nav aria-label="Site" className="flex flex-col gap-2 text-sm">
-              <p className="font-medium text-zinc-900 dark:text-zinc-100">Site</p>
-              <Link href="/about" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
-                About
-              </Link>
-              <Link href="/blog" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
-                Blog
-              </Link>
-              <Link href="/contact" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
-                Contact
-              </Link>
-              <Link href="/privacy-policy" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
-                Terms of Service
-              </Link>
-            </nav>
+                <Link href="/blog" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                  Blog
+                </Link>
+                <Link href="/contact" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                  Contact
+                </Link>
+                <Link href="/privacy-policy" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100">
+                  Terms of Service
+                </Link>
+              </nav>
+            </div>
+            <p className="border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
+              &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+            </p>
           </div>
         </footer>
       </body>

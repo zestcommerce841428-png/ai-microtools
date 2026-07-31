@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import type { ToolSummary } from "@/lib/tools/summaries";
+import ToolCard from "@/components/ToolCard";
 
 interface ToolsBrowserProps {
   tools: ToolSummary[];
@@ -83,16 +83,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
               <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">{category}</h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {categoryTools.map((tool) => (
-                  <Link
-                    key={tool.slug}
-                    href={`/tools/${tool.slug}`}
-                    className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
-                  >
-                    <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-                      {tool.name}
-                    </h3>
-                    <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{tool.tagline}</p>
-                  </Link>
+                  <ToolCard key={tool.slug} slug={tool.slug} name={tool.name} tagline={tool.tagline} />
                 ))}
               </div>
             </section>
