@@ -49,6 +49,11 @@ export async function generateWithOpenRouter({
           ],
           max_tokens: maxTokens,
           temperature: 0.8,
+          // gemini-2.5-flash-lite is a reasoning model by default — hidden
+          // "thinking" tokens eat into max_tokens (and bill separately)
+          // without appearing in the output, causing silent truncation.
+          // Disabling it frees the whole budget for visible content.
+          reasoning: { enabled: false },
         }),
       });
 
@@ -58,7 +63,15 @@ export async function generateWithOpenRouter({
       }
 
       const data = await res.json();
-      const content = data?.choices?.[0]?.message?.content;
+      const choice = data?.choices?.[0];
+      const content = choice?.message?.content;
+
+      if (choice?.finish_reason === "length") {
+        // Truncated mid-output — never return or cache a cut-off result.
+        // Fall through to the next model in the chain instead.
+        lastError = new Error(`OpenRouter ${model} truncated output (hit max_tokens)`);
+        continue;
+      }
 
       if (typeof content === "string" && content.trim().length > 0) {
         return { text: content, model };

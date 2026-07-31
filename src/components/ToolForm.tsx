@@ -109,7 +109,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
           disabled={loading || needsVerification}
           className="mt-2 rounded-lg bg-zinc-900 px-4 py-2.5 font-semibold text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
         >
-          {loading ? "Generating..." : `Generate ${tool.name}`}
+          {loading ? "Generating..." : "Generate"}
         </button>
 
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}

@@ -3,7 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { categories, toolSummaries } from "@/lib/tools/summaries";
+import ThemeToggle from "@/components/ThemeToggle";
 import "./globals.css";
+
+// Runs before hydration to apply the saved/system theme without a flash of
+// the wrong one. suppressHydrationWarning on <html> below is required
+// because this mutates the class before React hydrates.
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,9 +53,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white dark:bg-black">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
             <Link href="/" className="font-semibold text-zinc-900 dark:text-zinc-50">
@@ -68,6 +76,7 @@ export default function RootLayout({
               >
                 Blog
               </Link>
+              <ThemeToggle />
             </nav>
           </div>
         </header>

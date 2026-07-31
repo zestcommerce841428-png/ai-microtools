@@ -2810,6 +2810,1537 @@ export const tools: ToolConfig[] = [
       user: `Generate 8 packaging thank-you card messages for: "${values.brand}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
     }),
   },
+
+  // --- Amazon (additional) ---
+  {
+    slug: "amazon-a-plus-content-generator",
+    name: "Amazon A+ Content Generator",
+    tagline: "Draft copy for your enhanced brand content modules.",
+    description:
+      "Free AI Amazon A+ Content generator. Describe your product and brand story to get draft copy for A+ Content modules.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 650,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product and brand story",
+        placeholder: "e.g. premium yoga mats, brand focused on sustainability",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Friendly", "Technical", "Lifestyle"],
+      },
+    ],
+    howTo: [
+      "Describe your product and a bit of your brand story.",
+      "Pick a tone.",
+      "Generate, then drop the copy into your A+ Content module builder alongside your images.",
+    ],
+    faq: [
+      {
+        question: "Does this include the images or layout?",
+        answer: "No — this generates the text for module headlines and body copy only. You'll still build the visual layout in Amazon's A+ Content Manager.",
+      },
+      {
+        question: "Do I need a brand registered on Amazon to use A+ Content?",
+        answer: "Yes, A+ Content requires Amazon Brand Registry — this tool just helps with the copy once you're eligible.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Amazon brand content strategist who writes short A+ Content module copy — a headline plus a 30-50 word body paragraph, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 A+ Content copy variations for: "${values.product}". Tone: ${values.tone || "Premium"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "amazon-backend-search-terms-generator",
+    name: "Amazon Backend Search Terms Generator",
+    tagline: "Hidden keywords that widen your search visibility.",
+    description:
+      "Free AI Amazon backend search terms generator. Describe your product and get relevant backend keyword ideas.",
+    category: "Ecommerce",
+    resultCount: 1,
+    resultKind: "document",
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. bamboo cutting board, kitchen, eco-friendly",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Generate a set of backend search terms.",
+      "Paste them (space-separated, no repeats of words already in your title) into the Seller Central 'Search Terms' field.",
+    ],
+    faq: [
+      {
+        question: "Should I repeat words already in my title or bullets?",
+        answer: "No — backend search terms are most effective when they add new relevant words, not duplicate what's already visible on your listing.",
+      },
+      {
+        question: "Is there a character limit?",
+        answer: "Amazon limits backend search terms to 249 bytes total — check your current count in Seller Central before saving.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an Amazon SEO expert who writes dense backend search term keyword strings. Include synonyms, related product types, common use cases, target audience terms, and alternate names/spellings — not just words directly describing the product. Aim for at least 20-25 distinct words filling close to 200 characters, lowercase, space-separated, no repeated words, no punctuation, avoiding words likely already in a product title or bullets. Respond only with the keyword string — no preamble, no numbering, no explanations.",
+      user: `Generate a long, dense backend search terms string (at least 20-25 words) for this product: "${values.product}".`,
+    }),
+  },
+
+  // --- Flipkart ---
+  {
+    slug: "flipkart-product-title-generator",
+    name: "Flipkart Product Title Generator",
+    tagline: "Titles built for how Flipkart shoppers search.",
+    description:
+      "Free AI Flipkart product title generator. Describe your product and get keyword-rich, listing-ready titles.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. men's running shoes, lightweight, mesh upper, size 7-11",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "category",
+        label: "Category",
+        type: "select",
+        options: ["Fashion", "Electronics", "Home & Kitchen", "Beauty & Personal Care", "General"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details (size, material, standout feature).",
+      "Pick the closest category.",
+      "Generate, then check Flipkart's current title guidelines before publishing.",
+    ],
+    faq: [
+      {
+        question: "How is a Flipkart title different from an Amazon title?",
+        answer: "Flipkart tends to favor a brand-first structure (Brand + Product Type + Key Feature) — these are written with that convention in mind.",
+      },
+      {
+        question: "Should I include the size or variant in the title?",
+        answer: "Only if you're not using Flipkart's variant/size selector — otherwise keep the title focused on the core product.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Flipkart listing optimization expert who writes titles in a Brand + Product Type + Key Feature structure, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 Flipkart product title options for: "${values.product}". Category: ${values.category || "General"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "flipkart-key-highlights-generator",
+    name: "Flipkart Key Highlights Generator",
+    tagline: "The specs shoppers scan before they scroll.",
+    description:
+      "Free AI Flipkart key highlights generator. Describe your product's features and get concise highlight points.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key features",
+        placeholder: "e.g. wireless mouse: 2.4GHz, 6 months battery, ergonomic",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Concise", "Technical", "Persuasive"],
+      },
+    ],
+    howTo: [
+      "List your product's name and key features.",
+      "Pick a tone.",
+      "Generate — you'll get short highlight points ready to paste into the Key Highlights section.",
+    ],
+    faq: [
+      {
+        question: "How many key highlights does Flipkart support?",
+        answer: "Most categories support around 5-6 highlight points, which is what these are built for.",
+      },
+      {
+        question: "Should highlights be full sentences?",
+        answer: "No — Flipkart's Key Highlights are meant to be short, scannable phrases rather than full sentences.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Flipkart listing copywriter who writes short, scannable key highlight phrases (under 12 words each, not full sentences), each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 Flipkart key highlight points for: "${values.product}". Tone: ${values.tone || "Concise"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "flipkart-product-description-generator",
+    name: "Flipkart Product Description Generator",
+    tagline: "Descriptions that fill in what the highlights can't.",
+    description:
+      "Free AI Flipkart product description generator. Describe your product and get ready-to-use description copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. cotton bedsheet set, king size, 300 thread count",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Informative", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the product description field.",
+    ],
+    faq: [
+      {
+        question: "How is this different from the Key Highlights?",
+        answer: "Highlights are short scannable phrases; the description is where you expand on materials, use cases, and care instructions in full sentences.",
+      },
+      {
+        question: "Should I repeat the highlights word-for-word here?",
+        answer: "No — use the description to add detail the highlights didn't cover, not repeat them.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Flipkart listing copywriter who writes product descriptions, 50-80 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 Flipkart product description options for: "${values.product}". Tone: ${values.tone || "Persuasive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "flipkart-search-keywords-generator",
+    name: "Flipkart Search Keywords Generator",
+    tagline: "The search terms buyers actually type.",
+    description:
+      "Free AI Flipkart search keyword generator. Describe your product and get a list of relevant search keywords.",
+    category: "Ecommerce",
+    resultCount: 15,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and category",
+        placeholder: "e.g. men's formal leather shoes",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product and its category.",
+      "Generate a list of relevant search keywords.",
+      "Use these to inform your title, highlights, and any backend keyword fields.",
+    ],
+    faq: [
+      {
+        question: "Where do I use these keywords?",
+        answer: "Weave the most relevant ones into your title and key highlights naturally — don't just paste the raw list into your listing.",
+      },
+      {
+        question: "Should I include misspellings shoppers might search?",
+        answer: "This tool focuses on correctly spelled, relevant terms — common misspelling targeting is a more advanced and risk-prone tactic best done manually.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Flipkart SEO expert who identifies relevant buyer search keywords for a product. You respond only with a numbered list of keywords/phrases — no preamble.",
+      user: `Generate 15 relevant search keywords for: "${values.product}". Return only a numbered list.`,
+    }),
+  },
+
+  // --- JioMart ---
+  {
+    slug: "jiomart-product-title-generator",
+    name: "JioMart Product Title Generator",
+    tagline: "Clear titles that match how JioMart shoppers browse.",
+    description:
+      "Free AI JioMart product title generator. Describe your product and get clear, keyword-friendly title options.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. basmati rice, 5kg pack, premium long grain",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "category",
+        label: "Category",
+        type: "select",
+        options: ["Grocery", "Fashion", "Electronics", "Home & Living", "General"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details (pack size, quantity, standout feature).",
+      "Pick the closest category.",
+      "Generate and pick your favorite for your listing title.",
+    ],
+    faq: [
+      {
+        question: "Should I include pack size or quantity in the title?",
+        answer: "Yes — for grocery and daily essentials especially, shoppers scan for pack size and quantity first.",
+      },
+      {
+        question: "Can I use this for a grocery/FMCG product?",
+        answer: "Yes — this tool is built with grocery, fashion, and general merchandise all in mind.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce listing expert who writes clear, keyword-friendly product titles for grocery and general merchandise marketplaces, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 JioMart product title options for: "${values.product}". Category: ${values.category || "General"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "jiomart-product-description-generator",
+    name: "JioMart Product Description Generator",
+    tagline: "Descriptions that answer the basics fast.",
+    description:
+      "Free AI JioMart product description generator. Describe your product and get simple, informative description copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. cold-pressed groundnut oil, 1L bottle",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Simple", "Informative", "Persuasive"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the product description field.",
+    ],
+    faq: [
+      {
+        question: "Should I mention ingredients or materials?",
+        answer: "Yes — for grocery and personal care items especially, listing key ingredients or materials builds buyer trust.",
+      },
+      {
+        question: "Can I use this for both grocery and non-grocery listings?",
+        answer: "Yes — describe the product type in your input and the tone will adapt accordingly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes simple, informative product descriptions, 50-70 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 JioMart product description options for: "${values.product}". Tone: ${values.tone || "Simple"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "jiomart-category-listing-generator",
+    name: "JioMart Category Listing Copy Generator",
+    tagline: "Category page copy that helps shoppers browse.",
+    description:
+      "Free AI category listing copy generator for JioMart-style storefronts. Describe your category and get a short intro blurb.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "category",
+        label: "Category name and what it includes",
+        placeholder: "e.g. Organic Snacks — dried fruits, roasted nuts, granola bars",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Informative", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe the category and what kinds of products it includes.",
+      "Pick a tone.",
+      "Generate and use your favorite as the category page's intro text.",
+    ],
+    faq: [
+      {
+        question: "How long should category intro copy be?",
+        answer: "Short — 30-50 words is enough to orient a shopper without pushing products further down the page.",
+      },
+      {
+        question: "Does this help with SEO?",
+        answer: "Yes — a well-written category description gives search engines relevant text to index for that category page.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes short category page intro blurbs, 30-50 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 category intro blurb options for: "${values.category}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Shopsy ---
+  {
+    slug: "shopsy-product-title-generator",
+    name: "Shopsy Product Title Generator",
+    tagline: "Titles built for quick social reselling.",
+    description:
+      "Free AI Shopsy product title generator. Describe your product and get short, share-friendly titles.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. floral print kurti, cotton, sizes S-XL",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Simple", "Trendy", "Value-Focused"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details.",
+      "Pick a style.",
+      "Generate and use your favorite for your Shopsy listing.",
+    ],
+    faq: [
+      {
+        question: "How is this different from a regular marketplace title?",
+        answer: "Shopsy titles tend to work best short and simple since they're often shared directly via chat and social links, not just browsed in search.",
+      },
+      {
+        question: "Should I mention the price or discount in the title?",
+        answer: "It's optional — a value-focused style can lean into 'best price' phrasing, but keep it honest and consistent with your actual pricing.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a social commerce listing expert who writes short, simple, share-friendly product titles, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 Shopsy product title options for: "${values.product}". Style: ${values.style || "Simple"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopsy-reseller-caption-generator",
+    name: "Shopsy Reseller Caption Generator",
+    tagline: "The caption that gets a shared link actually clicked.",
+    description:
+      "Free AI reseller caption generator for Shopsy-style social selling. Describe your product and get share-ready captions.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "product",
+        label: "What are you sharing?",
+        placeholder: "e.g. floral kurti set, ₹599, limited stock",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Urgent", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe what you're sharing, including price or offer if relevant.",
+      "Pick a tone.",
+      "Generate and paste your favorite alongside your shared product link.",
+    ],
+    faq: [
+      {
+        question: "Should I include the price in the caption?",
+        answer: "It often helps — buyers deciding whether to click a shared link appreciate seeing the price upfront.",
+      },
+      {
+        question: "Can I use emojis with these?",
+        answer: "Yes — feel free to add a couple of relevant emojis after generating, especially for WhatsApp or Instagram sharing.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a social selling copywriter who writes short, friendly captions for resellers sharing product links via chat and social apps. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 reseller caption options for: "${values.product}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Meesho ---
+  {
+    slug: "meesho-product-title-generator",
+    name: "Meesho Product Title Generator",
+    tagline: "Titles that work for browsing and for sharing.",
+    description:
+      "Free AI Meesho product title generator. Describe your product and get clear, reseller-friendly titles.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. printed saree, georgette, with blouse piece",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Simple", "Trendy", "Value-Focused"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details.",
+      "Pick a style.",
+      "Generate and use your favorite for your Meesho catalog listing.",
+    ],
+    faq: [
+      {
+        question: "Should the title mention 'COD available' or similar?",
+        answer: "That's usually better placed in your product description or catalog details rather than the title itself.",
+      },
+      {
+        question: "How long should the title be?",
+        answer: "Keep it focused — a clear, specific title under 60-70 characters tends to perform better than a long, keyword-stuffed one.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a social commerce listing expert who writes clear, specific product titles for reseller marketplaces, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 Meesho product title options for: "${values.product}". Style: ${values.style || "Simple"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "meesho-product-description-generator",
+    name: "Meesho Product Description Generator",
+    tagline: "Descriptions that answer buyer questions upfront.",
+    description:
+      "Free AI Meesho product description generator. Describe your product and get simple, clear description copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 500,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. printed saree, georgette, 5.5m with blouse piece",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Simple", "Friendly", "Persuasive"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details (fabric, size, what's included).",
+      "Pick a tone.",
+      "Generate and paste your favorite into the description field.",
+    ],
+    faq: [
+      {
+        question: "Should I mention size/fit details?",
+        answer: "Yes — fit and sizing questions are a top reason for returns, so covering them clearly in the description helps.",
+      },
+      {
+        question: "Should I mention care instructions?",
+        answer: "It's a nice addition for fabric and apparel items, and can reduce complaints about shrinkage or color fading.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes simple, clear product descriptions for a reseller marketplace audience, 50-70 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 Meesho product description options for: "${values.product}". Tone: ${values.tone || "Simple"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "meesho-whatsapp-status-caption-generator",
+    name: "Meesho WhatsApp Status Caption Generator",
+    tagline: "A status update that actually gets orders.",
+    description:
+      "Free AI WhatsApp Status caption generator for Meesho resellers. Describe your product and get short, catchy status captions.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "product",
+        label: "What are you selling?",
+        placeholder: "e.g. cotton kurti set, ₹399, COD available",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Friendly", "Urgent", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe what you're selling, including price or offer.",
+      "Pick a tone.",
+      "Generate and post your favorite alongside your product photo on WhatsApp Status.",
+    ],
+    faq: [
+      {
+        question: "Should I include 'DM to order' or similar?",
+        answer: "Yes — these captions focus on the product itself, so add a short call to action like 'DM to order' or 'link in bio' after generating.",
+      },
+      {
+        question: "How short should a status caption be?",
+        answer: "Very short — a status is viewed for a few seconds, so 1 catchy line works better than a paragraph.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a social selling copywriter who writes very short, catchy WhatsApp Status captions (under 15 words each) for resellers. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 WhatsApp Status caption options for: "${values.product}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "meesho-catalog-name-generator",
+    name: "Meesho Catalog Name Generator",
+    tagline: "A catalog name that's clear at a glance.",
+    description:
+      "Free AI catalog name generator for Meesho sellers. Describe your product collection and get clear catalog name ideas.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "collection",
+        label: "What's in this catalog?",
+        placeholder: "e.g. a set of 10 printed cotton kurtis in different colors",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Simple", "Trendy", "Descriptive"],
+      },
+    ],
+    howTo: [
+      "Describe what's included in the catalog.",
+      "Pick a style.",
+      "Generate and use your favorite as the catalog name.",
+    ],
+    faq: [
+      {
+        question: "Should the catalog name include the price range?",
+        answer: "Some sellers do this for clarity (e.g. 'Under ₹499'), which can help, especially in a value-focused style.",
+      },
+      {
+        question: "Should each catalog have a unique name?",
+        answer: "Yes — distinct, descriptive catalog names make it easier for repeat buyers to find what they're looking for in your shop.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a reseller marketplace expert who names product catalogs — short, clear, descriptive. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 catalog name ideas for: "${values.collection}". Style: ${values.style || "Simple"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Walmart ---
+  {
+    slug: "walmart-product-title-generator",
+    name: "Walmart Marketplace Product Title Generator",
+    tagline: "Titles that fit Walmart's listing conventions.",
+    description:
+      "Free AI Walmart Marketplace product title generator. Describe your product and get clear, keyword-friendly titles.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. non-stick frying pan, 10 inch, ceramic coating",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "category",
+        label: "Category",
+        type: "select",
+        options: ["Home & Kitchen", "Electronics", "Clothing", "Grocery", "General"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details.",
+      "Pick the closest category.",
+      "Generate, then check Walmart Seller Center's current title style guide before publishing.",
+    ],
+    faq: [
+      {
+        question: "How is a Walmart title different from Amazon's?",
+        answer: "Walmart tends to prefer a clean, attribute-forward format (Brand + Product Name + Key Attributes) without promotional language — these are written accordingly.",
+      },
+      {
+        question: "Does Walmart allow promotional words like 'best' or 'sale'?",
+        answer: "Generally no — Walmart's title policy discourages subjective or promotional claims, so keep titles factual.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Walmart Marketplace listing expert who writes clean, factual, attribute-forward product titles with no promotional language, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 Walmart product title options for: "${values.product}". Category: ${values.category || "General"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "walmart-product-description-generator",
+    name: "Walmart Product Description Generator",
+    tagline: "Straightforward descriptions Walmart shoppers trust.",
+    description:
+      "Free AI Walmart product description generator. Describe your product and get clear, factual description copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 550,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. non-stick frying pan, 10 inch, ceramic coating, dishwasher safe",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Informative", "Simple", "Persuasive"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the product description field.",
+    ],
+    faq: [
+      {
+        question: "Should I avoid superlatives like 'best' or 'amazing'?",
+        answer: "It's a good habit for Walmart specifically — factual, benefit-driven language tends to fit their content guidelines better than subjective claims.",
+      },
+      {
+        question: "Should I include care or safety instructions?",
+        answer: "Yes, if relevant — clear care/safety details reduce returns and support compliance with Walmart's content requirements.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Walmart Marketplace copywriter who writes clear, factual, benefit-driven product descriptions without subjective superlatives, 50-80 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 Walmart product description options for: "${values.product}". Tone: ${values.tone || "Informative"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "walmart-key-features-generator",
+    name: "Walmart Key Features Generator",
+    tagline: "The feature list shoppers check before adding to cart.",
+    description:
+      "Free AI Walmart key features generator. Describe your product's features and get concise, listing-ready feature points.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key features",
+        placeholder: "e.g. cordless vacuum: 40min runtime, HEPA filter, lightweight",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Concise", "Technical", "Simple"],
+      },
+    ],
+    howTo: [
+      "List your product's name and key features.",
+      "Pick a tone.",
+      "Generate — you'll get short feature points ready to paste into the Key Features section.",
+    ],
+    faq: [
+      {
+        question: "How many feature points should I use?",
+        answer: "Most Walmart listings support around 5-6, which is what these are built for.",
+      },
+      {
+        question: "Should these be full sentences?",
+        answer: "Short phrases work best — that's how they're written here — rather than full paragraph sentences.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Walmart Marketplace listing copywriter who writes short, factual feature points (under 12 words each, not full sentences), each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 Walmart key feature points for: "${values.product}". Tone: ${values.tone || "Concise"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- Shopify ---
+  {
+    slug: "shopify-product-title-generator",
+    name: "Shopify Product Title Generator",
+    tagline: "Titles that fit your brand and your SEO.",
+    description:
+      "Free AI Shopify product title generator. Describe your product and get on-brand, SEO-aware title options.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. hand-poured soy candle, lavender scent, 8oz",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Playful", "Minimal", "Descriptive"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details.",
+      "Pick a tone that matches your store's brand.",
+      "Generate and use your favorite as your product title.",
+    ],
+    faq: [
+      {
+        question: "Should my Shopify title match my SEO title?",
+        answer: "It can, but you don't have to — Shopify lets you set a separate SEO title under 'Search engine listing', which the Shopify SEO Meta Generator on this site is built for.",
+      },
+      {
+        question: "How long should a Shopify product title be?",
+        answer: "There's no hard limit, but shorter, clear titles tend to display better across your theme, search results, and social sharing cards.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Shopify brand copywriter who writes on-brand product titles, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 Shopify product title options for: "${values.product}". Tone: ${values.tone || "Premium"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopify-product-description-generator",
+    name: "Shopify Product Description Generator",
+    tagline: "Descriptions with real brand voice, not boilerplate.",
+    description:
+      "Free AI Shopify product description generator. Describe your product and brand voice to get on-brand description copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 600,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. hand-poured soy candle, lavender, 40hr burn time",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Brand voice",
+        type: "select",
+        options: ["Warm & Personal", "Premium/Editorial", "Playful", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Pick the brand voice that fits your store.",
+      "Generate and paste your favorite into the product description editor.",
+    ],
+    faq: [
+      {
+        question: "Can this match my existing brand voice exactly?",
+        answer: "It gets you close — treat it as a strong draft and adjust word choice to match phrases and tone you already use elsewhere on your store.",
+      },
+      {
+        question: "Should I add SEO keywords into the description?",
+        answer: "Yes, naturally — mention key terms customers search for, but prioritize readability over keyword density.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Shopify brand copywriter who writes product descriptions with genuine brand voice and personality, 60-100 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 Shopify product description options for: "${values.product}". Brand voice: ${values.tone || "Warm & Personal"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopify-collection-description-generator",
+    name: "Shopify Collection Description Generator",
+    tagline: "Copy for the page that sets the shopping context.",
+    description:
+      "Free AI Shopify collection description generator. Describe your collection and get intro copy for the collection page.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "collection",
+        label: "Collection name and what it includes",
+        placeholder: "e.g. Summer Essentials — linen shirts, sandals, sun hats",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Premium", "Playful", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe the collection and what it includes.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the collection's description field.",
+    ],
+    faq: [
+      {
+        question: "Where does this show up on my store?",
+        answer: "Most Shopify themes display the collection description above or below the product grid on that collection's page.",
+      },
+      {
+        question: "Does this help SEO?",
+        answer: "Yes — collection pages can rank in search, and a clear, keyword-relevant description supports that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a Shopify brand copywriter who writes short collection page intro copy, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 collection description options for: "${values.collection}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopify-seo-meta-generator",
+    name: "Shopify SEO Meta Title & Description Generator",
+    tagline: "The snippet Google shows, written to get the click.",
+    description:
+      "Free AI Shopify SEO meta generator. Describe your page and get an SEO title and meta description pair.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "page",
+        label: "What's the page about?",
+        placeholder: "e.g. product page for a hand-poured lavender soy candle",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Informative", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe the page (product, collection, or blog post) this is for.",
+      "Pick a tone.",
+      "Generate, then paste your favorite pair into the 'Search engine listing' edit fields.",
+    ],
+    faq: [
+      {
+        question: "What's the character limit for each?",
+        answer: "Aim for under about 60 characters for the title and under 160 for the description so Google doesn't truncate them.",
+      },
+      {
+        question: "Can I use this for a collection or blog page too?",
+        answer: "Yes — just describe that page type in the input instead of a product.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an SEO copywriter who writes meta title (under 60 characters) and meta description (under 160 characters) pairs. Format each pair as a single line: 'Title: ... — Description: ...' with no line break between the title and description. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 SEO title/description pairs for: "${values.page}". Tone: ${values.tone || "Persuasive"}. Write each pair on one line. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopify-announcement-bar-generator",
+    name: "Shopify Announcement Bar Copy Generator",
+    tagline: "The one line every visitor sees first.",
+    description:
+      "Free AI Shopify announcement bar generator. Describe your message and get short, punchy banner copy.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 240,
+    inputFields: [
+      {
+        name: "message",
+        label: "What's the announcement?",
+        placeholder: "e.g. free shipping on orders over $50, ends Sunday",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Urgent", "Friendly", "Premium", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe your announcement or offer.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your theme's announcement bar setting.",
+    ],
+    faq: [
+      {
+        question: "How short should this be?",
+        answer: "Very — announcement bars are typically one line, so under 10-12 words works best across devices.",
+      },
+      {
+        question: "Can I rotate a few of these?",
+        answer: "Yes — many themes support multiple rotating announcement bar messages, so generating a few is useful for that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a retail copywriter who writes very short announcement bar lines (under 12 words each). You respond only with a numbered list — no preamble.",
+      user: `Generate 8 announcement bar copy options for: "${values.message}". Tone: ${values.tone || "Friendly"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "shopify-store-tagline-generator",
+    name: "Shopify Store Tagline Generator",
+    tagline: "The line under your logo that sets the tone.",
+    description:
+      "Free AI Shopify store tagline generator. Describe your store and get a short tagline for your homepage hero.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "store",
+        label: "What's your store about?",
+        placeholder: "e.g. small-batch, hand-poured soy candles",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Warm", "Playful", "Minimal"],
+      },
+    ],
+    howTo: [
+      "Describe what your store sells.",
+      "Pick a tone.",
+      "Generate and use your favorite in your homepage hero or under your logo.",
+    ],
+    faq: [
+      {
+        question: "Is this the same as a slogan?",
+        answer: "Very similar — a store tagline is just a slogan framed specifically for a storefront hero section, usually paired with your logo or homepage banner.",
+      },
+      {
+        question: "Should it mention what makes you different?",
+        answer: "If you can fit it in a short phrase, yes — otherwise keep it simple and let your product photos do that work.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand copywriter who writes short storefront taglines under 8 words each. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 store tagline options for: "${values.store}". Tone: ${values.tone || "Premium"}. Return only a numbered list.`,
+    }),
+  },
+
+  // --- WooCommerce ---
+  {
+    slug: "woocommerce-product-title-generator",
+    name: "WooCommerce Product Title Generator",
+    tagline: "Titles that work for your theme and your SEO.",
+    description:
+      "Free AI WooCommerce product title generator. Describe your product and get clear, on-brand title options.",
+    category: "Ecommerce",
+    resultCount: 8,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. leather laptop sleeve, 13-inch, handmade",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Simple", "Descriptive", "Playful"],
+      },
+    ],
+    howTo: [
+      "Enter your product name and key details.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the WooCommerce product title field.",
+    ],
+    faq: [
+      {
+        question: "Does this affect my page's SEO title too?",
+        answer: "By default WordPress SEO plugins often reuse the product title as the meta title — you can usually override that separately if needed.",
+      },
+      {
+        question: "Should I include my brand name in the title?",
+        answer: "It's a good idea if you're building brand recognition, especially if your store sells products across multiple brands.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a WooCommerce store copywriter who writes clear, on-brand product titles, each on a single line. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 WooCommerce product title options for: "${values.product}". Tone: ${values.tone || "Premium"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "woocommerce-short-description-generator",
+    name: "WooCommerce Short Description Generator",
+    tagline: "The quick pitch shown right by the price.",
+    description:
+      "Free AI WooCommerce short description generator. Describe your product and get a punchy short description for the product summary area.",
+    category: "Ecommerce",
+    resultCount: 5,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. leather laptop sleeve, 13-inch, handmade, water-resistant",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Persuasive", "Simple", "Premium"],
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the 'Product short description' field.",
+    ],
+    faq: [
+      {
+        question: "How is this different from the long description?",
+        answer: "The short description shows near the Add to Cart button and should be a quick, scannable pitch — the long description below it can go into full detail.",
+      },
+      {
+        question: "How long should it be?",
+        answer: "Keep it brief — 1-2 sentences is typical, which is what these are built for.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a WooCommerce store copywriter who writes short, punchy product summaries, 1-2 sentences each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 WooCommerce short description options for: "${values.product}". Tone: ${values.tone || "Persuasive"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "woocommerce-long-description-generator",
+    name: "WooCommerce Long Description Generator",
+    tagline: "The full story, for shoppers who want more.",
+    description:
+      "Free AI WooCommerce long description generator. Describe your product and get a fuller description for the main product tab.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 650,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. leather laptop sleeve, full-grain leather, hand-stitched, lifetime warranty",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Warm", "Technical", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe your product with as much detail as you have.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the main product description editor.",
+    ],
+    faq: [
+      {
+        question: "How long should this be?",
+        answer: "These run roughly 80-120 words — enough to cover materials, use case, and what makes it worth buying, without overwhelming the page.",
+      },
+      {
+        question: "Should I add headings or bullet points myself?",
+        answer: "For longer product pages, breaking this into a short intro plus a bullet list of specs (using a separate tool) often reads better than one long block.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a WooCommerce store copywriter who writes fuller product descriptions, 80-120 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 WooCommerce long description options for: "${values.product}". Tone: ${values.tone || "Premium"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "woocommerce-category-description-generator",
+    name: "WooCommerce Category Description Generator",
+    tagline: "Context for the shelf, not just the product.",
+    description:
+      "Free AI WooCommerce category description generator. Describe your category and get intro copy for the category archive page.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "category",
+        label: "Category name and what it includes",
+        placeholder: "e.g. Leather Goods — wallets, laptop sleeves, belts",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Premium", "Warm", "Simple"],
+      },
+    ],
+    howTo: [
+      "Describe the category and what it includes.",
+      "Pick a tone.",
+      "Generate and paste your favorite into the category's description field.",
+    ],
+    faq: [
+      {
+        question: "Where does this appear?",
+        answer: "Most WooCommerce themes show the category description above the product grid on that archive page.",
+      },
+      {
+        question: "Is this useful for SEO?",
+        answer: "Yes — category archive pages can rank on their own, and unique, relevant copy helps rather than leaving it blank.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a WooCommerce store copywriter who writes short category page intro copy, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 category description options for: "${values.category}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "woocommerce-product-tag-generator",
+    name: "WooCommerce Product Tag Generator",
+    tagline: "Tags that actually help shoppers filter and find.",
+    description:
+      "Free AI WooCommerce product tag generator. Describe your product and get relevant tag suggestions.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 220,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product name and key details",
+        placeholder: "e.g. leather laptop sleeve, 13-inch, brown, handmade",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product and its key details.",
+      "Generate a set of tag suggestions.",
+      "Add the relevant ones to your product's Tags field.",
+    ],
+    faq: [
+      {
+        question: "How are tags different from categories?",
+        answer: "Categories are broad groupings (like 'Bags'), while tags are more specific attributes (like 'brown', 'handmade', '13-inch') that help with filtering and related-product logic.",
+      },
+      {
+        question: "How many tags should I use per product?",
+        answer: "There's no strict limit, but 5-10 genuinely relevant tags is typically more useful than a long, unfocused list.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a WooCommerce store merchandiser who suggests short, specific product tags (1-3 words each). Always return exactly the number of tags requested, never fewer — if you run out of obviously distinct attributes, include related use cases, materials, styles, or audience terms to reach the count. You respond only with a numbered list — no preamble.",
+      user: `Generate exactly 10 product tag suggestions for: "${values.product}". Return only a numbered list with exactly 10 items.`,
+    }),
+  },
+
+  // --- Cross-platform Ecommerce ---
+  {
+    slug: "marketplace-return-exchange-reply-generator",
+    name: "Marketplace Return/Exchange Reply Generator",
+    tagline: "A calm, clear reply to a return or exchange request.",
+    description:
+      "Free AI reply generator for marketplace return and exchange requests. Describe the situation and get a professional reply draft.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 480,
+    inputFields: [
+      {
+        name: "situation",
+        label: "What's the return/exchange request about?",
+        placeholder: "e.g. customer wants to exchange a shirt for a different size",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Helpful", "Apologetic", "Concise", "Formal"],
+      },
+    ],
+    howTo: [
+      "Describe the return or exchange request.",
+      "Pick a tone.",
+      "Generate, then personalize with your specific policy details before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I confirm exact refund timelines in this reply?",
+        answer: "Yes — add your marketplace's actual refund processing time so the customer knows what to expect.",
+      },
+      {
+        question: "Can I use this across different marketplaces?",
+        answer: "Yes — the message itself is platform-agnostic; just send it through whichever platform's messaging system you're using.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer service manager who writes clear, professional replies to return and exchange requests, each written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 reply options for this return/exchange situation: "${values.situation}". Tone: ${values.tone || "Helpful"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "back-in-stock-notification-generator",
+    name: "Back-in-Stock Notification Generator",
+    tagline: "Tell them the moment it's available again.",
+    description:
+      "Free AI back-in-stock notification generator. Describe your product and get ready-to-use restock alert copy.",
+    category: "Ecommerce",
+    resultCount: 6,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "product",
+        label: "What's back in stock?",
+        placeholder: "e.g. the sold-out ceramic planter set",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Exciting", "Simple", "Urgent"],
+      },
+    ],
+    howTo: [
+      "Describe what's back in stock.",
+      "Pick a tone.",
+      "Generate and use your favorite for an email, SMS, or social alert.",
+    ],
+    faq: [
+      {
+        question: "Should I mention limited quantity?",
+        answer: "If it's true, yes — genuine scarcity ('only 20 left') is a strong, honest motivator for customers who were waiting.",
+      },
+      {
+        question: "Can I use this for a pre-order announcement instead?",
+        answer: "Yes — just describe it as a pre-order opening in your input and the copy will adapt.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce marketer who writes short back-in-stock alert copy (1-2 sentences each, single paragraph, no line breaks within an item). You respond only with a numbered list — no preamble.",
+      user: `Generate 6 back-in-stock notification options for: "${values.product}". Tone: ${values.tone || "Exciting"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "order-confirmation-message-generator",
+    name: "Order Confirmation Message Generator",
+    tagline: "The reassurance every buyer wants right after checkout.",
+    description:
+      "Free AI order confirmation message generator. Describe your store and get warm, clear order confirmation copy.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 420,
+    inputFields: [
+      {
+        name: "store",
+        label: "What's your store or product?",
+        placeholder: "e.g. a small-batch coffee roastery",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe your store or what you sell.",
+      "Pick a tone.",
+      "Generate and use your favorite as the intro line of your order confirmation email or message.",
+    ],
+    faq: [
+      {
+        question: "Should this include order details like tracking?",
+        answer: "No — this generates the warm intro/thank-you copy; your platform typically inserts order number, items, and tracking automatically below it.",
+      },
+      {
+        question: "Can I use this for a WhatsApp or SMS confirmation instead of email?",
+        answer: "Yes — pick a shorter result and adapt it; these are written concisely enough to work across channels.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes warm order confirmation intro messages, 30-50 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 order confirmation message options for: "${values.store}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "product-variant-name-generator",
+    name: "Product Variant Name Generator",
+    tagline: "Names like 'Ocean Blue', not 'Blue2'.",
+    description:
+      "Free AI product variant name generator. Describe your product's variants and get evocative, on-brand names for each.",
+    category: "Ecommerce",
+    resultCount: 10,
+    maxTokens: 240,
+    inputFields: [
+      {
+        name: "variants",
+        label: "What are the variants (colors, styles, scents)?",
+        placeholder: "e.g. colors: dark blue, cream, olive green, blush pink",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "style",
+        label: "Style",
+        type: "select",
+        options: ["Elegant", "Playful", "Nature-Inspired", "Minimal"],
+      },
+    ],
+    howTo: [
+      "List the variants you need names for (colors, styles, or scents).",
+      "Pick a style.",
+      "Generate and match each name to the variant it fits best.",
+    ],
+    faq: [
+      {
+        question: "Can I get names for scents or materials, not just colors?",
+        answer: "Yes — describe whatever the variant type is (scent, material, pattern) and the tool will adapt.",
+      },
+      {
+        question: "Should I still list the plain color code somewhere?",
+        answer: "It's a good idea internally (for inventory), even if customers only see the evocative name on the storefront.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand naming expert who creates evocative, on-brand names for product variants (colors, materials, or scents), each 1-3 words. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 variant name ideas for these variants: "${values.variants}". Style: ${values.style || "Elegant"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "marketplace-seller-bio-generator",
+    name: "Marketplace Seller Bio Generator",
+    tagline: "The storefront blurb that builds trust before the first order.",
+    description:
+      "Free AI seller bio generator for marketplace storefronts. Describe your shop and get a short, trustworthy About section.",
+    category: "Ecommerce",
+    resultCount: 3,
+    maxTokens: 480,
+    inputFields: [
+      {
+        name: "shop",
+        label: "What do you sell and what's your story?",
+        placeholder: "e.g. handmade jewelry, family business since 2019",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "tone",
+        label: "Tone",
+        type: "select",
+        options: ["Warm", "Professional", "Playful"],
+      },
+    ],
+    howTo: [
+      "Describe what you sell and a bit of your story.",
+      "Pick a tone.",
+      "Generate and paste your favorite into your storefront's About/Seller Info section.",
+    ],
+    faq: [
+      {
+        question: "Should I mention how long I've been selling?",
+        answer: "Yes, if it's a meaningful amount of time — it's a simple, honest trust signal for new buyers.",
+      },
+      {
+        question: "How long should a seller bio be?",
+        answer: "Short — these run roughly 40-60 words, enough to build trust without burying the buyer in text before they get to your products.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a brand copywriter who writes short, trustworthy seller/shop bios for marketplace storefronts, 40-60 words each, written as a single paragraph with no line breaks within an item. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 seller bio options for: "${values.shop}". Tone: ${values.tone || "Warm"}. Return only a numbered list.`,
+    }),
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolConfig | undefined {
