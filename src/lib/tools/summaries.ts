@@ -41,6 +41,18 @@ export const categoryDescriptions: Record<string, string> = {
   "Podcasting & Video": "Episode titles, show notes, and video descriptions.",
   "Personal Branding": "Bios and taglines for your website, portfolio, or media kit.",
   "Customer Support": "Replies and greetings for support tickets and live chat.",
+  "Finance & Personal Finance": "Budgets, side hustles, and money messages for everyday finances.",
+  "Startup & Fundraising": "Pitch decks, investor emails, and launch copy for founders.",
+  "Sales & Outreach": "Cold emails, follow-ups, and objection handling that close deals.",
+  "Tech & Developer Tools": "Commit messages, PR descriptions, and plain-English explainers for code.",
+  "SEO & Content Strategy": "Meta tags, keyword clusters, and content planning for search.",
+  "Presentations & Public Speaking": "Outlines, openers, and closers for talks and speeches.",
+  "Parenting & Family": "Invitations, stories, and notes for family life.",
+  "Pet Care": "Bios, captions, and reminders for pets and their people.",
+  "Automotive": "Listings, ads, and reminders for car sales and service.",
+  "Insurance": "Explainers, reminders, and bios for agents and clients.",
+  "Home & DIY": "Checklists and project plans for home projects and moves.",
+  "Productivity & Self-Improvement": "Affirmations, habits, and schedules to help you get things done.",
 };
 
 export function getCategoryCounts(): { category: string; count: number }[] {

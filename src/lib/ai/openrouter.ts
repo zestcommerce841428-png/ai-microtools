@@ -10,7 +10,7 @@ const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 // check https://openrouter.ai/models before assuming these slugs still exist.
 const MODEL_CHAIN = [
   process.env.OPENROUTER_MODEL_PRIMARY || "google/gemini-2.5-flash-lite",
-  process.env.OPENROUTER_MODEL_FALLBACK || "openai/gpt-oss-20b:free",
+  process.env.OPENROUTER_MODEL_FALLBACK || "nvidia/nemotron-3-nano-30b-a3b:free",
 ];
 
 export interface GenerateParams {

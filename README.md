@@ -1,6 +1,6 @@
 # AI Microtools
 
-170+ free AI generators (business names, resumes, social bios, wedding speeches, and more) across Business, Marketing, Social Media, Career, Life Events, Fun, Writing, Ecommerce, and more. A free account is required to generate (no credit card, ever). Monetized by AdSense + affiliate links, not subscriptions — so the product goal is traffic and repeat use, not conversion.
+330+ free AI generators (business names, resumes, social bios, wedding speeches, and more) across Business, Marketing, Social Media, Career, Finance, Startups, Sales, Developer Tools, SEO, Parenting, Pet Care, and more. A free account is required to generate (no credit card, ever). Monetized by AdSense + affiliate links, not subscriptions — so the product goal is traffic and repeat use, not conversion.
 
 ## Stack
 
