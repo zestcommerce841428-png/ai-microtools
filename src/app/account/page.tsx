@@ -3,6 +3,9 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createServerSupabaseClient } from "@/lib/supabase/serverAuth";
 import AccountActions from "./AccountActions";
+import ChangePasswordForm from "./ChangePasswordForm";
+import TotpMfaSection from "./TotpMfaSection";
+import AvatarUpload from "./AvatarUpload";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -42,6 +45,14 @@ export default async function AccountPage() {
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">Your Account</h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">{user.email}</p>
       </div>
+
+      <section className="rounded-xl border border-surface-border bg-surface p-6">
+        <AvatarUpload
+          userId={user.id}
+          email={user.email ?? ""}
+          initialAvatarUrl={typeof user.user_metadata?.avatar_url === "string" ? user.user_metadata.avatar_url : null}
+        />
+      </section>
 
       <section className="rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Perks of being signed in</h2>
@@ -87,10 +98,11 @@ export default async function AccountPage() {
 
       <section className="rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Account</h2>
-        <div className="mt-3 flex flex-col gap-3">
-          <Link href="/forgot-password" className="text-sm font-medium underline">
-            Change password
-          </Link>
+        <div className="mt-3 flex flex-col gap-4">
+          <ChangePasswordForm />
+          <div className="border-t border-surface-border pt-4">
+            <TotpMfaSection />
+          </div>
           <AccountActions />
         </div>
       </section>

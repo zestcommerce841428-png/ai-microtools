@@ -6,18 +6,23 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function AuthStatus() {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
 
     supabase.auth.getSession().then(({ data }) => {
       setLoggedIn(Boolean(data.session));
+      const metaAvatar = data.session?.user.user_metadata?.avatar_url;
+      setAvatarUrl(typeof metaAvatar === "string" ? metaAvatar : null);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setLoggedIn(Boolean(session));
+      const metaAvatar = session?.user.user_metadata?.avatar_url;
+      setAvatarUrl(typeof metaAvatar === "string" ? metaAvatar : null);
     });
 
     return () => subscription.unsubscribe();
@@ -31,8 +36,12 @@ export default function AuthStatus() {
     return (
       <Link
         href="/account"
-        className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+        className="flex items-center gap-1.5 text-sm font-medium text-zinc-600 hover:text-primary dark:text-zinc-400"
       >
+        {avatarUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element -- user-uploaded, arbitrary remote-origin image
+          <img src={avatarUrl} alt="" className="h-6 w-6 rounded-full object-cover" />
+        ) : null}
         Account
       </Link>
     );
