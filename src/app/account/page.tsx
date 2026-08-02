@@ -5,6 +5,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/serverAuth";
 import AccountActions from "./AccountActions";
 import ChangePasswordForm from "./ChangePasswordForm";
 import TotpMfaSection from "./TotpMfaSection";
+import PasskeySection from "./PasskeySection";
 import AvatarUpload from "./AvatarUpload";
 import { SITE_URL } from "@/lib/site";
 
@@ -102,6 +103,9 @@ export default async function AccountPage() {
           <ChangePasswordForm />
           <div className="border-t border-surface-border pt-4">
             <TotpMfaSection />
+          </div>
+          <div className="border-t border-surface-border pt-4">
+            <PasskeySection />
           </div>
           <AccountActions />
         </div>

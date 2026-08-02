@@ -93,3 +93,24 @@ create policy "Public can read blog posts"
   on blog_posts for select
   to anon, authenticated
   using (true);
+
+-- "Trust this device" for MFA: after a user completes a TOTP challenge and
+-- opts in, /api/auth/device/trust stores a hash of a random token (never
+-- the raw token) and sets it as an httpOnly cookie. On future logins,
+-- /api/auth/device/check looks up the hash to skip the MFA prompt for the
+-- device. Deliberately has no RLS policies — every access goes through
+-- these two server routes using the service-role key, which bypasses RLS;
+-- RLS is still enabled so a future accidental anon-key query denies by
+-- default rather than leaking rows.
+create table if not exists trusted_devices (
+  id bigint generated always as identity primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  device_token_hash text not null,
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null,
+  unique (user_id, device_token_hash)
+);
+
+create index if not exists trusted_devices_lookup_idx on trusted_devices (user_id, device_token_hash, expires_at);
+
+alter table trusted_devices enable row level security;

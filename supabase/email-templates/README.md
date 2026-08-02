@@ -16,22 +16,23 @@ If you ever need to redo this by hand instead: **Dashboard → Authentication
 | `confirm-signup.html` | Confirm signup | `Your AI Microtools confirmation code` |
 | `reset-password.html` | Reset Password | `Your AI Microtools password reset code` |
 | `reauthentication.html` | Reauthentication | `Your AI Microtools verification code` |
-| `magic-link.html` | Magic Link | `Log in to AI Microtools` |
+| `magic-link.html` | Magic Link | `Your AI Microtools login code` |
 | `invite-user.html` | Invite user | `You've been invited to AI Microtools` |
 | `change-email-address.html` | Change Email Address | `Confirm your new AI Microtools email` |
 
-## Why only three are code-based
+## Why only two are still link-based
 
-`confirm-signup`, `reset-password`, and `reauthentication` show a 6-digit
-`{{ .Token }}` and deliberately drop the `{{ .ConfirmationURL }}` button —
-the app's signup and forgot-password forms now have a matching "enter your
-code" step (`SignupForm.tsx`, `ForgotPasswordForm.tsx`) that calls
+`confirm-signup`, `reset-password`, `reauthentication`, and `magic-link`
+all show a 6-digit `{{ .Token }}` and deliberately drop the
+`{{ .ConfirmationURL }}` button — the app has a matching "enter your code"
+step for each: `SignupForm.tsx`, `ForgotPasswordForm.tsx`, and
+`LoginForm.tsx`'s "log in with a code instead" path all call
 `supabase.auth.verifyOtp(...)`. Reauthentication has no link variant in
 Supabase regardless.
 
-`magic-link`, `invite-user`, and `change-email-address` stay link-based
-since the app has no UI to consume a code for those flows — showing a code
-with nowhere to type it would just confuse recipients.
+`invite-user` and `change-email-address` stay link-based since the app has
+no UI to consume a code for those flows — showing a code with nowhere to
+type it would just confuse recipients.
 
 ## Confirmed live project settings (checked via the Management API)
 

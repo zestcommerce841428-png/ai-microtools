@@ -10,17 +10,14 @@
         </tr>
         <tr>
           <td style="padding:24px 40px 40px 40px;">
-            <h1 style="margin:0 0 12px 0;font-size:20px;font-weight:700;color:#18181b;text-align:center;">Log in to AI Microtools</h1>
+            <h1 style="margin:0 0 12px 0;font-size:20px;font-weight:700;color:#18181b;text-align:center;">Your login code</h1>
             <p style="margin:0 0 8px 0;font-size:14px;line-height:1.6;color:#3f3f46;text-align:center;">
-              Click the button below to log in as <strong>{{ .Email }}</strong>.
+              Enter this code to log in to AI Microtools as <strong>{{ .Email }}</strong>:
             </p>
-            <div style="text-align:center;margin:28px 0;">
-              <a href="{{ .ConfirmationURL }}" style="display:inline-block;background-color:#18181b;color:#ffffff;font-weight:600;font-size:15px;padding:12px 28px;border-radius:8px;text-decoration:none;">Log in</a>
+            <div style="margin:24px 0;padding:20px;background-color:#f4f4f5;border-radius:12px;text-align:center;">
+              <span style="font-size:32px;font-weight:700;letter-spacing:0.35em;color:#18181b;font-family:'Courier New',monospace;">{{ .Token }}</span>
             </div>
-            <p style="margin:0;font-size:12px;color:#a1a1aa;text-align:center;word-break:break-all;">
-              Or paste this link into your browser:<br />
-              <a href="{{ .ConfirmationURL }}" style="color:#71717a;">{{ .ConfirmationURL }}</a>
-            </p>
+            <p style="margin:0;font-size:13px;color:#71717a;text-align:center;">This code expires shortly and can only be used once.</p>
             <p style="margin:20px 0 0 0;font-size:13px;line-height:1.6;color:#71717a;text-align:center;">
               If you didn't request this, you can safely ignore this email.
             </p>
