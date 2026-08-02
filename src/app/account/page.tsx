@@ -6,6 +6,7 @@ import AccountActions from "./AccountActions";
 import ChangePasswordForm from "./ChangePasswordForm";
 import TotpMfaSection from "./TotpMfaSection";
 import PasskeySection from "./PasskeySection";
+import TrustedDevicesSection from "./TrustedDevicesSection";
 import AvatarUpload from "./AvatarUpload";
 import { SITE_URL } from "@/lib/site";
 
@@ -106,6 +107,9 @@ export default async function AccountPage() {
           </div>
           <div className="border-t border-surface-border pt-4">
             <PasskeySection />
+          </div>
+          <div className="border-t border-surface-border pt-4">
+            <TrustedDevicesSection />
           </div>
           <AccountActions />
         </div>

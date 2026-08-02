@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/serverAuth";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { DEVICE_TRUST_COOKIE, DEVICE_TRUST_MAX_AGE_SECONDS, generateDeviceToken, hashDeviceToken } from "@/lib/auth/deviceTrust";
@@ -9,6 +9,7 @@ import { DEVICE_TRUST_COOKIE, DEVICE_TRUST_MAX_AGE_SECONDS, generateDeviceToken,
 // least once, otherwise this would just be a way to bypass MFA entirely.
 export async function POST() {
   const sessionClient = await createServerSupabaseClient();
+  const userAgent = (await headers()).get("user-agent");
   const {
     data: { user },
   } = await sessionClient.auth.getUser();
@@ -33,6 +34,7 @@ export async function POST() {
   const { error } = await admin.from("trusted_devices").insert({
     user_id: user.id,
     device_token_hash: hashDeviceToken(token),
+    user_agent: userAgent,
     expires_at: expiresAt.toISOString(),
   });
 

@@ -98,14 +98,17 @@ create policy "Public can read blog posts"
 -- opts in, /api/auth/device/trust stores a hash of a random token (never
 -- the raw token) and sets it as an httpOnly cookie. On future logins,
 -- /api/auth/device/check looks up the hash to skip the MFA prompt for the
--- device. Deliberately has no RLS policies — every access goes through
--- these two server routes using the service-role key, which bypasses RLS;
--- RLS is still enabled so a future accidental anon-key query denies by
--- default rather than leaking rows.
+-- device. user_agent is stored only so the account settings page can show
+-- something recognizable ("Chrome on Windows") — it's not part of the
+-- trust decision itself. Deliberately has no RLS policies — every access
+-- goes through server routes using the service-role key, which bypasses
+-- RLS; RLS is still enabled so a future accidental anon-key query denies
+-- by default rather than leaking rows.
 create table if not exists trusted_devices (
   id bigint generated always as identity primary key,
   user_id uuid not null references auth.users(id) on delete cascade,
   device_token_hash text not null,
+  user_agent text,
   created_at timestamptz not null default now(),
   expires_at timestamptz not null,
   unique (user_id, device_token_hash)
