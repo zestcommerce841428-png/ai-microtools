@@ -71,13 +71,13 @@ export default async function BlogPostPage({
       <nav aria-label="Breadcrumb" className="text-sm text-zinc-500 dark:text-zinc-500">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
-            <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/" className="hover:text-primary">
               Home
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href="/blog" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/blog" className="hover:text-primary">
               Blog
             </Link>
           </li>
@@ -122,7 +122,7 @@ export default async function BlogPostPage({
               <Link
                 key={tool.slug}
                 href={`/tools/${tool.slug}`}
-                className="rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-500"
+                className="rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:border-primary-ring dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-300"
               >
                 {tool.name}
               </Link>
@@ -133,7 +133,7 @@ export default async function BlogPostPage({
 
       <Link
         href="/blog"
-        className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+        className="text-sm font-medium text-zinc-500 hover:text-primary"
       >
         ← Back to blog
       </Link>

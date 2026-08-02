@@ -52,7 +52,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
             className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
               activeCategory === null
                 ? "border-primary bg-primary text-primary-content"
-                : "border-zinc-300 text-zinc-600 hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-400"
+                : "border-zinc-300 text-zinc-600 hover:border-primary-ring dark:border-zinc-700 dark:text-zinc-400"
             }`}
           >
             All
@@ -65,7 +65,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
               className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
                 activeCategory === category
                   ? "border-primary bg-primary text-primary-content"
-                  : "border-zinc-300 text-zinc-600 hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-400"
+                  : "border-zinc-300 text-zinc-600 hover:border-primary-ring dark:border-zinc-700 dark:text-zinc-400"
               }`}
             >
               {category}

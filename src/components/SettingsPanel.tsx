@@ -185,7 +185,7 @@ export default function SettingsPanel() {
                       <button
                         type="button"
                         onClick={() => resetA11ySettings()}
-                        className="text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                        className="text-xs font-medium text-zinc-500 hover:text-primary"
                       >
                         Reset all
                       </button>

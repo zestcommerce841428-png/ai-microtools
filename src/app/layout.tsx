@@ -7,6 +7,7 @@ import { categories, toolSummaries } from "@/lib/tools/summaries";
 import ThemeToggle from "@/components/ThemeToggle";
 import SettingsPanel from "@/components/SettingsPanel";
 import AccessibilityRuntime from "@/components/AccessibilityRuntime";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 import AuthStatus from "@/components/AuthStatus";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
@@ -117,6 +118,7 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd} />
         <JsonLd data={organizationJsonLd} />
         <AccessibilityRuntime />
+        <ScrollToTopButton />
         {/* Color-filter accessibility effects (grayscale, contrast, colorblind
             filters, etc.) are applied to this wrapper, not <html>/<body>.
             filter/backdrop-filter create a new containing block for

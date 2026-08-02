@@ -99,13 +99,13 @@ export default async function ToolPage({
       <nav aria-label="Breadcrumb" className="w-full max-w-2xl text-sm text-zinc-500 dark:text-zinc-500">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
-            <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/" className="hover:text-primary">
               Home
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href="/tools" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            <Link href="/tools" className="hover:text-primary">
               Tools
             </Link>
           </li>
@@ -149,7 +149,7 @@ export default async function ToolPage({
 
       <Link
         href="/tools"
-        className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+        className="text-sm font-medium text-zinc-500 hover:text-primary"
       >
         ← Back to all tools
       </Link>

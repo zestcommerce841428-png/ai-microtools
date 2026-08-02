@@ -37,7 +37,7 @@ export default function Home() {
           </Link>
           <Link
             href="/tools"
-            className="rounded-full border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
+            className="rounded-full border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:border-primary-ring dark:border-zinc-700 dark:text-zinc-300"
           >
             Browse all {toolSummaries.length} tools
           </Link>
@@ -66,7 +66,7 @@ export default function Home() {
             <Link
               key={category}
               href={`/tools?category=${encodeURIComponent(category)}`}
-              className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
+              className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-primary-ring dark:border-zinc-800 dark:bg-zinc-900"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{category}</h3>
