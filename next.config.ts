@@ -34,6 +34,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // AVIF first (smaller), WebP fallback for browsers that don't support it.
+    formats: ["image/avif", "image/webp"],
+    // Required as of Next.js 16 — an explicit allowlist, not just a default.
+    qualities: [75],
+  },
   async headers() {
     return [
       {

@@ -53,6 +53,17 @@ export const categoryDescriptions: Record<string, string> = {
   "Insurance": "Explainers, reminders, and bios for agents and clients.",
   "Home & DIY": "Checklists and project plans for home projects and moves.",
   "Productivity & Self-Improvement": "Affirmations, habits, and schedules to help you get things done.",
+  "Data & Analytics": "Turn raw metrics into narratives, alerts, and reports people actually read.",
+  "Recruiting & Talent Acquisition": "Sourcing strings, interview questions, and candidate communication.",
+  "Legal & Compliance": "Plain-English drafts for privacy, breach, and policy communications — not legal advice.",
+  "Consulting & Freelance Proposals": "Proposals, SOWs, and client communication that wins and keeps work.",
+  "PR & Crisis Communications": "Statements, media pitches, and talking points for high-stakes moments.",
+  "Real Estate Investment": "Deal analysis, tenant notices, and investor pitches for property investors.",
+  "Higher Ed & Academia": "Syllabi, rubrics, abstracts, and letters for teaching and research.",
+  "DevOps & Cloud": "Postmortems, runbooks, and changelogs for engineering teams.",
+  "UX & Product Management": "Research questions, PRDs, and user stories for building the right thing.",
+  "Sustainability & ESG": "Credible statements and reports on environmental and social impact.",
+  Accessibility: "Checklists and rewrites to make your product usable by everyone.",
 };
 
 export function getCategoryCounts(): { category: string; count: number }[] {

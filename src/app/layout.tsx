@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { categories, toolSummaries } from "@/lib/tools/summaries";
@@ -65,7 +66,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/opengraph-image`,
+  logo: `${SITE_URL}/logo-icon.png`,
 };
 
 export default function RootLayout({
@@ -85,7 +86,10 @@ export default function RootLayout({
         <JsonLd data={organizationJsonLd} />
         <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
-            <Link href="/" className="font-semibold text-zinc-900 dark:text-zinc-50">
+            <Link href="/" className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-white p-1 shadow-sm ring-1 ring-black/5">
+                <Image src="/logo-icon.png" alt="" width={24} height={24} preload />
+              </span>
               AI Microtools
             </Link>
             <nav className="flex items-center gap-5">
@@ -113,7 +117,12 @@ export default function RootLayout({
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
             <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
               <div className="max-w-sm">
-                <p className="font-semibold text-zinc-900 dark:text-zinc-50">{SITE_NAME}</p>
+                <p className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-white p-1 shadow-sm ring-1 ring-black/5">
+                    <Image src="/logo-icon.png" alt="" width={20} height={20} />
+                  </span>
+                  {SITE_NAME}
+                </p>
                 <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
                   AI-generated suggestions — always verify names, trademarks, and availability before use.
                 </p>

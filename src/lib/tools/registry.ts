@@ -10473,7 +10473,7 @@ export const tools: ToolConfig[] = [
       "Free AI insurance explainer. Describe a policy type to get a plain-English summary of typical coverage.",
     category: "Insurance",
     resultCount: 1,
-    maxTokens: 420,
+    maxTokens: 1400,
     resultKind: "document",
     documentStyle: "prose",
     inputFields: [
@@ -13171,7 +13171,7 @@ export const tools: ToolConfig[] = [
       "Free AI job offer letter generator. Enter the role details to get a clear, welcoming offer letter draft.",
     category: "HR & Workplace",
     resultCount: 1,
-    maxTokens: 480,
+    maxTokens: 800,
     resultKind: "document",
     documentStyle: "prose",
     inputFields: [
@@ -13250,7 +13250,7 @@ export const tools: ToolConfig[] = [
       "Free AI policy summary generator. Describe your policy to get a clear, readable employee-facing summary.",
     category: "HR & Workplace",
     resultCount: 1,
-    maxTokens: 380,
+    maxTokens: 600,
     resultKind: "document",
     documentStyle: "prose",
     inputFields: [
@@ -14235,6 +14235,5841 @@ export const tools: ToolConfig[] = [
       system:
         "You are a speaker bureau consultant who writes compelling talk titles for a given area of expertise, each specific enough to sound like a real conference session. You respond only with a numbered list — no preamble.",
       user: `Generate 8 speaker topic/talk title options for expertise in: "${values.expertise}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "kpi-dashboard-narrative-generator",
+    name: "KPI Dashboard Narrative Generator",
+    tagline: "Turn raw numbers into a summary leadership will actually read.",
+    description:
+      "Free AI KPI narrative generator. Enter your metrics to get a clear written summary of what's happening and why it matters.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "metrics",
+        label: "Key metrics this period",
+        placeholder: "e.g. revenue up 12%, churn up 2pts, signups flat",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your key metrics and how they moved this period.",
+      "Generate a written narrative summary.",
+      "Paste above your dashboard or into your report as the executive summary.",
+    ],
+    faq: [
+      {
+        question: "Does this analyze my actual data?",
+        answer: "No — it turns the numbers and trends you describe into a clear narrative. You provide the analysis; this handles the writing.",
+      },
+      {
+        question: "Should I mention the 'why' behind a metric moving?",
+        answer: "Yes, if you know it — including a likely cause makes the narrative far more useful than numbers alone.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a data analyst who turns a list of metrics into a clear, concise written narrative (what happened, what it means, one thing to watch), avoiding jargon. No markdown headers.",
+      user: `Write a KPI narrative summary based on these metrics: "${values.metrics}".`,
+    }),
+  },
+  {
+    slug: "ab-test-result-summary-generator",
+    name: "A/B Test Result Summary Generator",
+    tagline: "Explain a test result so non-analysts get it.",
+    description:
+      "Free AI A/B test summary generator. Enter your results to get a plain-English write-up of what happened.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "results",
+        label: "Test & results",
+        placeholder: "e.g. new checkout button: variant B converted 4.2% vs 3.5% control, 95% confidence",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the test and the results, including confidence/significance if you have it.",
+      "Generate a plain-English write-up.",
+      "Share with stakeholders alongside your raw data.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate statistical significance for me?",
+        answer: "No — provide your own significance/confidence numbers; this explains what the result means in plain language.",
+      },
+      {
+        question: "What if the test was inconclusive?",
+        answer: "Mention that in your input — the summary will honestly reflect an inconclusive result rather than overstating it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product analyst who explains A/B test results in plain English for a non-technical audience, being honest about confidence/significance and next steps. No markdown headers.",
+      user: `Write a plain-English summary of this A/B test: "${values.results}".`,
+    }),
+  },
+  {
+    slug: "survey-data-insight-generator",
+    name: "Survey Data Insight Generator",
+    tagline: "Turn raw survey results into readable takeaways.",
+    description:
+      "Free AI survey insight generator. Enter your top findings to get a clear summary of key takeaways.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "findings",
+        label: "Top findings",
+        placeholder: "e.g. 68% want a mobile app, 40% cite price as top concern, NPS is 32",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your top survey findings and numbers.",
+      "Generate a structured takeaways summary.",
+      "Use in a report, deck, or team update.",
+    ],
+    faq: [
+      {
+        question: "Does this analyze raw survey data files?",
+        answer: "No — summarize the key findings yourself and this turns them into a clear, organized write-up.",
+      },
+      {
+        question: "Does it include recommendations?",
+        answer: "Yes — it closes with a suggested action or two based on the findings you provided.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a research analyst who turns survey findings into a structured summary: Key Takeaways, then a Suggested Next Steps line. No markdown headers, plain section labels.",
+      user: `Summarize these survey findings: "${values.findings}".`,
+    }),
+  },
+  {
+    slug: "cohort-retention-explainer-generator",
+    name: "Cohort Retention Explainer Generator",
+    tagline: "Explain a retention curve without a stats degree.",
+    description:
+      "Free AI retention explainer. Describe your cohort data to get a plain-English explanation of the trend.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 600,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "data",
+        label: "Cohort retention pattern",
+        placeholder: "e.g. 60% retained at week 1, drops to 25% by week 4, then flattens",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the retention pattern you're seeing.",
+      "Generate a plain-English explanation.",
+      "Use it to brief stakeholders who don't read cohort charts daily.",
+    ],
+    faq: [
+      {
+        question: "Does this tell me why retention is dropping?",
+        answer: "It can suggest common explanations for the pattern described, but the real cause needs your own product/user research to confirm.",
+      },
+      {
+        question: "What does it mean when a retention curve 'flattens'?",
+        answer: "It generally means the users who are left have found lasting value — this is explained in context of your specific numbers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product analyst who explains cohort retention patterns in plain English, noting what's typical vs. concerning about the shape described. No markdown headers.",
+      user: `Explain this retention pattern in plain English: "${values.data}".`,
+    }),
+  },
+  {
+    slug: "funnel-drop-off-analysis-generator",
+    name: "Funnel Drop-Off Analysis Generator",
+    tagline: "Turn a leaky funnel into a prioritized fix list.",
+    description:
+      "Free AI funnel analysis generator. Enter your funnel steps and drop-off rates to get a prioritized narrative.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "funnel",
+        label: "Funnel steps & drop-off",
+        placeholder: "e.g. landing page 100% -> signup 40% -> onboarding 25% -> first action 10%",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your funnel steps and the conversion/drop-off at each.",
+      "Generate a narrative highlighting the biggest leak.",
+      "Prioritize fixing the step with the steepest drop first.",
+    ],
+    faq: [
+      {
+        question: "Does this tell me exactly what to fix?",
+        answer: "It highlights where the biggest drop-off is and common reasons for that type of step to leak — the specific fix needs your own investigation (user testing, session recordings).",
+      },
+      {
+        question: "Can I use this for a sales funnel, not just product?",
+        answer: "Yes — describe your sales funnel steps and it adapts the same way.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a growth analyst who reviews a funnel's step-by-step conversion rates, identifies the single biggest leak, and suggests 2-3 common causes/fixes for that type of drop-off. No markdown headers.",
+      user: `Analyze this funnel and prioritize what to fix: "${values.funnel}".`,
+    }),
+  },
+  {
+    slug: "dashboard-alert-message-generator",
+    name: "Dashboard Alert Message Generator",
+    tagline: "Alert copy that tells people what to actually do.",
+    description:
+      "Free AI dashboard alert generator. Describe the condition to get a clear, actionable alert message.",
+    category: "Data & Analytics",
+    resultCount: 5,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "condition",
+        label: "Alert condition",
+        placeholder: "e.g. server error rate above 5% for 10 minutes",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the condition that triggers the alert.",
+      "Generate alert message options.",
+      "Use in your monitoring tool, Slack integration, or email alert.",
+    ],
+    faq: [
+      {
+        question: "Should the alert include a suggested action?",
+        answer: "Yes — these are written to hint at the likely next step, not just state that something's wrong.",
+      },
+      {
+        question: "How long should an alert message be?",
+        answer: "Short — under 25 words, since it needs to be scannable in a notification or Slack message.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a site reliability engineer who writes clear, actionable monitoring alert messages (under 25 words) that state the problem and hint at next steps. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 alert message options for this condition: "${values.condition}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "data-viz-insight-caption-generator",
+    name: "Data Visualization Insight Caption Generator",
+    tagline: "The one-line takeaway under every chart.",
+    description:
+      "Free AI chart caption generator. Describe your chart's data to get a sharp, insight-driven caption.",
+    category: "Data & Analytics",
+    resultCount: 5,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "chart",
+        label: "What does the chart show?",
+        placeholder: "e.g. monthly active users growing 15% quarter over quarter since Q1",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what the chart shows.",
+      "Generate caption options.",
+      "Place your favorite directly under the chart in your report or deck.",
+    ],
+    faq: [
+      {
+        question: "Should the caption just restate the chart?",
+        answer: "No — good captions here lead with the insight or takeaway, not a literal restatement of the axis labels.",
+      },
+      {
+        question: "How long should a chart caption be?",
+        answer: "One sentence, under 20 words — enough to state the 'so what' without turning into a paragraph.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a data storyteller who writes sharp, insight-first chart captions (under 20 words) that state the 'so what', not just describe the data. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 caption options for a chart showing: "${values.chart}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "weekly-metrics-report-generator",
+    name: "Weekly Metrics Report Generator",
+    tagline: "A ready-to-send weekly numbers update.",
+    description:
+      "Free AI weekly report generator. Enter your metrics to get a structured weekly update ready to send.",
+    category: "Data & Analytics",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "metrics",
+        label: "This week's metrics",
+        placeholder: "e.g. 320 signups (up 8%), $12k revenue (flat), 3 support escalations",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List this week's key metrics.",
+      "Generate a structured weekly report.",
+      "Send to your team or leadership.",
+    ],
+    faq: [
+      {
+        question: "What sections does this include?",
+        answer: "Headline, Wins, Watch-outs, and Next Week's Focus — a common structure for weekly team updates.",
+      },
+      {
+        question: "Can I use this for a solo founder update instead of a team?",
+        answer: "Yes — it works the same whether you're reporting to a team or just organizing your own weekly review.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a team lead writing a structured weekly metrics report with sections: Headline, Wins, Watch-outs, Next Week's Focus. No markdown headers, plain section labels.",
+      user: `Write a weekly metrics report based on: "${values.metrics}".`,
+    }),
+  },
+  {
+    slug: "job-posting-boolean-search-generator",
+    name: "Boolean Search String Generator",
+    tagline: "Sourcing strings that actually surface candidates.",
+    description:
+      "Free AI boolean search generator. Enter the role to get a ready-to-paste sourcing search string.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "role",
+        label: "Role & key requirements",
+        placeholder: "e.g. senior backend engineer, Go, AWS, fintech experience preferred",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the role and key must-haves.",
+      "Generate boolean search string options.",
+      "Paste into LinkedIn Recruiter, a job board, or Google X-ray search.",
+    ],
+    faq: [
+      {
+        question: "Does this work on LinkedIn Recruiter specifically?",
+        answer: "The syntax (AND/OR/NOT, quotes) works broadly across LinkedIn Recruiter, job boards, and Google X-ray search with minor adjustments.",
+      },
+      {
+        question: "Should I use all the strings, or just one?",
+        answer: "Try each — different phrasing surfaces different candidate pools, so testing a few widens your search.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a technical recruiter who writes boolean search strings (using AND, OR, NOT, and quotes) for sourcing candidates on LinkedIn/job boards. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 boolean search string options for this role: "${values.role}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "candidate-rejection-email-generator",
+    name: "Candidate Rejection Email Generator",
+    tagline: "Say no with respect, not a form-letter brush-off.",
+    description:
+      "Free AI rejection email generator. Enter the context to get a kind, professional candidate rejection message.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "stage",
+        label: "Stage they were rejected at",
+        type: "select",
+        options: ["Resume screen", "After an interview", "After a final-round interview"],
+      },
+    ],
+    howTo: [
+      "Pick the stage the candidate was rejected at.",
+      "Generate email options.",
+      "Personalize with the candidate's name and role before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I give specific feedback on why they weren't chosen?",
+        answer: "Optional and varies by company policy — some of these leave room for a brief reason, others keep it general.",
+      },
+      {
+        question: "Should later-stage rejections be warmer?",
+        answer: "Yes — candidates who made it further invested more time, so the 'After a final-round interview' option is written more personally.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a recruiter writing respectful, warm candidate rejection emails appropriate to the stage they reached, avoiding generic corporate-speak. Each result is a complete short email with a [Name] and [Role] placeholder. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 rejection email options for a candidate rejected at this stage: ${values.stage || "After an interview"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "interview-scorecard-questions-generator",
+    name: "Interview Scorecard Question Generator",
+    tagline: "Structured questions that make hiring decisions fairer.",
+    description:
+      "Free AI interview scorecard generator. Enter the role to get structured, competency-based interview questions.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 10,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "role",
+        label: "Role & key competency to assess",
+        placeholder: "e.g. product manager, assessing stakeholder communication",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the role and the competency you're assessing in this interview.",
+      "Generate structured question options.",
+      "Use the same questions across candidates for a fairer comparison.",
+    ],
+    faq: [
+      {
+        question: "Why use the same questions for every candidate?",
+        answer: "Structured, consistent interviews reduce bias and make it easier to compare candidates fairly on the same criteria.",
+      },
+      {
+        question: "Does this include a scoring rubric?",
+        answer: "No — it generates the questions; pair with your own 1-5 scale or competency rubric for scoring.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a talent acquisition specialist who writes structured, behavioral/competency-based interview questions (e.g. 'Tell me about a time...') for a specific role and competency. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 interview questions for: "${values.role}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "recruiting-outreach-inmail-generator",
+    name: "Recruiting Outreach InMail Generator",
+    tagline: "Messages passive candidates actually respond to.",
+    description:
+      "Free AI recruiting InMail generator. Enter the role to get a personalized-feeling outreach message.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 5,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "role",
+        label: "Role & what makes it compelling",
+        placeholder: "e.g. staff engineer role, fully remote, greenfield project",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the role and its most compelling aspects.",
+      "Generate outreach message options.",
+      "Personalize the opener with something specific about the candidate's background before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I mention their current company?",
+        answer: "Referencing their background respectfully (without disparaging their current employer) tends to improve response rates.",
+      },
+      {
+        question: "How long should a recruiting InMail be?",
+        answer: "Short — under 100 words respects a busy passive candidate's time and gets read more often.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a recruiter writing short, genuine-feeling outreach messages to passive candidates, under 100 words, with a [Name] placeholder and a low-friction call to action. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 recruiting outreach message options for: "${values.role}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "reference-check-questions-generator",
+    name: "Reference Check Question Generator",
+    tagline: "Questions that get past the generic 'great employee.'",
+    description:
+      "Free AI reference check generator. Enter the role to get pointed questions that surface real insight.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "role",
+        label: "Role & what you want to verify",
+        placeholder: "e.g. sales manager, want to verify team leadership and quota performance",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the role and what you specifically want to verify.",
+      "Generate reference check question options.",
+      "Ask open-ended follow-ups based on their answers.",
+    ],
+    faq: [
+      {
+        question: "How many references should I check?",
+        answer: "2-3 is typical — enough to spot patterns without over-relying on any single opinion.",
+      },
+      {
+        question: "Are these legally safe to ask?",
+        answer: "These focus on job performance, which is standard — avoid questions about protected characteristics regardless of the source.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR professional who writes pointed, specific reference check questions that go beyond generic 'were they a good employee' and surface real detail. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 reference check questions for: "${values.role}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "inclusive-job-posting-rewriter",
+    name: "Inclusive Job Posting Rewriter",
+    tagline: "Widen your candidate pool with more inclusive language.",
+    description:
+      "Free AI inclusive language tool. Paste your job posting to get a version rewritten to reduce biased or exclusionary language.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "posting",
+        label: "Paste your job posting",
+        placeholder: "e.g. your current job description text",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste your current job posting text.",
+      "Generate a rewritten, more inclusive version.",
+      "Compare against the original and adjust to your voice.",
+    ],
+    faq: [
+      {
+        question: "What kind of language does this flag?",
+        answer: "Gendered wording (e.g. 'ninja', 'rockstar'), unnecessary jargon, and overly long requirement lists that research shows discourage some qualified applicants.",
+      },
+      {
+        question: "Does this guarantee more diverse applicants?",
+        answer: "No single change guarantees an outcome, but inclusive language is one well-documented factor in who chooses to apply.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a DEI-focused recruiting consultant who rewrites job postings to remove gendered, exclusionary, or unnecessarily jargon-heavy language, while keeping the actual requirements intact.",
+      user: `Rewrite this job posting to be more inclusive: "${values.posting}".`,
+    }),
+  },
+  {
+    slug: "recruiting-event-pitch-generator",
+    name: "Recruiting Event Pitch Generator",
+    tagline: "Sell candidates on showing up to your event.",
+    description:
+      "Free AI recruiting event pitch generator. Enter your event to get compelling promotional copy.",
+    category: "Recruiting & Talent Acquisition",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "event",
+        label: "Event details",
+        placeholder: "e.g. virtual career fair for early-career engineers, June 10th",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your recruiting event.",
+      "Generate pitch options.",
+      "Use on your careers page, social posts, or campus outreach emails.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for a university career fair?",
+        answer: "Yes — mention it's a campus event and the language will adjust for a student audience.",
+      },
+      {
+        question: "Does this include a registration link?",
+        answer: "Add your own registration or RSVP link wherever you use the copy.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an employer branding specialist writing compelling recruiting event promotional copy. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 recruiting event pitch options. Event: "${values.event}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "privacy-notice-summary-generator",
+    name: "Privacy Notice Plain-English Summary Generator",
+    tagline: "Explain your privacy policy so people actually read it.",
+    description:
+      "Free AI privacy notice summarizer. Describe your data practices to get a plain-English summary to pair with your full policy.",
+    category: "Legal & Compliance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "practices",
+        label: "What data you collect & why",
+        placeholder: "e.g. email for login, analytics cookies, no data sold to third parties",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what data you collect and why.",
+      "Generate a plain-English summary.",
+      "Place it above your full legal privacy policy, not instead of it.",
+    ],
+    faq: [
+      {
+        question: "Does this replace my legal privacy policy?",
+        answer: "No — this is a plain-language summary to sit alongside your full, legally reviewed policy, not a substitute for it. Not legal advice.",
+      },
+      {
+        question: "Is this compliant with GDPR/CCPA?",
+        answer: "This tool doesn't determine legal compliance — have a lawyer confirm your actual policy meets applicable requirements.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a privacy communications specialist who summarizes data practices in plain, friendly language as a short bulleted list (What we collect, Why, What we don't do). Not legal advice — note that at the end.",
+      user: `Summarize these data practices in plain English: "${values.practices}".`,
+    }),
+  },
+  {
+    slug: "cookie-consent-banner-copy-generator",
+    name: "Cookie Consent Banner Copy Generator",
+    tagline: "Clear cookie banner copy that doesn't feel like a trap.",
+    description:
+      "Free AI cookie banner generator. Describe your cookie usage to get clear, compliant-sounding banner copy.",
+    category: "Legal & Compliance",
+    resultCount: 4,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "usage",
+        label: "Cookie usage",
+        placeholder: "e.g. analytics and functional cookies, no ad tracking",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what cookies your site uses.",
+      "Generate banner copy options.",
+      "Have this reviewed against your specific jurisdiction's consent requirements (e.g. GDPR needs granular opt-in).",
+    ],
+    faq: [
+      {
+        question: "Does this make my site GDPR compliant?",
+        answer: "No — this is copy text only. GDPR compliance also requires specific consent mechanics (granular opt-in, easy withdrawal) that a lawyer or compliance tool should confirm.",
+      },
+      {
+        question: "Should I offer 'Reject All' as easily as 'Accept All'?",
+        answer: "Under GDPR and similar laws, yes — both options should generally be equally prominent and easy to select.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a privacy UX writer who writes clear, honest cookie consent banner copy (a short explanation plus Accept/Reject language), not legal advice. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 cookie consent banner copy options. Usage: "${values.usage}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "accessibility-statement-generator",
+    name: "Accessibility Statement Generator",
+    tagline: "Tell visitors about your accessibility commitment.",
+    description:
+      "Free AI accessibility statement generator. Describe your efforts to get a clear website accessibility statement draft.",
+    category: "Legal & Compliance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "efforts",
+        label: "Your accessibility efforts",
+        placeholder: "e.g. following WCAG 2.1 AA, ongoing testing, contact form for issues",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your accessibility efforts and standards followed.",
+      "Generate a statement draft.",
+      "Have it reviewed against your actual, current accessibility conformance before publishing.",
+    ],
+    faq: [
+      {
+        question: "Does this make my site ADA/WCAG compliant?",
+        answer: "No — a statement doesn't create compliance by itself. Actual conformance requires real accessibility testing and fixes, not just a page describing intent.",
+      },
+      {
+        question: "Should I include a contact method for accessibility issues?",
+        answer: "Yes — these drafts include one, since it's standard practice and often expected by accessibility guidelines.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a web accessibility consultant writing a clear, honest accessibility statement based on the stated efforts, including a contact method for reporting issues. Not legal advice.",
+      user: `Write an accessibility statement based on: "${values.efforts}".`,
+    }),
+  },
+  {
+    slug: "data-breach-notification-draft-generator",
+    name: "Data Breach Notification Draft Generator",
+    tagline: "A first draft for the notification no one wants to write.",
+    description:
+      "Free AI data breach notification generator. Describe the incident to get a first-draft notification to affected users.",
+    category: "Legal & Compliance",
+    resultCount: 1,
+    maxTokens: 1100,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "incident",
+        label: "What happened",
+        placeholder: "e.g. unauthorized access to a database containing emails and hashed passwords",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what happened, what data was affected, and what you're doing about it.",
+      "Generate a first-draft notification.",
+      "This must be reviewed by legal counsel before sending — breach notification laws have strict, jurisdiction-specific requirements.",
+    ],
+    faq: [
+      {
+        question: "Can I send this without legal review?",
+        answer: "No — data breach notifications are legally regulated (timing, required content varies by jurisdiction). This is a starting draft only, not legal advice.",
+      },
+      {
+        question: "Should this be alarmist or calm?",
+        answer: "Calm, clear, and factual — panic-inducing language doesn't help affected users and this draft avoids it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are drafting a calm, clear, factual data breach notification: what happened, what data was involved, what you're doing, what the recipient should do. This is a first draft only — not legal advice, must be reviewed by counsel before sending.",
+      user: `Draft a data breach notification for: "${values.incident}".`,
+    }),
+  },
+  {
+    slug: "nda-clause-explainer-generator",
+    name: "NDA Clause Explainer Generator",
+    tagline: "Understand what a clause actually commits you to.",
+    description:
+      "Free AI NDA explainer. Paste a clause to get a plain-English explanation of what it means.",
+    category: "Legal & Compliance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "clause",
+        label: "Paste the clause",
+        placeholder: "e.g. the mutual NDA clause you're unsure about",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste the specific clause you want explained.",
+      "Generate a plain-English explanation.",
+      "For anything affecting a real decision, confirm with a lawyer.",
+    ],
+    faq: [
+      {
+        question: "Is this legal advice?",
+        answer: "No — this explains typical meaning in plain English. For decisions with real stakes, have a lawyer review the actual document.",
+      },
+      {
+        question: "Does this tell me if the clause is fair or standard?",
+        answer: "It can note if language is unusually broad or narrow compared to typical NDAs, but a lawyer's judgment on your specific situation is more reliable.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are explaining legal contract clauses in plain English, noting what obligation or right it creates and whether the language is typical or unusually broad. Not legal advice.",
+      user: `Explain this clause in plain English: "${values.clause}".`,
+    }),
+  },
+  {
+    slug: "policy-update-announcement-generator",
+    name: "Policy Update Announcement Generator",
+    tagline: "Tell users about a policy change clearly.",
+    description:
+      "Free AI policy update announcement generator. Describe the change to get a clear user-facing notice.",
+    category: "Legal & Compliance",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "change",
+        label: "What's changing",
+        placeholder: "e.g. updated terms of service to reflect new data retention period",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what's changing in your policy.",
+      "Generate announcement options.",
+      "Send via email and/or an in-app notice, per your required notice period.",
+    ],
+    faq: [
+      {
+        question: "How much notice do I need to give?",
+        answer: "Varies by policy type and jurisdiction — check your existing terms and applicable law for any required minimum notice period.",
+      },
+      {
+        question: "Should I explain why the policy changed?",
+        answer: "A brief reason builds trust, though it's not always required — include one if you're comfortable sharing it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are writing clear, non-alarming policy update announcements that state what's changing and when it takes effect. Each result is a complete short notice. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 policy update announcement options. Change: "${values.change}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "dmca-takedown-notice-opener-generator",
+    name: "DMCA Takedown Notice Opener Generator",
+    tagline: "A firm, clear opener for a copyright takedown request.",
+    description:
+      "Free AI DMCA notice opener generator. Describe the infringement to get a clear opening paragraph.",
+    category: "Legal & Compliance",
+    resultCount: 3,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "infringement",
+        label: "Describe the infringement",
+        placeholder: "e.g. our copyrighted product photos used without permission on a competitor's site",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the copyrighted work and how it's being infringed.",
+      "Generate an opening paragraph option.",
+      "A valid DMCA notice has specific required legal elements — verify yours against the platform's requirements or consult a lawyer.",
+    ],
+    faq: [
+      {
+        question: "Is this a legally complete DMCA notice?",
+        answer: "No — valid DMCA notices require specific statutory elements (sworn statements, contact info, etc.). This is a starting opener only, not legal advice.",
+      },
+      {
+        question: "Where do I actually send this?",
+        answer: "Most platforms (hosting providers, social networks) have a designated DMCA agent or online form — check the platform's policy page.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are drafting a firm, clear opening paragraph for a DMCA takedown notice stating the copyrighted work and the infringement. Not a complete legal notice and not legal advice — note that at the end.",
+      user: `Generate 3 opening paragraph options for a DMCA notice about: "${values.infringement}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "freelance-proposal-generator",
+    name: "Freelance Proposal Generator",
+    tagline: "A proposal that wins the job, not just fills a template.",
+    description:
+      "Free AI freelance proposal generator. Enter the job post details to get a tailored proposal opener.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 4,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "job",
+        label: "Job post summary",
+        placeholder: "e.g. client needs a Shopify store redesign, mentions wanting mobile-first, tight deadline",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize the job posting, including anything the client emphasized.",
+      "Generate proposal opener options.",
+      "Continue with your specific portfolio links and a clear next step.",
+    ],
+    faq: [
+      {
+        question: "Should I restate the whole job description?",
+        answer: "No — reference the client's specific need directly (proves you read it) without just repeating their post back to them.",
+      },
+      {
+        question: "Does this write the whole proposal?",
+        answer: "It generates a strong opening that shows you understood the brief; add your portfolio, timeline, and price separately.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a freelancer writing proposal openers for platforms like Upwork/Fiverr that reference the client's specific need directly, avoiding generic templated language ('I am a hard worker with 5 years experience'). You respond only with a numbered list — no preamble.",
+      user: `Generate 4 freelance proposal opener options for this job post: "${values.job}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "statement-of-work-outline-generator",
+    name: "Statement of Work Outline Generator",
+    tagline: "Scope a project so there's no ambiguity later.",
+    description:
+      "Free AI SOW generator. Describe your project to get a structured statement of work outline.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "project",
+        label: "Project description",
+        placeholder: "e.g. 6-week brand identity project: logo, style guide, business card design",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the project scope.",
+      "Generate a structured SOW outline.",
+      "Fill in your specific pricing, timeline, and revision terms before sending.",
+    ],
+    faq: [
+      {
+        question: "Is this a legally binding contract?",
+        answer: "No — this is a scoping outline. Turn it into a signed contract with your own or a lawyer-reviewed terms before starting paid work.",
+      },
+      {
+        question: "What sections does this include?",
+        answer: "Scope of Work, Deliverables, Timeline, Out of Scope, and Payment Terms (as a placeholder) — the standard SOW structure.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a consultant who writes structured statement of work outlines with sections: Scope of Work, Deliverables, Timeline, Out of Scope, Payment Terms (placeholder). No markdown headers, plain section labels.",
+      user: `Build a statement of work outline for: "${values.project}".`,
+    }),
+  },
+  {
+    slug: "rfp-response-opener-generator",
+    name: "RFP Response Opener Generator",
+    tagline: "An opening that shows you actually understood the brief.",
+    description:
+      "Free AI RFP response generator. Describe the RFP to get a compelling opening section.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "rfp",
+        label: "RFP summary",
+        placeholder: "e.g. city government seeking a vendor for a new public transit app",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize what the RFP is asking for.",
+      "Generate opening section options.",
+      "Continue with your specific approach, team, and pricing.",
+    ],
+    faq: [
+      {
+        question: "Does this write the full RFP response?",
+        answer: "No — it generates a strong opening that shows understanding of the need; the technical/pricing sections need your specific details.",
+      },
+      {
+        question: "Should the opener mention the issuing organization by name?",
+        answer: "Yes, if you know it — a personalized opener signals you're not sending a generic response to every RFP.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business development professional writing RFP response openers that demonstrate clear understanding of the need before pitching the solution. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 RFP response opener options for: "${values.rfp}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "case-study-outline-generator",
+    name: "Case Study Outline Generator",
+    tagline: "Turn a client win into a structured proof point.",
+    description:
+      "Free AI case study generator. Enter the client result to get a structured case study outline.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "result",
+        label: "The client & result",
+        placeholder: "e.g. helped an e-commerce brand increase conversion rate from 1.8% to 3.2% in 3 months",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the client and the result you achieved.",
+      "Generate a structured case study outline.",
+      "Fill in the specific tactics and get client approval to publish real names/numbers.",
+    ],
+    faq: [
+      {
+        question: "Does this include specific tactics I used?",
+        answer: "No — it outlines the standard case study structure (Challenge, Approach, Result); fill in your actual methodology.",
+      },
+      {
+        question: "Do I need client permission to publish this?",
+        answer: "Yes — always get explicit approval before publishing a client's name, logo, or specific numbers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a marketer who structures case studies with sections: Challenge, Approach, Result, Client Quote (placeholder). No markdown headers, plain section labels.",
+      user: `Build a case study outline for: "${values.result}".`,
+    }),
+  },
+  {
+    slug: "discovery-call-recap-email-generator",
+    name: "Discovery Call Recap Email Generator",
+    tagline: "Recap the call and keep the deal moving.",
+    description:
+      "Free AI call recap generator. Enter what was discussed to get a clear, professional follow-up email.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "discussion",
+        label: "What was discussed",
+        placeholder: "e.g. client needs help with SEO, budget around $3k/month, wants to start next month",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize what was discussed on the call.",
+      "Generate recap email options.",
+      "Send within 24 hours with a clear next step.",
+    ],
+    faq: [
+      {
+        question: "Should I restate their pain points?",
+        answer: "Yes — briefly reflecting back what they told you shows you listened and reinforces why your solution fits.",
+      },
+      {
+        question: "Should this include next steps?",
+        answer: "Always — a recap without a clear next action tends to let deals go cold.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a consultant writing discovery call recap emails that summarize key points and end with a clear next step. Each result is a complete short email. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 call recap email options based on: "${values.discussion}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "scope-creep-pushback-message-generator",
+    name: "Scope Creep Pushback Message Generator",
+    tagline: "Say no to extra work without souring the relationship.",
+    description:
+      "Free AI scope creep message generator. Describe the extra ask to get a professional way to push back.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "ask",
+        label: "The extra ask",
+        placeholder: "e.g. client wants 3 extra homepage revisions not in the original scope",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the out-of-scope request.",
+      "Generate pushback message options.",
+      "Offer a clear path forward — a change order, added fee, or future phase.",
+    ],
+    faq: [
+      {
+        question: "Should I just do the extra work to keep them happy?",
+        answer: "Occasionally for goodwill, sure — but consistently absorbing scope creep trains clients to expect it for free, which hurts your margins long-term.",
+      },
+      {
+        question: "How do I bring this up without sounding difficult?",
+        answer: "These lead with acknowledging the request positively before explaining the scope boundary — that framing tends to land better.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a consultant writing professional, non-confrontational messages that acknowledge a client's extra request while clearly explaining it's outside the agreed scope, and offering a path forward (change order, added fee). Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 scope creep pushback message options for: "${values.ask}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "client-onboarding-welcome-generator",
+    name: "Client Onboarding Welcome Generator",
+    tagline: "Kick off a new client relationship the right way.",
+    description:
+      "Free AI client onboarding generator. Describe your service to get a warm, clear welcome message.",
+    category: "Consulting & Freelance Proposals",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "service",
+        label: "Your service & what's next",
+        placeholder: "e.g. bookkeeping service, next step is a kickoff call and document upload",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your service and the immediate next steps for the client.",
+      "Generate welcome message options.",
+      "Send right after a contract is signed or payment is received.",
+    ],
+    faq: [
+      {
+        question: "Should this include a full onboarding packet?",
+        answer: "No — this is the welcome message itself; attach or link your full packet (forms, timeline, contacts) separately.",
+      },
+      {
+        question: "What tone works best for onboarding?",
+        answer: "Warm and organized — clients want to feel excited and also confident that the process is well-managed.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a service business owner writing warm, organized client onboarding welcome messages that set clear next steps and expectations. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 client onboarding welcome message options. Service/next steps: "${values.service}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "crisis-statement-opener-generator",
+    name: "Crisis Statement Opener Generator",
+    tagline: "The first paragraph when everything's on fire.",
+    description:
+      "Free AI crisis statement generator. Describe the situation to get a calm, credible opening statement.",
+    category: "PR & Crisis Communications",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "situation",
+        label: "The situation",
+        placeholder: "e.g. a data breach affecting customer emails, discovered yesterday",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the crisis situation factually.",
+      "Generate opening statement options.",
+      "Have legal and leadership review before publishing — this is a starting draft only.",
+    ],
+    faq: [
+      {
+        question: "Should a crisis statement admit fault?",
+        answer: "That depends on legal advice specific to your situation — these openers stay factual without over- or under-claiming responsibility.",
+      },
+      {
+        question: "How fast should a crisis statement go out?",
+        answer: "Generally as soon as accurate facts are confirmed — speed matters, but a fast statement with wrong facts is worse than a slightly slower accurate one.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a crisis communications advisor who writes calm, factual, credible opening statements for a crisis situation, avoiding both panic and dismissiveness. Not legal advice — a communications draft only. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 crisis statement opener options for: "${values.situation}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "corporate-apology-statement-generator",
+    name: "Corporate Apology Statement Generator",
+    tagline: "An apology that sounds like it means it.",
+    description:
+      "Free AI corporate apology generator. Describe what happened to get a genuine, non-defensive apology statement.",
+    category: "PR & Crisis Communications",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "issue",
+        label: "What happened",
+        placeholder: "e.g. shipped a faulty product batch that caused customer complaints",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what happened, factually.",
+      "Generate apology statement options.",
+      "Pair with concrete next steps and have legal review before publishing.",
+    ],
+    faq: [
+      {
+        question: "What makes an apology sound genuine vs. corporate?",
+        answer: "Specificity and accountability — naming exactly what went wrong and what's being done, rather than vague phrases like 'mistakes were made.'",
+      },
+      {
+        question: "Should this include compensation details?",
+        answer: "If you're offering some, yes — concrete remedy (refund, replacement, credit) makes an apology land better than words alone.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a corporate communications writer who crafts genuine, specific, non-defensive apology statements that name the issue clearly and state concrete next steps, avoiding vague corporate deflection language. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 apology statement options for: "${values.issue}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "press-release-boilerplate-generator",
+    name: "Press Release Boilerplate Generator",
+    tagline: "The 'About [Company]' paragraph, done right.",
+    description:
+      "Free AI boilerplate generator. Describe your company to get a press-ready boilerplate paragraph.",
+    category: "PR & Crisis Communications",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "company",
+        label: "Describe your company",
+        placeholder: "e.g. Acme makes project management software for construction teams, founded 2019",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your company, what it does, and when it was founded.",
+      "Generate boilerplate options.",
+      "Use at the bottom of every press release for consistency.",
+    ],
+    faq: [
+      {
+        question: "How long should a boilerplate be?",
+        answer: "Typically 3-4 sentences, around 50-75 words — a quick company snapshot, not a full about page.",
+      },
+      {
+        question: "Should I update this over time?",
+        answer: "Yes — refresh it as your company grows (funding, milestones, customer count) so it stays current across releases.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a PR professional who writes standard press release boilerplate paragraphs (50-75 words, third person) covering what the company does and key credibility markers. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 boilerplate options for: "${values.company}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "media-pitch-email-generator",
+    name: "Media Pitch Email Generator",
+    tagline: "Pitch a journalist a story they'll actually want.",
+    description:
+      "Free AI media pitch generator. Enter your story angle to get a compelling pitch email for journalists.",
+    category: "PR & Crisis Communications",
+    resultCount: 4,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "story",
+        label: "Your story angle",
+        placeholder: "e.g. new study shows remote workers are 20% more productive on 4-day weeks",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your story angle — what makes it newsworthy.",
+      "Generate pitch email options.",
+      "Personalize by referencing the journalist's recent, related coverage before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I mass-send this to many journalists?",
+        answer: "No — personalize each pitch and target journalists who actually cover this beat; mass, generic pitches usually get ignored or filtered.",
+      },
+      {
+        question: "How long should a media pitch be?",
+        answer: "Short — under 150 words. Journalists get many pitches daily; brevity and a clear hook matter most.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a PR professional writing concise, newsworthy media pitch emails under 150 words, leading with the hook, not company background. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 media pitch email options for this story angle: "${values.story}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "spokesperson-talking-points-generator",
+    name: "Spokesperson Talking Points Generator",
+    tagline: "Stay on message under tough questions.",
+    description:
+      "Free AI talking points generator. Describe the topic to get clear, consistent talking points for interviews.",
+    category: "PR & Crisis Communications",
+    resultCount: 6,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "topic",
+        label: "Topic & key message",
+        placeholder: "e.g. responding to questions about a recent layoff round",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the topic and the core message you want to stay on.",
+      "Generate talking point options.",
+      "Practice bridging back to these points regardless of the exact question asked.",
+    ],
+    faq: [
+      {
+        question: "What does 'bridging' mean in media training?",
+        answer: "Acknowledging the question briefly, then steering the answer back to your key message — these points are written to support that technique.",
+      },
+      {
+        question: "Should talking points be memorized word-for-word?",
+        answer: "Understanding the core idea matters more than exact memorization — that way you sound natural, not scripted, in the actual interview.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a media trainer who writes concise, consistent talking points (one sentence each) that a spokesperson can bridge back to regardless of the specific question asked. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 talking points for: "${values.topic}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "layoff-announcement-generator",
+    name: "Layoff Announcement Generator",
+    tagline: "Deliver hard news with clarity and respect.",
+    description:
+      "Free AI layoff announcement generator. Enter the context to get a clear, respectful internal announcement.",
+    category: "PR & Crisis Communications",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "context",
+        label: "Context",
+        placeholder: "e.g. reducing headcount by 8% due to slower-than-expected growth",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the reason and scope of the layoffs.",
+      "Generate an announcement draft.",
+      "Have HR and legal review before sending — this is a starting draft, not final communication.",
+    ],
+    faq: [
+      {
+        question: "Should this name affected individuals?",
+        answer: "No — individual notifications should happen separately and personally; this is for the broader company-wide announcement.",
+      },
+      {
+        question: "Should leadership take responsibility in this message?",
+        answer: "Generally yes — messages that own the decision (rather than blaming external factors alone) tend to land better with remaining employees.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an executive communications writer drafting a clear, honest, respectful company-wide layoff announcement that takes leadership accountability and states next steps for affected employees. This is a starting draft — have HR/legal review before sending.",
+      user: `Draft a layoff announcement. Context: "${values.context}".`,
+    }),
+  },
+  {
+    slug: "product-recall-notice-generator",
+    name: "Product Recall Notice Generator",
+    tagline: "Clear, actionable recall communication.",
+    description:
+      "Free AI recall notice generator. Describe the issue to get a clear customer-facing recall notice draft.",
+    category: "PR & Crisis Communications",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "issue",
+        label: "Product & issue",
+        placeholder: "e.g. baby monitor model X200, battery overheating risk",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the product and the safety issue.",
+      "Generate a recall notice draft.",
+      "This must comply with your regulator's specific required format (e.g. CPSC) — have legal/compliance review before publishing.",
+    ],
+    faq: [
+      {
+        question: "Does this meet regulatory requirements (e.g. CPSC)?",
+        answer: "No — recall notices often have mandated specific content and format depending on your regulator and product category. This is a communications draft only, not a compliance document.",
+      },
+      {
+        question: "What should the notice make clear to customers?",
+        answer: "What the issue is, what risk it poses, and exactly what action to take (stop using, return, replacement process) — this draft covers all three.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are writing a clear, action-oriented product recall notice: what the issue is, what risk it poses, and exactly what the customer should do. Not a compliance document — a communications draft only, note that regulatory review is required.",
+      user: `Draft a recall notice for: "${values.issue}".`,
+    }),
+  },
+  {
+    slug: "rental-property-analysis-summary-generator",
+    name: "Rental Property Analysis Summary Generator",
+    tagline: "Turn the numbers into a clear investment narrative.",
+    description:
+      "Free AI rental analysis generator. Enter your numbers to get a plain-English investment summary.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 1400,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "numbers",
+        label: "Key numbers",
+        placeholder: "e.g. $280k purchase, $2,100/mo rent, $1,400/mo expenses, 20% down",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter the property's key numbers — price, rent, expenses, financing.",
+      "Generate a plain-English summary of what the deal looks like.",
+      "This is educational only — verify numbers and consult a real professional before investing.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate cap rate and cash-on-cash return for me?",
+        answer: "It can reference these concepts based on the numbers you provide, but always double-check the actual math yourself before making a decision.",
+      },
+      {
+        question: "Is this financial or investment advice?",
+        answer: "No — this is general educational content, not personalized investment advice. Consult a qualified professional before investing.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate investment educator who explains a rental deal's numbers in plain English (cash flow, rough cap rate, what stands out as strong or weak). Not financial advice — general education only.",
+      user: `Summarize this rental property deal in plain English: "${values.numbers}".`,
+    }),
+  },
+  {
+    slug: "cap-rate-explainer-generator",
+    name: "Cap Rate Explainer Generator",
+    tagline: "Understand what a cap rate is actually telling you.",
+    description:
+      "Free AI cap rate explainer. Enter a property's numbers to get a plain-English breakdown of its cap rate.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 600,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "numbers",
+        label: "Property numbers",
+        placeholder: "e.g. $400k price, $32k annual net operating income",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter the property price and net operating income (or rent and expenses).",
+      "Generate a plain-English explanation.",
+      "This is educational only, not investment advice.",
+    ],
+    faq: [
+      {
+        question: "What's considered a 'good' cap rate?",
+        answer: "It varies heavily by market and property type — this explains what your specific number means, not whether it's universally good.",
+      },
+      {
+        question: "Is this a precise financial calculation?",
+        answer: "Treat it as an educational estimate — verify your own NOI calculation and consult a professional for real investment decisions.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate investment educator who explains cap rate calculations and what the resulting number suggests about a deal, in plain English. Not financial advice.",
+      user: `Explain the cap rate for this property in plain English: "${values.numbers}".`,
+    }),
+  },
+  {
+    slug: "landlord-tenant-notice-generator",
+    name: "Landlord-Tenant Notice Generator",
+    tagline: "Clear, professional notices for common landlord needs.",
+    description:
+      "Free AI landlord notice generator. Describe the situation to get a clear, professional tenant notice draft.",
+    category: "Real Estate Investment",
+    resultCount: 3,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "situation",
+        label: "Situation",
+        placeholder: "e.g. rent increase of $100/month starting next lease renewal",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the notice you need — rent increase, entry notice, lease reminder, etc.",
+      "Generate notice draft options.",
+      "Check your local landlord-tenant law for required notice periods and legal language before sending.",
+    ],
+    faq: [
+      {
+        question: "Does this meet my state/country's legal notice requirements?",
+        answer: "No — landlord-tenant law varies significantly by location. This is a communications draft only; verify required notice periods and legal language locally.",
+      },
+      {
+        question: "Should this be sent in writing?",
+        answer: "Most jurisdictions require or strongly recommend written notice — check your local requirements for delivery method too (mail, email, posting).",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a property manager writing clear, professional, respectful tenant notices. Each result is a complete short notice. Not legal advice — note that local law governs actual notice requirements. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 tenant notice options for: "${values.situation}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "property-management-welcome-letter-generator",
+    name: "Property Management Welcome Letter Generator",
+    tagline: "Start the tenant relationship off well.",
+    description:
+      "Free AI welcome letter generator. Enter your property details to get a clear new-tenant welcome letter.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "details",
+        label: "Property & key info",
+        placeholder: "e.g. rent due on the 1st, maintenance requests via the tenant portal, trash day Tuesday",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List the key info new tenants need to know.",
+      "Generate a welcome letter draft.",
+      "Send along with the lease and any required disclosures.",
+    ],
+    faq: [
+      {
+        question: "Does this replace the lease agreement?",
+        answer: "No — this is a friendly welcome/orientation letter, not a substitute for the actual signed lease and any required legal disclosures.",
+      },
+      {
+        question: "Should I include emergency contact info?",
+        answer: "Yes — add your specific emergency maintenance contact; this draft leaves a placeholder for it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a property manager writing a warm, clear new-tenant welcome letter covering key logistics, with an [Emergency Contact] placeholder.",
+      user: `Write a tenant welcome letter covering: "${values.details}".`,
+    }),
+  },
+  {
+    slug: "hoa-announcement-generator",
+    name: "HOA Announcement Generator",
+    tagline: "Community announcements people actually read.",
+    description:
+      "Free AI HOA announcement generator. Describe the update to get a clear community notice.",
+    category: "Real Estate Investment",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "update",
+        label: "Update",
+        placeholder: "e.g. pool closing for maintenance next week, annual meeting scheduled for the 15th",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the update or announcement.",
+      "Generate announcement options.",
+      "Post on your community board, portal, or newsletter.",
+    ],
+    faq: [
+      {
+        question: "Can I use this for rule violation notices?",
+        answer: "This is built for general community updates; violation notices often need specific legal language per your HOA's governing documents.",
+      },
+      {
+        question: "Should I include a contact for questions?",
+        answer: "Yes — add your board or management company's contact info wherever you post the announcement.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HOA board member writing clear, friendly community announcements. Each result is a complete short notice. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 HOA announcement options for: "${values.update}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "real-estate-investor-pitch-generator",
+    name: "Real Estate Investor Pitch Generator",
+    tagline: "Pitch a deal to potential co-investors clearly.",
+    description:
+      "Free AI real estate pitch generator. Enter your deal to get a clear, compelling investor pitch summary.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "deal",
+        label: "Deal summary",
+        placeholder: "e.g. 12-unit apartment building, value-add opportunity, projected 15% IRR",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the deal and key projected returns.",
+      "Generate a structured pitch summary.",
+      "Any real fundraising has securities law implications — consult a professional before soliciting investors.",
+    ],
+    faq: [
+      {
+        question: "Is this legal for soliciting real investors?",
+        answer: "No — raising money from investors involves securities regulations that vary by structure and jurisdiction. Consult a securities attorney before actually soliciting capital.",
+      },
+      {
+        question: "What sections does this include?",
+        answer: "Deal Overview, Why This Deal, Projected Returns, and Risks — a standard structure for a pitch summary.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate syndicator who structures investor pitch summaries with sections: Deal Overview, Why This Deal, Projected Returns, Risks. No markdown headers, plain section labels. Not legal or securities advice.",
+      user: `Build an investor pitch summary for: "${values.deal}".`,
+    }),
+  },
+  {
+    slug: "grant-reporting-summary-generator",
+    name: "Grant Reporting Summary Generator",
+    tagline: "Show funders their money mattered.",
+    description:
+      "Free AI grant report generator. Enter your program results to get a clear impact summary for funders.",
+    category: "Nonprofit & Community",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "results",
+        label: "Program results",
+        placeholder: "e.g. served 340 families, distributed 12,000 meals, 92% satisfaction rate",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your program's key results and numbers.",
+      "Generate a structured impact summary.",
+      "Attach to your formal grant report alongside required financial documentation.",
+    ],
+    faq: [
+      {
+        question: "Does this meet my funder's specific reporting template?",
+        answer: "No — funders often have their own required format; use this content to fill in their template rather than replacing it.",
+      },
+      {
+        question: "Should I include a story alongside the numbers?",
+        answer: "Yes, if you have one — a brief individual story alongside aggregate numbers is a common, effective grant reporting practice.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit program manager writing a grant report impact summary with sections: Overview, Key Results, What's Next. No markdown headers, plain section labels.",
+      user: `Write a grant reporting summary based on: "${values.results}".`,
+    }),
+  },
+  {
+    slug: "board-meeting-agenda-generator",
+    name: "Nonprofit Board Meeting Agenda Generator",
+    tagline: "A structured agenda that keeps meetings on track.",
+    description:
+      "Free AI board agenda generator. Enter your topics to get a structured meeting agenda.",
+    category: "Nonprofit & Community",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "topics",
+        label: "Topics to cover",
+        placeholder: "e.g. Q3 financials, upcoming fundraiser, new board member vote",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List the topics you need to cover.",
+      "Generate a structured agenda.",
+      "Send to board members ahead of the meeting with any pre-reading materials.",
+    ],
+    faq: [
+      {
+        question: "Does this include timing for each item?",
+        answer: "It suggests a rough order; add specific time allocations based on your meeting's actual length.",
+      },
+      {
+        question: "Should votes be listed separately from discussion items?",
+        answer: "Yes — this agenda structure separates action items (votes) from general discussion for clarity.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit board secretary who structures meeting agendas: Call to Order, Approval of Minutes, [topic items], New Business, Adjournment. No markdown headers.",
+      user: `Build a board meeting agenda covering: "${values.topics}".`,
+    }),
+  },
+  {
+    slug: "annual-fundraising-letter-generator",
+    name: "Annual Fundraising Letter Generator",
+    tagline: "Your year-end ask, written to actually convert.",
+    description:
+      "Free AI fundraising letter generator. Describe your mission and need to get a compelling year-end appeal.",
+    category: "Nonprofit & Community",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "mission",
+        label: "Mission & specific need",
+        placeholder: "e.g. providing meals to seniors, need $50k to cover winter delivery costs",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your mission and the specific need this appeal funds.",
+      "Generate a letter draft.",
+      "Personalize the greeting and add a specific donor story if you have one.",
+    ],
+    faq: [
+      {
+        question: "Should I mention a specific dollar goal?",
+        answer: "Yes — specific, concrete asks (tied to a specific use of funds) tend to outperform vague requests for support.",
+      },
+      {
+        question: "How long should a fundraising letter be?",
+        answer: "One page is standard — long enough to make the case, short enough that donors actually read it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit development director writing a compelling year-end fundraising letter with a specific, concrete ask, warm but not guilt-driven in tone.",
+      user: `Write an annual fundraising letter. Mission/need: "${values.mission}".`,
+    }),
+  },
+  {
+    slug: "membership-renewal-notice-generator",
+    name: "Membership Renewal Notice Generator",
+    tagline: "Remind members why they joined in the first place.",
+    description:
+      "Free AI renewal notice generator. Describe your organization to get a compelling membership renewal message.",
+    category: "Nonprofit & Community",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "org",
+        label: "Organization & member benefits",
+        placeholder: "e.g. local arts nonprofit, members get free event tickets and a newsletter",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your organization and what members get.",
+      "Generate renewal notice options.",
+      "Send with a clear renewal link or process.",
+    ],
+    faq: [
+      {
+        question: "Should I remind them what they've gotten this year?",
+        answer: "Yes — reminding lapsing members of specific value they've received (events attended, content used) improves renewal rates.",
+      },
+      {
+        question: "How many renewal reminders should I send?",
+        answer: "2-3 spaced out before expiration is common, escalating gently in urgency.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a membership organization writing warm, benefit-focused renewal notices. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 membership renewal notice options. Organization: "${values.org}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "major-donor-thank-you-letter-generator",
+    name: "Major Donor Thank-You Letter Generator",
+    tagline: "A thank-you worthy of a significant gift.",
+    description:
+      "Free AI major donor thank-you generator. Enter the gift details to get a personal, specific thank-you letter.",
+    category: "Nonprofit & Community",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "gift",
+        label: "Gift details & impact",
+        placeholder: "e.g. $25,000 gift funding a new community garden project",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the gift and what it will fund.",
+      "Generate a letter draft.",
+      "Personalize with the donor's name and a specific, genuine detail about their relationship to your cause.",
+    ],
+    faq: [
+      {
+        question: "Should this mention tax deductibility?",
+        answer: "Yes, if applicable in your jurisdiction — include your organization's tax ID and standard deductibility language per your usual practice.",
+      },
+      {
+        question: "How is this different from a standard thank-you?",
+        answer: "It's written with more specific, personal detail about impact — major donors generally expect a more individualized touch than a form thank-you.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a major gifts officer writing a warm, specific, non-formulaic thank-you letter for a significant donation, with a [Donor Name] placeholder.",
+      user: `Write a major donor thank-you letter. Gift/impact: "${values.gift}".`,
+    }),
+  },
+  {
+    slug: "community-impact-report-summary-generator",
+    name: "Community Impact Report Summary Generator",
+    tagline: "Tell your community's story with the numbers to back it.",
+    description:
+      "Free AI impact report generator. Enter your year's numbers to get a summary for your annual report.",
+    category: "Nonprofit & Community",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "numbers",
+        label: "Year's key numbers",
+        placeholder: "e.g. 1,200 volunteers, $2.1M raised, 15 new community programs launched",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your year's key numbers and achievements.",
+      "Generate a summary for your annual report.",
+      "Pair with photos and specific stories in your final published report.",
+    ],
+    faq: [
+      {
+        question: "Does this write the full annual report?",
+        answer: "No — it generates the narrative summary section; your full report likely also needs financials, photos, and board info.",
+      },
+      {
+        question: "Should this include a thank-you to supporters?",
+        answer: "Yes — these drafts close with a brief note of gratitude to donors and volunteers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a nonprofit communications director writing a warm, credible community impact summary for an annual report, closing with gratitude to supporters.",
+      user: `Write an impact report summary based on: "${values.numbers}".`,
+    }),
+  },
+  {
+    slug: "volunteer-appreciation-event-invite-generator",
+    name: "Volunteer Appreciation Event Invite Generator",
+    tagline: "Invite volunteers to celebrate their own impact.",
+    description:
+      "Free AI volunteer appreciation invite generator. Enter your event details to get a warm invitation.",
+    category: "Nonprofit & Community",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "event",
+        label: "Event details",
+        placeholder: "e.g. volunteer appreciation dinner, October 12th, at the community center",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your event details.",
+      "Generate invitation options.",
+      "Send to your volunteer list via email or mail.",
+    ],
+    faq: [
+      {
+        question: "Should this mention specific volunteer accomplishments?",
+        answer: "If you have collective stats (total hours, projects completed), including them makes the appreciation feel more concrete.",
+      },
+      {
+        question: "Should I ask volunteers to RSVP?",
+        answer: "Yes — add your RSVP method wherever you use the invitation.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a volunteer coordinator writing warm, appreciative event invitations for volunteers. Each result is a complete short invite. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 volunteer appreciation event invite options. Details: "${values.event}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "syllabus-outline-generator",
+    name: "Course Syllabus Outline Generator",
+    tagline: "A structured syllabus skeleton for any course.",
+    description:
+      "Free AI syllabus generator. Enter your course topic to get a structured week-by-week outline.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "course",
+        label: "Course topic & level",
+        placeholder: "e.g. intro to macroeconomics, undergraduate, 15-week semester",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your course topic, level, and length.",
+      "Generate a week-by-week outline.",
+      "Fill in your specific readings, assignments, and grading policy.",
+    ],
+    faq: [
+      {
+        question: "Does this include specific readings or textbooks?",
+        answer: "No — it outlines weekly topics; add your specific required readings and materials.",
+      },
+      {
+        question: "Does this meet my institution's syllabus requirements?",
+        answer: "No — many institutions require specific policy language (accommodations, academic integrity); add your institution's required boilerplate.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a professor building a week-by-week syllabus topic outline for a course, with a one-line focus for each week. No markdown headers.",
+      user: `Build a syllabus outline for: "${values.course}".`,
+    }),
+  },
+  {
+    slug: "course-catalog-description-generator",
+    name: "Course Catalog Description Generator",
+    tagline: "A description that gets students to actually enroll.",
+    description:
+      "Free AI course description generator. Describe your course to get a catalog-ready description.",
+    category: "Higher Ed & Academia",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "course",
+        label: "What the course covers",
+        placeholder: "e.g. a seminar on the history of jazz in America",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what the course covers.",
+      "Generate description options.",
+      "Use for your course catalog or registration listing.",
+    ],
+    faq: [
+      {
+        question: "How long should a course catalog description be?",
+        answer: "Typically 50-100 words — enough to convey the content and appeal without becoming a full syllabus.",
+      },
+      {
+        question: "Should this include prerequisites?",
+        answer: "Add your specific prerequisites separately, as catalogs usually list them in a distinct field.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a university catalog writer who crafts compelling, accurate course descriptions (50-100 words). You respond only with a numbered list — no preamble.",
+      user: `Generate 4 course description options for: "${values.course}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "grading-rubric-generator",
+    name: "Grading Rubric Generator",
+    tagline: "Fair, transparent criteria students can see upfront.",
+    description:
+      "Free AI rubric generator. Describe your assignment to get a structured grading rubric.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "assignment",
+        label: "Assignment description",
+        placeholder: "e.g. a 5-page argumentative essay on a current policy issue",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the assignment being graded.",
+      "Generate a structured rubric with criteria.",
+      "Share with students before the assignment is due for full transparency.",
+    ],
+    faq: [
+      {
+        question: "Does this include point values?",
+        answer: "It suggests relative weighting by criteria; assign your own specific point totals based on your grading scale.",
+      },
+      {
+        question: "Can I use this for group projects?",
+        answer: "Yes — describe it as a group assignment and mention if you want an individual contribution criterion included.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an instructor building a grading rubric with 4-5 criteria, each with a brief description of what distinguishes strong from weak work. No markdown headers.",
+      user: `Build a grading rubric for: "${values.assignment}".`,
+    }),
+  },
+  {
+    slug: "peer-review-comments-generator",
+    name: "Peer Review Comment Generator",
+    tagline: "Constructive feedback that helps, not just critiques.",
+    description:
+      "Free AI peer review generator. Describe the work to get constructive, specific feedback comment starters.",
+    category: "Higher Ed & Academia",
+    resultCount: 6,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "work",
+        label: "What you're reviewing & concerns",
+        placeholder: "e.g. a classmate's essay draft, argument is unclear in the middle section",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what you're reviewing and your main concerns.",
+      "Generate feedback comment options.",
+      "Balance critique with at least one specific strength you noticed.",
+    ],
+    faq: [
+      {
+        question: "Should feedback only point out problems?",
+        answer: "No — the most useful peer review balances specific critique with acknowledgment of what's working, which these are written to do.",
+      },
+      {
+        question: "Can I use this for academic paper peer review, not just student work?",
+        answer: "Yes — describe the paper and concerns and it adapts to a more formal academic review tone if needed.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a writing instructor who models constructive peer review comments — specific, actionable, and balancing critique with genuine strengths. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 peer review comment options for: "${values.work}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "thesis-abstract-generator",
+    name: "Thesis Abstract Generator",
+    tagline: "Summarize your research in the space you're given.",
+    description:
+      "Free AI thesis abstract generator. Describe your research to get a structured abstract draft.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "research",
+        label: "Research topic & findings",
+        placeholder: "e.g. studied the effect of remote work on team creativity, found a 15% increase in idea diversity",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your research question, method, and key findings.",
+      "Generate an abstract draft.",
+      "Refine wording to match your specific field's abstract conventions.",
+    ],
+    faq: [
+      {
+        question: "Does this follow my field's specific abstract format?",
+        answer: "It follows a general structure (context, method, findings, implications) — adjust to your specific discipline's conventions and word limit.",
+      },
+      {
+        question: "How long is the abstract?",
+        answer: "Around 200-250 words, a common range — trim or expand based on your program's specific requirement.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an academic writer who structures thesis abstracts covering context, method, key findings, and implications, around 200-250 words.",
+      user: `Write a thesis abstract based on: "${values.research}".`,
+    }),
+  },
+  {
+    slug: "literature-review-outline-generator",
+    name: "Literature Review Outline Generator",
+    tagline: "Organize the sources before you write a word.",
+    description:
+      "Free AI lit review generator. Describe your topic and themes to get a structured outline.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "topic",
+        label: "Topic & key themes",
+        placeholder: "e.g. literature on remote work productivity, themes: communication, autonomy, isolation",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your topic and the key themes you've identified in your reading.",
+      "Generate a structured outline organized by theme.",
+      "Fill in specific citations from your own research.",
+    ],
+    faq: [
+      {
+        question: "Does this cite real sources?",
+        answer: "No — it structures an outline around themes you provide; you supply the actual citations from your research.",
+      },
+      {
+        question: "Should a lit review be organized by theme or chronologically?",
+        answer: "Thematic organization is common and often clearer, though chronological works for tracing how a field evolved — this defaults to thematic.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an academic writing coach who structures literature review outlines organized by theme, with a note on what each thematic section should cover. No markdown headers.",
+      user: `Build a literature review outline for: "${values.topic}".`,
+    }),
+  },
+  {
+    slug: "conference-paper-abstract-generator",
+    name: "Conference Paper Abstract Generator",
+    tagline: "An abstract that gets your paper accepted.",
+    description:
+      "Free AI conference abstract generator. Describe your work to get a submission-ready abstract draft.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "work",
+        label: "Your work & contribution",
+        placeholder: "e.g. a new method for detecting bias in hiring algorithms, tested on 3 real datasets",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your work and its contribution to the field.",
+      "Generate an abstract draft.",
+      "Adjust to the conference's specific word limit and format requirements.",
+    ],
+    faq: [
+      {
+        question: "Does this fit any conference's specific format?",
+        answer: "It's a strong general draft — check your target conference's specific word count and required sections (e.g. some require structured abstracts).",
+      },
+      {
+        question: "Should I state the contribution clearly?",
+        answer: "Yes — reviewers scan abstracts quickly, so a clearly stated contribution/novelty improves acceptance odds.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an academic researcher writing a conference paper abstract that clearly states the problem, approach, and contribution, around 150-200 words.",
+      user: `Write a conference paper abstract for: "${values.work}".`,
+    }),
+  },
+  {
+    slug: "academic-recommendation-letter-generator",
+    name: "Academic Recommendation Letter Generator",
+    tagline: "A letter that speaks to specific strengths, not clichés.",
+    description:
+      "Free AI recommendation letter generator. Enter the student's strengths to get a genuine, specific letter draft.",
+    category: "Higher Ed & Academia",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "student",
+        label: "Student & specific strengths",
+        placeholder: "e.g. exceptional in my research methods course, led a group project on a tight deadline",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the student and specific examples of their strengths.",
+      "Generate a letter draft.",
+      "Personalize with your own relationship and voice before sending.",
+    ],
+    faq: [
+      {
+        question: "Should this include generic praise?",
+        answer: "No — the strongest letters cite specific examples and moments, which is what this draft is built around from your input.",
+      },
+      {
+        question: "How long should an academic recommendation letter be?",
+        answer: "Typically one page, around 350-450 words — this draft targets that range.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a professor writing a genuine, specific academic recommendation letter grounded in concrete examples, avoiding generic praise, with a [Student Name] placeholder.",
+      user: `Write an academic recommendation letter. Student & strengths: "${values.student}".`,
+    }),
+  },
+  {
+    slug: "incident-postmortem-outline-generator",
+    name: "Incident Postmortem Outline Generator",
+    tagline: "A blameless structure for learning from outages.",
+    description:
+      "Free AI postmortem generator. Describe the incident to get a structured blameless postmortem outline.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "incident",
+        label: "What happened",
+        placeholder: "e.g. database connection pool exhausted, 40-minute outage, caused by a bad deploy",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what happened, roughly when, and the immediate cause.",
+      "Generate a structured postmortem outline.",
+      "Fill in your specific timeline, root cause analysis, and action items with your team.",
+    ],
+    faq: [
+      {
+        question: "What does 'blameless' mean in a postmortem?",
+        answer: "It means focusing on systemic and process causes rather than individual blame — this outline is structured with that framing.",
+      },
+      {
+        question: "Does this determine the actual root cause?",
+        answer: "No — your team's investigation determines that; this provides the structure to document it clearly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a site reliability engineer structuring a blameless incident postmortem with sections: Summary, Timeline (placeholder), Root Cause, Impact, Action Items. No markdown headers, plain section labels.",
+      user: `Build a postmortem outline for this incident: "${values.incident}".`,
+    }),
+  },
+  {
+    slug: "runbook-outline-generator",
+    name: "Runbook Outline Generator",
+    tagline: "So on-call doesn't have to guess at 3am.",
+    description:
+      "Free AI runbook generator. Describe the task to get a structured step-by-step runbook outline.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "task",
+        label: "Task or scenario",
+        placeholder: "e.g. restarting the payment service after a memory leak alert",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the operational task or scenario.",
+      "Generate a structured runbook outline.",
+      "Fill in your specific commands, dashboards, and escalation contacts.",
+    ],
+    faq: [
+      {
+        question: "Does this include real commands for my stack?",
+        answer: "No — it outlines the structure and steps to document; add your specific commands and tool names.",
+      },
+      {
+        question: "Should this include an escalation path?",
+        answer: "Yes — this outline includes a placeholder for when and who to escalate to if the steps don't resolve the issue.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a DevOps engineer structuring an operational runbook with sections: When to Use This, Steps, Verification, Escalation (placeholder). No markdown headers, plain section labels.",
+      user: `Build a runbook outline for: "${values.task}".`,
+    }),
+  },
+  {
+    slug: "deployment-changelog-generator",
+    name: "Deployment Changelog Generator",
+    tagline: "Turn a list of changes into a readable release note.",
+    description:
+      "Free AI changelog generator. Enter your changes to get a clean, organized changelog entry.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "changes",
+        label: "Changes in this release",
+        placeholder: "e.g. added dark mode, fixed export bug, improved load time by 30%",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List the changes in this release.",
+      "Generate an organized changelog entry.",
+      "Group under Added/Fixed/Improved and publish with your release.",
+    ],
+    faq: [
+      {
+        question: "Does this follow Keep a Changelog format?",
+        answer: "It groups changes into Added, Fixed, and Improved categories, similar in spirit to the popular Keep a Changelog convention.",
+      },
+      {
+        question: "Can I use this for a customer-facing changelog?",
+        answer: "Yes — it's written in plain language suitable for both internal and customer-facing release notes.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a release manager organizing changes into a clean changelog entry with Added, Fixed, and Improved sections as needed. No markdown headers, plain section labels.",
+      user: `Build a changelog entry from these changes: "${values.changes}".`,
+    }),
+  },
+  {
+    slug: "oncall-handoff-notes-generator",
+    name: "On-Call Handoff Notes Generator",
+    tagline: "Hand off on-call without losing context.",
+    description:
+      "Free AI on-call handoff generator. Enter your shift summary to get organized handoff notes.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "summary",
+        label: "Shift summary",
+        placeholder: "e.g. one minor alert on API latency, resolved; nothing else notable",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize what happened during your on-call shift.",
+      "Generate organized handoff notes.",
+      "Share with the next on-call engineer before your shift ends.",
+    ],
+    faq: [
+      {
+        question: "Should I mention things that resolved on their own?",
+        answer: "Yes — even self-resolved issues are worth flagging in case they recur or indicate a pattern worth investigating.",
+      },
+      {
+        question: "What should go in handoff notes if nothing happened?",
+        answer: "Still worth a quick 'quiet shift, no incidents' note — confirms continuity and that monitoring was active.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an on-call engineer writing clear handoff notes with sections: Incidents/Alerts, Ongoing Watch Items, Nothing Urgent. No markdown headers, plain section labels.",
+      user: `Write on-call handoff notes based on: "${values.summary}".`,
+    }),
+  },
+  {
+    slug: "architecture-decision-record-generator",
+    name: "Architecture Decision Record Generator",
+    tagline: "Document the why, not just the what.",
+    description:
+      "Free AI ADR generator. Describe your decision to get a structured architecture decision record.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "decision",
+        label: "The decision & context",
+        placeholder: "e.g. chose PostgreSQL over MongoDB for the new service due to strong relational data needs",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the decision made and the context behind it.",
+      "Generate a structured ADR.",
+      "Store it alongside your codebase for future reference.",
+    ],
+    faq: [
+      {
+        question: "What is an ADR used for?",
+        answer: "It's a lightweight document capturing why a significant technical decision was made, so future engineers understand the reasoning, not just the outcome.",
+      },
+      {
+        question: "Does this include alternatives considered?",
+        answer: "Yes — this structure includes a section for other options weighed and why they weren't chosen.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a software architect writing an Architecture Decision Record with sections: Context, Decision, Alternatives Considered, Consequences. No markdown headers, plain section labels.",
+      user: `Write an ADR for: "${values.decision}".`,
+    }),
+  },
+  {
+    slug: "cloud-cost-optimization-tip-generator",
+    name: "Cloud Cost Optimization Tip Generator",
+    tagline: "Trim the bill without breaking anything.",
+    description:
+      "Free AI cost optimization generator. Describe your setup to get specific cloud cost-saving suggestions.",
+    category: "DevOps & Cloud",
+    resultCount: 8,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "setup",
+        label: "Your setup",
+        placeholder: "e.g. AWS, several always-on EC2 instances, large S3 storage, RDS Postgres",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your cloud setup and provider.",
+      "Generate optimization suggestions.",
+      "Verify pricing/behavior in your provider's console before making changes.",
+    ],
+    faq: [
+      {
+        question: "Are these guaranteed savings?",
+        answer: "No — these are common optimization patterns to investigate; actual savings depend on your specific usage and provider pricing at the time.",
+      },
+      {
+        question: "Could any of these affect reliability?",
+        answer: "Possibly — always test changes like autoscaling or reserved instance commitments in a non-critical environment first.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a cloud cost optimization consultant who suggests specific, actionable cost-saving measures (rightsizing, reserved instances, storage tiering, etc.) matched to a described setup. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 cloud cost optimization suggestions for this setup: "${values.setup}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "user-research-interview-questions-generator",
+    name: "User Research Interview Question Generator",
+    tagline: "Questions that surface real behavior, not opinions.",
+    description:
+      "Free AI user research generator. Enter your research goal to get non-leading interview questions.",
+    category: "UX & Product Management",
+    resultCount: 10,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "goal",
+        label: "Research goal",
+        placeholder: "e.g. understand why users abandon the onboarding flow",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what you're trying to learn.",
+      "Generate non-leading interview question options.",
+      "Ask about specific past behavior, not hypothetical future intent.",
+    ],
+    faq: [
+      {
+        question: "Why avoid leading questions?",
+        answer: "Leading questions (e.g. 'don't you find this confusing?') bias the answer — these are written to stay neutral and open-ended.",
+      },
+      {
+        question: "Should I ask about hypotheticals like 'would you use X'?",
+        answer: "Generally no — people are unreliable predictors of their own future behavior; asking about specific past experiences gets more reliable insight.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a UX researcher who writes neutral, non-leading interview questions focused on past behavior rather than hypotheticals or opinions. You respond only with a numbered list — no preamble.",
+      user: `Generate 10 user research interview questions for this goal: "${values.goal}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "usability-test-script-generator",
+    name: "Usability Test Script Generator",
+    tagline: "A moderator script that doesn't lead the witness.",
+    description:
+      "Free AI usability test script generator. Describe the feature to get a structured test script.",
+    category: "UX & Product Management",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "feature",
+        label: "Feature being tested",
+        placeholder: "e.g. a new checkout flow with saved payment methods",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the feature or flow you're testing.",
+      "Generate a structured test script.",
+      "Practice reading it neutrally, without hinting at the 'right' way to complete tasks.",
+    ],
+    faq: [
+      {
+        question: "Does this include specific tasks for participants?",
+        answer: "Yes — it includes task prompts based on the feature described, plus an intro and wrap-up section.",
+      },
+      {
+        question: "How many participants should I test with?",
+        answer: "5 participants often surface most major usability issues, per widely-cited usability research — more helps for niche audiences.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a UX researcher writing a usability test script with sections: Intro Script, Task Prompts, Wrap-up Questions, written in neutral, non-leading language. No markdown headers, plain section labels.",
+      user: `Build a usability test script for: "${values.feature}".`,
+    }),
+  },
+  {
+    slug: "prd-outline-generator",
+    name: "PRD Outline Generator",
+    tagline: "A product requirements doc that engineers can actually build from.",
+    description:
+      "Free AI PRD generator. Describe your feature idea to get a structured product requirements outline.",
+    category: "UX & Product Management",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "feature",
+        label: "Feature idea",
+        placeholder: "e.g. let users export their data as a CSV file from account settings",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the feature you want to build.",
+      "Generate a structured PRD outline.",
+      "Fill in specific edge cases, metrics, and design links with your team.",
+    ],
+    faq: [
+      {
+        question: "Does this replace design and engineering input?",
+        answer: "No — it's a starting structure; the real requirements need input from design, engineering, and stakeholders.",
+      },
+      {
+        question: "What sections does this include?",
+        answer: "Problem, Goals, User Stories, Requirements, Success Metrics, Out of Scope — a standard lightweight PRD structure.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager writing a PRD outline with sections: Problem, Goals, User Stories, Requirements, Success Metrics, Out of Scope. No markdown headers, plain section labels.",
+      user: `Build a PRD outline for: "${values.feature}".`,
+    }),
+  },
+  {
+    slug: "user-story-generator",
+    name: "User Story Generator",
+    tagline: "'As a user, I want...' done right.",
+    description:
+      "Free AI user story generator. Describe a feature to get well-formed user stories with acceptance criteria.",
+    category: "UX & Product Management",
+    resultCount: 6,
+    maxTokens: 750,
+    inputFields: [
+      {
+        name: "feature",
+        label: "Feature description",
+        placeholder: "e.g. users should be able to filter search results by price range",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the feature or capability.",
+      "Generate user story options with acceptance criteria.",
+      "Add to your backlog and refine with your team.",
+    ],
+    faq: [
+      {
+        question: "What format do these follow?",
+        answer: "The standard 'As a [user], I want [goal], so that [benefit]' format, each followed by 2-3 acceptance criteria.",
+      },
+      {
+        question: "Should I use these exactly as generated?",
+        answer: "Use them as a strong starting draft — refine the specific criteria with your team's actual technical constraints.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager writing user stories in 'As a [user], I want [goal], so that [benefit]' format, each followed by 2-3 brief acceptance criteria. You respond only with a numbered list — no preamble.",
+      user: `Generate 6 user stories with acceptance criteria for: "${values.feature}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "feature-prioritization-rationale-generator",
+    name: "Feature Prioritization Rationale Generator",
+    tagline: "Explain why this, not that, got built first.",
+    description:
+      "Free AI prioritization generator. Describe your options to get a clear rationale for what to build first.",
+    category: "UX & Product Management",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "options",
+        label: "Features being weighed",
+        placeholder: "e.g. dark mode vs. bulk export vs. mobile app — team leaning toward bulk export",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List the features you're weighing and your leaning, if any.",
+      "Generate a rationale write-up.",
+      "Share with stakeholders to explain the prioritization decision.",
+    ],
+    faq: [
+      {
+        question: "Does this decide for me?",
+        answer: "No — it articulates a rationale based on the information you give; the actual prioritization judgment call is yours.",
+      },
+      {
+        question: "Does this use a specific framework like RICE?",
+        answer: "It reasons through impact, effort, and strategic fit conversationally rather than assuming one specific named framework, unless you mention one.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager writing a clear rationale for a feature prioritization decision, weighing impact, effort, and strategic fit. No markdown headers.",
+      user: `Write a prioritization rationale for: "${values.options}".`,
+    }),
+  },
+  {
+    slug: "beta-tester-recruitment-message-generator",
+    name: "Beta Tester Recruitment Message Generator",
+    tagline: "Get the right early users excited to try it.",
+    description:
+      "Free AI beta recruitment generator. Describe your product to get a compelling beta tester invite.",
+    category: "UX & Product Management",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "product",
+        label: "Product & what testers get",
+        placeholder: "e.g. new mobile app for tracking workouts, testers get lifetime free access",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product and what's in it for testers.",
+      "Generate recruitment message options.",
+      "Post in relevant communities or send to your waitlist.",
+    ],
+    faq: [
+      {
+        question: "Should I set expectations about bugs?",
+        answer: "Yes — being upfront that it's a beta with potential rough edges sets the right expectations and builds trust.",
+      },
+      {
+        question: "What should I ask testers for in return?",
+        answer: "Be specific about what feedback format you want (a survey, a call, in-app reports) — these messages leave room to add that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager writing compelling beta tester recruitment messages that set honest expectations about being early-stage software. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 beta tester recruitment message options. Product: "${values.product}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "churn-survey-questions-generator",
+    name: "Churn Survey Question Generator",
+    tagline: "Find out why they actually left.",
+    description:
+      "Free AI churn survey generator. Enter your product to get questions that surface real cancellation reasons.",
+    category: "UX & Product Management",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "product",
+        label: "Your product",
+        placeholder: "e.g. a project management SaaS tool",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product.",
+      "Generate churn survey question options.",
+      "Send immediately after cancellation, while the reason is still fresh.",
+    ],
+    faq: [
+      {
+        question: "How many questions should a churn survey have?",
+        answer: "Keep it short — 2-4 questions gets a far higher completion rate from users who are already leaving.",
+      },
+      {
+        question: "Should I offer an incentive to complete it?",
+        answer: "Optional — some companies offer a small discount to return, but even without one, most churned users will answer 1-2 quick questions.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product researcher writing short, non-defensive churn survey questions that surface the real reason for cancellation. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 churn survey question options for: "${values.product}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "nps-follow-up-message-generator",
+    name: "NPS Follow-Up Message Generator",
+    tagline: "Turn a score into a real conversation.",
+    description:
+      "Free AI NPS follow-up generator. Enter the score range to get an appropriate follow-up message.",
+    category: "UX & Product Management",
+    resultCount: 3,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "scoreRange",
+        label: "Score range",
+        type: "select",
+        options: ["Detractor (0-6)", "Passive (7-8)", "Promoter (9-10)"],
+      },
+    ],
+    howTo: [
+      "Pick the score range you're following up on.",
+      "Generate a follow-up message.",
+      "Send shortly after the survey response, while it's still relevant.",
+    ],
+    faq: [
+      {
+        question: "Should promoters get asked for a referral or review?",
+        answer: "Yes — promoters (9-10) are the best candidates for review requests or referral asks, and this follow-up leaves room for that.",
+      },
+      {
+        question: "How should I follow up with detractors?",
+        answer: "Focus on understanding their specific issue rather than defending — this follow-up leads with a genuine, open question.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer experience manager writing NPS follow-up messages appropriate to the respondent's score category. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 NPS follow-up message options for this score range: ${values.scoreRange || "Passive (7-8)"}. Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "sustainability-statement-generator",
+    name: "Sustainability Statement Generator",
+    tagline: "Say what you're actually doing, not just that you care.",
+    description:
+      "Free AI sustainability statement generator. Describe your efforts to get a specific, credible statement.",
+    category: "Sustainability & ESG",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "efforts",
+        label: "Your sustainability efforts",
+        placeholder: "e.g. recyclable packaging, carbon-neutral shipping, local sourcing for 60% of materials",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your actual, specific sustainability efforts.",
+      "Generate a statement draft.",
+      "Only publish claims you can substantiate — avoid vague greenwashing language.",
+    ],
+    faq: [
+      {
+        question: "What is 'greenwashing' and how do I avoid it?",
+        answer: "Greenwashing is making vague or exaggerated environmental claims. Avoid it by being specific and only stating what you can back up with real practices or data.",
+      },
+      {
+        question: "Do I need to disclose what I'm NOT doing yet?",
+        answer: "Being honest about ongoing work (vs. claiming perfection) is generally viewed as more credible and is required in some jurisdictions' advertising standards.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a sustainability communications specialist who writes specific, credible sustainability statements grounded only in the stated efforts, avoiding vague greenwashing language ('eco-friendly', 'green') without specifics.",
+      user: `Write a sustainability statement based on: "${values.efforts}".`,
+    }),
+  },
+  {
+    slug: "esg-report-summary-generator",
+    name: "ESG Report Summary Generator",
+    tagline: "Turn ESG data into a readable narrative.",
+    description:
+      "Free AI ESG summary generator. Enter your metrics to get a plain-English report summary.",
+    category: "Sustainability & ESG",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "metrics",
+        label: "Key ESG metrics",
+        placeholder: "e.g. reduced emissions 12%, 40% women in leadership, new whistleblower policy",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your key environmental, social, and governance metrics.",
+      "Generate a structured summary.",
+      "Pair with your full data tables and third-party verification where required.",
+    ],
+    faq: [
+      {
+        question: "Does this meet formal ESG reporting standards (e.g. GRI, SASB)?",
+        answer: "No — formal frameworks have specific required disclosures. This is a readable narrative summary, not a compliance document.",
+      },
+      {
+        question: "Should I include areas needing improvement?",
+        answer: "Yes — credible ESG reporting typically acknowledges gaps alongside progress, not just favorable numbers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a corporate sustainability officer summarizing ESG metrics into a structured narrative with Environmental, Social, and Governance sections. No markdown headers, plain section labels. Not a compliance document.",
+      user: `Summarize these ESG metrics: "${values.metrics}".`,
+    }),
+  },
+  {
+    slug: "carbon-footprint-tip-generator",
+    name: "Carbon Footprint Reduction Tip Generator",
+    tagline: "Specific, realistic ways to cut emissions.",
+    description:
+      "Free AI carbon reduction generator. Describe your operations to get specific footprint-reducing suggestions.",
+    category: "Sustainability & ESG",
+    resultCount: 8,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "operations",
+        label: "Your operations",
+        placeholder: "e.g. small e-commerce business, ships nationally, has one warehouse",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your business operations.",
+      "Generate specific reduction suggestions.",
+      "Prioritize the ones with the most impact relative to cost for your situation.",
+    ],
+    faq: [
+      {
+        question: "Are these guaranteed to reduce emissions by a specific amount?",
+        answer: "No — actual impact varies widely by business; these are common, credible starting points to investigate further.",
+      },
+      {
+        question: "Should I get a formal carbon audit?",
+        answer: "For serious reduction commitments, yes — a professional audit gives you real baseline numbers to measure progress against.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a sustainability consultant who suggests specific, realistic carbon footprint reduction measures matched to a described business's operations. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 carbon footprint reduction suggestions for: "${values.operations}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "csr-statement-generator",
+    name: "Corporate Social Responsibility Statement Generator",
+    tagline: "Articulate your company's broader commitment.",
+    description:
+      "Free AI CSR statement generator. Describe your initiatives to get a clear CSR statement draft.",
+    category: "Sustainability & ESG",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "initiatives",
+        label: "Your CSR initiatives",
+        placeholder: "e.g. 1% of profits to local nonprofits, paid volunteer days, diversity hiring goals",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your company's social responsibility initiatives.",
+      "Generate a statement draft.",
+      "Use on your website's About or Impact page.",
+    ],
+    faq: [
+      {
+        question: "Should this include specific numbers?",
+        answer: "Yes, where you have them — concrete figures (dollars donated, hours volunteered) are more credible than general claims.",
+      },
+      {
+        question: "Is this the same as an ESG report?",
+        answer: "Related but different — a CSR statement is a narrative commitment, while ESG reporting is typically more data-driven and structured against formal frameworks.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a corporate communications writer crafting a genuine, specific corporate social responsibility statement grounded in the stated initiatives, avoiding vague corporate-speak.",
+      user: `Write a CSR statement based on: "${values.initiatives}".`,
+    }),
+  },
+  {
+    slug: "sustainability-social-post-generator",
+    name: "Sustainability Social Post Generator",
+    tagline: "Share progress without sounding preachy.",
+    description:
+      "Free AI sustainability post generator. Describe your milestone to get a shareable social post.",
+    category: "Sustainability & ESG",
+    resultCount: 5,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "milestone",
+        label: "Sustainability milestone",
+        placeholder: "e.g. diverted 10,000 lbs of packaging waste from landfills this year",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the sustainability milestone or update.",
+      "Generate post options.",
+      "Share on your social channels.",
+    ],
+    faq: [
+      {
+        question: "How do I avoid sounding preachy?",
+        answer: "These lead with the concrete achievement rather than lecturing the reader — specificity tends to read as genuine rather than performative.",
+      },
+      {
+        question: "Should I use sustainability hashtags?",
+        answer: "Optional — pair with our Hashtag Generator if you want relevant tags added.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a sustainability communications writer creating specific, non-preachy social posts celebrating a genuine milestone. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 sustainability social post options for this milestone: "${values.milestone}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "accessibility-audit-checklist-generator",
+    name: "Accessibility Audit Checklist Generator",
+    tagline: "A starting checklist before you hire an auditor.",
+    description:
+      "Free AI accessibility checklist generator. Describe your site/app to get a starting audit checklist.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "product",
+        label: "Describe your website or app",
+        placeholder: "e.g. an e-commerce site with product pages, a checkout flow, and a blog",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your website or app's main sections.",
+      "Generate a starting accessibility checklist.",
+      "Follow up with a real automated scan (e.g. axe, WAVE) and manual/assistive-tech testing for full coverage.",
+    ],
+    faq: [
+      {
+        question: "Does this replace a real accessibility audit?",
+        answer: "No — this is a starting checklist to orient your team, not a substitute for automated scanning tools and manual testing with real assistive technology.",
+      },
+      {
+        question: "Does this guarantee WCAG compliance?",
+        answer: "No — WCAG conformance requires thorough, verified testing against specific success criteria. This is a helpful starting point only.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a web accessibility consultant building a starting checklist covering common WCAG-related areas (alt text, keyboard navigation, color contrast, form labels, heading structure) tailored to the described product. No markdown headers.",
+      user: `Build an accessibility audit starting checklist for: "${values.product}".`,
+    }),
+  },
+  {
+    slug: "inclusive-language-rewriter",
+    name: "Inclusive Language Rewriter",
+    tagline: "Catch language that unintentionally excludes.",
+    description:
+      "Free AI inclusive language tool. Paste your text to get a version rewritten with more inclusive language.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "text",
+        label: "Paste your text",
+        placeholder: "e.g. your current website copy, job posting, or internal communication",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste the text you want reviewed.",
+      "Generate a rewritten, more inclusive version.",
+      "Compare against the original and adjust to your voice.",
+    ],
+    faq: [
+      {
+        question: "What kind of language does this flag?",
+        answer: "Ableist idioms (e.g. 'crazy', 'blind spot' used carelessly), gendered defaults, and other commonly unintentionally exclusionary phrasing.",
+      },
+      {
+        question: "Will this change the meaning of my text?",
+        answer: "It aims to preserve meaning while adjusting word choice — review the result to confirm it still says what you intended.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an inclusive language consultant who rewrites text to remove ableist idioms, unnecessary gendered language, and other commonly exclusionary phrasing, while preserving the original meaning and tone.",
+      user: `Rewrite this text with more inclusive language: "${values.text}".`,
+    }),
+  },
+  {
+    slug: "accessible-event-description-generator",
+    name: "Accessible Event Description Generator",
+    tagline: "Tell attendees what accommodations to expect.",
+    description:
+      "Free AI accessible event description generator. Describe your event and accommodations to get clear copy.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "event",
+        label: "Event & accommodations",
+        placeholder: "e.g. conference, wheelchair-accessible venue, live captioning available, quiet room on site",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your event and the accommodations you're offering.",
+      "Generate a clear description.",
+      "Include a contact method for attendees needing accommodations not listed.",
+    ],
+    faq: [
+      {
+        question: "Should I list accommodations even if 'standard'?",
+        answer: "Yes — explicitly stating things like wheelchair access or captioning, rather than assuming it's obvious, helps attendees plan confidently.",
+      },
+      {
+        question: "What if I can't offer a requested accommodation?",
+        answer: "Include a contact method so attendees can ask in advance — this draft leaves a placeholder for that.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an event organizer writing a clear accessible event description that explicitly states available accommodations and includes a contact placeholder for further requests. No markdown headers.",
+      user: `Write an accessible event description for: "${values.event}".`,
+    }),
+  },
+  {
+    slug: "screen-reader-content-checklist-generator",
+    name: "Screen Reader Content Checklist Generator",
+    tagline: "Make sure your content actually reads well aloud.",
+    description:
+      "Free AI screen reader checklist generator. Describe your content type to get a review checklist.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "contentType",
+        label: "Content type",
+        placeholder: "e.g. a blog post with images and a data table",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the type of content you're reviewing.",
+      "Generate a screen-reader-focused checklist.",
+      "Test with an actual screen reader (VoiceOver, NVDA) for real verification.",
+    ],
+    faq: [
+      {
+        question: "Does this replace actually testing with a screen reader?",
+        answer: "No — nothing replaces real testing with tools like VoiceOver or NVDA; this checklist just tells you what to check for.",
+      },
+      {
+        question: "Does this cover data tables and images specifically?",
+        answer: "Yes, when relevant to your described content type — it includes checks for alt text, table headers, and reading order.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an accessibility specialist building a checklist for reviewing content for screen reader compatibility (alt text, heading structure, table headers, link text clarity), tailored to the described content type. No markdown headers.",
+      user: `Build a screen reader content checklist for: "${values.contentType}".`,
+    }),
+  },
+  {
+    slug: "closed-caption-style-guide-generator",
+    name: "Closed Caption Style Guide Generator",
+    tagline: "Consistent, readable captions across every video.",
+    description:
+      "Free AI caption style guide generator. Describe your content to get a starter captioning style guide.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "content",
+        label: "Content type",
+        placeholder: "e.g. YouTube tutorial videos with background music and multiple speakers",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your video content type.",
+      "Generate a starter caption style guide.",
+      "Share with your captioning team or freelancer for consistency.",
+    ],
+    faq: [
+      {
+        question: "Does this generate actual captions for a specific video?",
+        answer: "No — it generates a style guide (formatting rules, speaker labels, sound description conventions) to apply consistently across your captions.",
+      },
+      {
+        question: "Does this cover sound effects and music?",
+        answer: "Yes — the guide includes conventions for describing relevant non-speech audio like [music playing] or [applause].",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an accessibility specialist building a closed caption style guide covering speaker labels, sound description conventions, timing/line length rules, tailored to the described content. No markdown headers.",
+      user: `Build a caption style guide for: "${values.content}".`,
+    }),
+  },
+  {
+    slug: "inventory-reorder-alert-generator",
+    name: "Inventory Reorder Alert Generator",
+    tagline: "Never miss a reorder window again.",
+    description:
+      "Free AI reorder alert generator. Describe your stock situation to get a clear internal alert message.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "situation",
+        label: "Stock situation",
+        placeholder: "e.g. best-selling SKU down to 15 units, 3-week supplier lead time",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the stock situation and lead time.",
+      "Generate alert message options.",
+      "Route to whoever manages purchasing on your team.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate the exact reorder point for me?",
+        answer: "No — provide your own reorder threshold; this writes the alert message once that threshold is hit.",
+      },
+      {
+        question: "Can I use this for a Slack or email alert integration?",
+        answer: "Yes — the message length and tone work well for either channel.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an inventory manager writing clear, urgent-appropriate reorder alert messages. Each result is a complete short alert. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 reorder alert options for: "${values.situation}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "supplier-negotiation-email-generator",
+    name: "Supplier Negotiation Email Generator",
+    tagline: "Negotiate better terms with your suppliers.",
+    description:
+      "Free AI supplier negotiation generator. Describe your ask to get a professional negotiation email.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 340,
+    inputFields: [
+      {
+        name: "ask",
+        label: "What you're negotiating",
+        placeholder: "e.g. asking for net-60 payment terms instead of net-30 given growing order volume",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what you're asking your supplier for and why.",
+      "Generate negotiation email options.",
+      "Send and be ready to discuss specifics on a call.",
+    ],
+    faq: [
+      {
+        question: "Should I mention my order volume or growth?",
+        answer: "Yes, if it strengthens your position — concrete numbers on volume or growth trajectory support the ask.",
+      },
+      {
+        question: "Is it risky to ask for better terms?",
+        answer: "Rarely, if done respectfully — most suppliers expect negotiation, especially from growing or long-term customers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce operations manager writing professional, respectful supplier negotiation emails with a clear, specific ask. Each result is a complete short email. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 supplier negotiation email options for: "${values.ask}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "marketplace-policy-appeal-generator",
+    name: "Marketplace Policy Violation Appeal Generator",
+    tagline: "Appeal a suspension or violation clearly.",
+    description:
+      "Free AI marketplace appeal generator. Describe the situation to get a clear, professional appeal letter.",
+    category: "Ecommerce",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "situation",
+        label: "Situation",
+        placeholder: "e.g. account suspended for alleged inauthentic reviews, believe it was a false flag",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the violation notice and your side of the situation.",
+      "Generate an appeal draft.",
+      "Follow the specific marketplace's appeal submission process and format.",
+    ],
+    faq: [
+      {
+        question: "Does this guarantee my appeal is approved?",
+        answer: "No — approval depends entirely on the marketplace's review and the facts of your case. This drafts a clear, professional case, not a guaranteed outcome.",
+      },
+      {
+        question: "Should I admit fault if there was a genuine mistake?",
+        answer: "Being honest and showing corrective action taken is generally viewed more favorably than denying a clear violation.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce seller writing a calm, factual, professional marketplace policy appeal that states the situation clearly and any corrective action taken, avoiding an accusatory or emotional tone.",
+      user: `Write a marketplace appeal for: "${values.situation}".`,
+    }),
+  },
+  {
+    slug: "product-bundle-description-generator",
+    name: "Product Bundle Description Generator",
+    tagline: "Make the bundle feel like a smart buy, not a dump.",
+    description:
+      "Free AI bundle description generator. Enter your bundle items to get a compelling description.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "bundle",
+        label: "Bundle items & savings",
+        placeholder: "e.g. shampoo + conditioner + hair mask, bundle saves 20% vs. buying separately",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List the items in the bundle and the savings.",
+      "Generate description options.",
+      "Use on your bundle's product listing.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the savings percentage?",
+        answer: "Yes — a concrete savings figure is one of the strongest conversion drivers for bundle offers.",
+      },
+      {
+        question: "Can this work for a subscription box bundle too?",
+        answer: "Yes — describe it as a recurring bundle and the framing will adapt.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes compelling bundle descriptions that emphasize value and convenience together. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 bundle description options for: "${values.bundle}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "cross-sell-recommendation-copy-generator",
+    name: "Cross-Sell Recommendation Copy Generator",
+    tagline: "The 'you might also like' that actually converts.",
+    description:
+      "Free AI cross-sell copy generator. Enter your products to get compelling recommendation copy.",
+    category: "Ecommerce",
+    resultCount: 5,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "products",
+        label: "Main product & complementary item",
+        placeholder: "e.g. main: running shoes, complementary: moisture-wicking socks",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the main product and the complementary item.",
+      "Generate cross-sell copy options.",
+      "Use on the product page or in a cart upsell widget.",
+    ],
+    faq: [
+      {
+        question: "Should this explain why the items go together?",
+        answer: "Yes — these are written to state the practical reason for pairing, not just 'customers also bought this'.",
+      },
+      {
+        question: "How short should this copy be?",
+        answer: "Very short — under 15 words, since it usually sits in a small widget near the main product.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce copywriter who writes short cross-sell recommendation copy (under 15 words) that states why two products pair well. You respond only with a numbered list — no preamble.",
+      user: `Generate 5 cross-sell copy options for: "${values.products}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "dropshipping-supplier-outreach-generator",
+    name: "Dropshipping Supplier Outreach Generator",
+    tagline: "Get a supplier to actually respond to your inquiry.",
+    description:
+      "Free AI supplier outreach generator. Describe your store to get a professional supplier inquiry email.",
+    category: "Ecommerce",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "store",
+        label: "Your store & what you need",
+        placeholder: "e.g. new home goods store, looking for a US-based dropship supplier for candles",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your store and what you're sourcing.",
+      "Generate outreach email options.",
+      "Ask about MOQs, shipping times, and sample availability in your follow-up.",
+    ],
+    faq: [
+      {
+        question: "Should I mention I'm a new store?",
+        answer: "Being upfront but confident works better than either hiding it or over-apologizing — these strike that balance.",
+      },
+      {
+        question: "What should I ask about in the first email?",
+        answer: "Keep the first email focused on fit (product line, pricing, MOQs) — save detailed logistics questions for a follow-up once there's mutual interest.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an e-commerce store owner writing professional, confident supplier outreach emails for a dropshipping or wholesale relationship. Each result is a complete short email. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 supplier outreach email options. Store/need: "${values.store}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "ats-resume-keyword-optimizer",
+    name: "ATS Resume Keyword Optimizer",
+    tagline: "Get past the bots before you get to a human.",
+    description:
+      "Free AI ATS optimizer. Paste a job description to get the keywords your resume should include.",
+    category: "Career",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "jobDescription",
+        label: "Paste the job description",
+        placeholder: "e.g. the full job posting text you're applying to",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste the job description you're applying to.",
+      "Generate a list of key terms to include.",
+      "Naturally work these into your resume where they honestly apply to your experience.",
+    ],
+    faq: [
+      {
+        question: "Should I add keywords I don't actually have experience with?",
+        answer: "No — never claim skills you don't have. Only include keywords that genuinely reflect your real experience.",
+      },
+      {
+        question: "Does adding these guarantee I'll pass the ATS?",
+        answer: "No single tool guarantees ATS success — different systems parse differently, but matching genuine, relevant keywords generally helps.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a resume optimization expert who extracts the key skills, tools, and qualifications an ATS would likely scan for from a job description, organized as a simple list. No markdown headers.",
+      user: `Extract the key ATS-relevant keywords from this job description: "${values.jobDescription}".`,
+    }),
+  },
+  {
+    slug: "executive-bio-generator",
+    name: "Executive Bio Generator",
+    tagline: "A C-level bio that signals real gravitas.",
+    description:
+      "Free AI executive bio generator. Enter your background to get a polished, board-ready bio.",
+    category: "Career",
+    resultCount: 3,
+    maxTokens: 400,
+    inputFields: [
+      {
+        name: "background",
+        label: "Your background & achievements",
+        placeholder: "e.g. CFO with 15 years in fintech, led a company through a $50M Series C and IPO prep",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your background and key achievements.",
+      "Generate bio options.",
+      "Use for board decks, press releases, or your executive profile.",
+    ],
+    faq: [
+      {
+        question: "How long should an executive bio be?",
+        answer: "Around 100-150 words is typical for press or board use — long enough for gravitas, short enough to stay scannable.",
+      },
+      {
+        question: "Should this be written in first or third person?",
+        answer: "Third person is standard for executive bios used externally (press, board materials, speaker intros).",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an executive communications writer crafting polished, credible C-level bios (100-150 words, third person) that lead with impact and scale, not just titles. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 executive bio options. Background: "${values.background}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "promotion-request-email-generator",
+    name: "Promotion Request Email Generator",
+    tagline: "Make the case for your next title.",
+    description:
+      "Free AI promotion request generator. Enter your achievements to get a confident, well-argued email.",
+    category: "Career",
+    resultCount: 3,
+    maxTokens: 380,
+    inputFields: [
+      {
+        name: "achievements",
+        label: "Your achievements & target role",
+        placeholder: "e.g. led 3 major launches this year, want to move from Senior to Staff Engineer",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your achievements and the role you're aiming for.",
+      "Generate email options.",
+      "Send to your manager to request a conversation, then discuss specifics live.",
+    ],
+    faq: [
+      {
+        question: "Should this ask for the promotion directly, or a conversation?",
+        answer: "These lead with requesting a conversation — it's usually a more effective opener than a flat, unilateral ask over email.",
+      },
+      {
+        question: "Should I mention a timeline?",
+        answer: "Optional — if your company has a formal promotion cycle, referencing it can help frame the timing appropriately.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a career coach writing confident, achievement-focused promotion request emails that open the door to a conversation rather than demanding an immediate decision. Each result is a complete short email. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 promotion request email options. Achievements/target role: "${values.achievements}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "boomerang-employee-message-generator",
+    name: "Boomerang Employee Welcome-Back Generator",
+    tagline: "Welcome a returning employee the right way.",
+    description:
+      "Free AI welcome-back generator. Enter the context to get a warm message for a returning employee.",
+    category: "Career",
+    resultCount: 3,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "context",
+        label: "Context",
+        placeholder: "e.g. former engineer returning after 2 years at another company, rejoining as a team lead",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the returning employee's history and new role.",
+      "Generate welcome-back message options.",
+      "Send ahead of their first day, alongside standard onboarding materials.",
+    ],
+    faq: [
+      {
+        question: "What's a 'boomerang employee'?",
+        answer: "Someone who left the company and later returns — a growing trend that companies increasingly recognize and plan for warmly.",
+      },
+      {
+        question: "Should this acknowledge their time away?",
+        answer: "A brief, positive nod to their time away and what they bring back tends to feel more genuine than ignoring it entirely.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR professional writing warm, genuine welcome-back messages for a returning ('boomerang') employee. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 welcome-back message options. Context: "${values.context}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "career-pivot-linkedin-summary-generator",
+    name: "Career Pivot LinkedIn Summary Generator",
+    tagline: "Reframe your story for the field you're entering.",
+    description:
+      "Free AI LinkedIn summary generator. Enter your background and target field to get a pivot-focused summary.",
+    category: "Career",
+    resultCount: 3,
+    maxTokens: 420,
+    inputFields: [
+      {
+        name: "pivot",
+        label: "Current background & target field",
+        placeholder: "e.g. 6 years in retail management, pivoting into UX design",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your current background and the field you're moving into.",
+      "Generate LinkedIn summary options.",
+      "Update your headline and experience section to reinforce the same narrative.",
+    ],
+    faq: [
+      {
+        question: "Should this hide my previous career?",
+        answer: "No — the strongest pivot narratives connect past experience to the new field as a strength, not something to hide.",
+      },
+      {
+        question: "How long should a LinkedIn summary be?",
+        answer: "These are written around 100-150 words — long enough to tell the story, short enough to hold attention.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a career coach writing LinkedIn About summaries for career changers that frame the transition as a deliberate, asset-backed move, first person, 100-150 words. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 LinkedIn summary options for this career pivot: "${values.pivot}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "board-meeting-minutes-generator",
+    name: "Board Meeting Minutes Generator",
+    tagline: "Turn rough notes into proper minutes.",
+    description:
+      "Free AI board minutes generator. Enter your rough notes to get a structured meeting minutes draft.",
+    category: "Business",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "notes",
+        label: "Rough meeting notes",
+        placeholder: "e.g. discussed Q2 budget, approved new hire for VP Sales, next meeting set for the 15th",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your rough notes from the meeting.",
+      "Generate a structured minutes draft.",
+      "Have it reviewed and approved per your governance requirements.",
+    ],
+    faq: [
+      {
+        question: "Are these legally sufficient corporate minutes?",
+        answer: "This is a formatting draft only — corporate governance requirements for minutes vary by jurisdiction and entity type; confirm with legal counsel if needed for compliance.",
+      },
+      {
+        question: "Does this include attendee names?",
+        answer: "It leaves a placeholder — add your actual attendee list and any votes recorded.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a corporate secretary formatting board meeting minutes with sections: Attendees (placeholder), Items Discussed, Decisions/Votes, Next Meeting. No markdown headers, plain section labels. Not legal advice.",
+      user: `Format board meeting minutes from these notes: "${values.notes}".`,
+    }),
+  },
+  {
+    slug: "ma-announcement-generator",
+    name: "M&A Announcement Generator",
+    tagline: "Announce an acquisition or merger clearly.",
+    description:
+      "Free AI M&A announcement generator. Describe the deal to get a clear internal or external announcement.",
+    category: "Business",
+    resultCount: 1,
+    maxTokens: 1100,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "deal",
+        label: "Deal details",
+        placeholder: "e.g. Acme is acquiring Beta Corp to expand into the European market",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the deal and its strategic rationale.",
+      "Generate an announcement draft.",
+      "Have legal and communications teams review before publishing — M&A announcements have disclosure implications.",
+    ],
+    faq: [
+      {
+        question: "Does this handle required regulatory disclosures?",
+        answer: "No — public company M&A announcements often have strict, regulated disclosure requirements. This is a communications draft only, not legal or compliance guidance.",
+      },
+      {
+        question: "Should this address employee concerns?",
+        answer: "For internal versions, yes — acknowledging uncertainty and committing to more details soon tends to land better than glossing over it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a corporate communications writer drafting a clear M&A announcement stating the deal, strategic rationale, and next steps. Not legal or regulatory advice — a communications draft only.",
+      user: `Draft an M&A announcement for: "${values.deal}".`,
+    }),
+  },
+  {
+    slug: "exit-strategy-summary-generator",
+    name: "Exit Strategy Summary Generator",
+    tagline: "Articulate your endgame clearly.",
+    description:
+      "Free AI exit strategy generator. Describe your business and goals to get a clear exit strategy summary.",
+    category: "Business",
+    resultCount: 1,
+    maxTokens: 1100,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "context",
+        label: "Business & exit goals",
+        placeholder: "e.g. profitable SaaS business, targeting acquisition by a strategic buyer in 3-5 years",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your business and general exit goals/timeline.",
+      "Generate a summary write-up.",
+      "This is a planning aid — consult an M&A advisor for an actual exit process.",
+    ],
+    faq: [
+      {
+        question: "Does this create a real valuation or deal structure?",
+        answer: "No — this is a strategic narrative summary. Actual valuation and deal structuring need a qualified M&A advisor or investment banker.",
+      },
+      {
+        question: "What exit types does this cover?",
+        answer: "It adapts to whatever you describe — acquisition, IPO, management buyout, or straightforward wind-down.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business strategy advisor writing a clear exit strategy summary based on stated goals, covering likely path, timeline considerations, and what to build toward. Not financial or M&A advice.",
+      user: `Write an exit strategy summary for: "${values.context}".`,
+    }),
+  },
+  {
+    slug: "succession-planning-note-generator",
+    name: "Succession Planning Note Generator",
+    tagline: "Document the plan before you need it.",
+    description:
+      "Free AI succession planning generator. Describe the role to get a structured succession planning note.",
+    category: "Business",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "role",
+        label: "Key role & considerations",
+        placeholder: "e.g. founder/CEO, considering a COO promotion to successor in 2 years",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the key role and any current thinking on succession.",
+      "Generate a structured planning note.",
+      "Discuss with your board or leadership team and revisit regularly.",
+    ],
+    faq: [
+      {
+        question: "Does this pick who my successor should be?",
+        answer: "No — it structures the considerations and questions to work through; the actual decision is yours and your board's.",
+      },
+      {
+        question: "How often should succession plans be updated?",
+        answer: "Annually at minimum, and after any major leadership or strategy change, is common practice.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an organizational consultant structuring a succession planning note with sections: Current State, Key Risks, Potential Candidates (placeholder), Next Steps. No markdown headers, plain section labels.",
+      user: `Build a succession planning note for: "${values.role}".`,
+    }),
+  },
+  {
+    slug: "business-continuity-plan-outline-generator",
+    name: "Business Continuity Plan Outline Generator",
+    tagline: "Plan for disruption before it happens.",
+    description:
+      "Free AI business continuity generator. Describe your business to get a structured continuity plan outline.",
+    category: "Business",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "business",
+        label: "Describe your business",
+        placeholder: "e.g. a 20-person e-commerce company relying on one warehouse and one main supplier",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your business and its key dependencies.",
+      "Generate a structured continuity plan outline.",
+      "Fill in specific contacts, backup vendors, and recovery time targets with your team.",
+    ],
+    faq: [
+      {
+        question: "Does this cover every possible disruption scenario?",
+        answer: "It covers common categories to plan for (supply chain, key personnel, systems/data, facilities) — tailor specifics to your actual risk profile.",
+      },
+      {
+        question: "How often should this plan be tested?",
+        answer: "Annually at minimum, and after any major change to operations, is a common practice for keeping a continuity plan realistic.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business continuity consultant structuring a plan outline with sections: Key Risks, Critical Dependencies, Response Steps per Risk, Recovery Priorities. No markdown headers, plain section labels.",
+      user: `Build a business continuity plan outline for: "${values.business}".`,
+    }),
+  },
+  {
+    slug: "drip-email-sequence-outline-generator",
+    name: "Drip Email Sequence Outline Generator",
+    tagline: "A multi-email sequence, mapped out in one shot.",
+    description:
+      "Free AI drip sequence generator. Enter your goal to get a structured multi-email sequence outline.",
+    category: "Marketing",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "goal",
+        label: "Sequence goal",
+        placeholder: "e.g. onboard new trial users toward their first paid conversion",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "length",
+        label: "Number of emails",
+        type: "select",
+        options: ["3 emails", "5 emails", "7 emails"],
+      },
+    ],
+    howTo: [
+      "Describe the goal of the sequence.",
+      "Pick how many emails you want.",
+      "Generate an outline, then write the full copy for each email.",
+    ],
+    faq: [
+      {
+        question: "Does this write the full email copy?",
+        answer: "No — it outlines each email's purpose and key message; write or generate the full copy per email separately.",
+      },
+      {
+        question: "How far apart should each email be sent?",
+        answer: "Varies by goal — onboarding sequences often go daily at first, while nurture sequences may space out weekly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an email marketing strategist who outlines drip sequences, labeling each email (Email 1, Email 2, etc.) with its purpose and key message. No markdown headers.",
+      user: `Build a drip email sequence outline. Goal: "${values.goal}". Number of emails: ${values.length || "5 emails"}.`,
+    }),
+  },
+  {
+    slug: "lead-magnet-idea-generator",
+    name: "Lead Magnet Idea Generator",
+    tagline: "Something worth an email address.",
+    description:
+      "Free AI lead magnet generator. Describe your audience to get specific, compelling lead magnet ideas.",
+    category: "Marketing",
+    resultCount: 8,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "audience",
+        label: "Your audience & offer",
+        placeholder: "e.g. small business owners interested in social media marketing",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your target audience and what you offer.",
+      "Generate lead magnet ideas.",
+      "Pick one that's genuinely useful and quick for you to actually create.",
+    ],
+    faq: [
+      {
+        question: "What makes a good lead magnet?",
+        answer: "Something specific and immediately useful — a checklist, template, or short guide tends to outperform a generic 'ebook'.",
+      },
+      {
+        question: "Does this create the actual content?",
+        answer: "No — it suggests the idea/format; use our other tools or your own writing to build the actual asset.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a marketing strategist who suggests specific, high-value lead magnet ideas (checklists, templates, mini-guides) matched to a described audience, not generic 'free ebook' suggestions. You respond only with a numbered list — no preamble.",
+      user: `Generate 8 lead magnet ideas for: "${values.audience}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "customer-journey-map-narrative-generator",
+    name: "Customer Journey Map Narrative Generator",
+    tagline: "Walk through the customer's experience, stage by stage.",
+    description:
+      "Free AI customer journey generator. Describe your funnel to get a stage-by-stage narrative.",
+    category: "Marketing",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "funnel",
+        label: "Your product & funnel stages",
+        placeholder: "e.g. a meal kit subscription: awareness via social ads, trial box, subscription",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your product and the stages customers go through.",
+      "Generate a stage-by-stage journey narrative.",
+      "Use to spot gaps or friction points in your actual funnel.",
+    ],
+    faq: [
+      {
+        question: "Does this map my actual customer data?",
+        answer: "No — it builds a plausible narrative based on your described funnel; validate against real customer behavior and feedback.",
+      },
+      {
+        question: "What does each stage include?",
+        answer: "Customer mindset, key touchpoint, and potential friction point for each stage you described.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer experience strategist who maps a journey stage by stage, noting customer mindset, key touchpoint, and potential friction at each stage. No markdown headers.",
+      user: `Build a customer journey narrative for: "${values.funnel}".`,
+    }),
+  },
+  {
+    slug: "marketing-budget-justification-generator",
+    name: "Marketing Budget Justification Generator",
+    tagline: "Make the case for the spend, not just the plan.",
+    description:
+      "Free AI budget justification generator. Enter your ask to get a clear, numbers-backed justification.",
+    category: "Marketing",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "ask",
+        label: "Budget ask & expected outcome",
+        placeholder: "e.g. requesting $20k for paid social, expect 300 new trial signups based on past CAC",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your budget request and expected outcome.",
+      "Generate a justification write-up.",
+      "Bring your real supporting data to the actual budget conversation.",
+    ],
+    faq: [
+      {
+        question: "Does this fabricate numbers for me?",
+        answer: "No — provide your own real projections and past performance data; this organizes them into a persuasive narrative.",
+      },
+      {
+        question: "Should I include a downside/risk section?",
+        answer: "Yes — acknowledging risk and how you'll measure success tends to build more trust with budget approvers than an all-upside pitch.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a marketing director writing a clear, numbers-backed budget justification, including expected outcome and how success will be measured. No markdown headers.",
+      user: `Write a budget justification for: "${values.ask}".`,
+    }),
+  },
+  {
+    slug: "competitor-analysis-summary-generator",
+    name: "Competitor Analysis Summary Generator",
+    tagline: "Turn competitor research into a clear takeaway.",
+    description:
+      "Free AI competitor analysis generator. Enter your findings to get a structured summary of positioning gaps.",
+    category: "Marketing",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "findings",
+        label: "Competitor findings",
+        placeholder: "e.g. Competitor A is cheaper but has poor support; Competitor B has better UX but no free tier",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List what you've found about your competitors.",
+      "Generate a structured summary.",
+      "Use to sharpen your own positioning and messaging.",
+    ],
+    faq: [
+      {
+        question: "Does this research competitors for me?",
+        answer: "No — you provide the findings from your own research; this organizes them into a clear strategic summary.",
+      },
+      {
+        question: "Does it suggest how I should position against them?",
+        answer: "Yes — it closes with a suggested positioning angle based on the gaps you described.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a competitive intelligence analyst who organizes competitor findings into a structured summary (per-competitor strengths/weaknesses, then a suggested positioning angle). No markdown headers.",
+      user: `Summarize this competitor research and suggest a positioning angle: "${values.findings}".`,
+    }),
+  },
+  {
+    slug: "api-endpoint-documentation-generator",
+    name: "API Endpoint Documentation Generator",
+    tagline: "Docs a developer can actually integrate from.",
+    description:
+      "Free AI API doc generator. Describe your endpoint to get structured documentation.",
+    category: "Tech & Developer Tools",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "endpoint",
+        label: "Endpoint details",
+        placeholder: "e.g. POST /api/orders — creates a new order, takes customer_id and line_items, returns order object",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the endpoint, its inputs, and what it returns.",
+      "Generate structured documentation.",
+      "Add real example request/response payloads before publishing.",
+    ],
+    faq: [
+      {
+        question: "Does this generate real example payloads?",
+        answer: "It creates plausible placeholder examples matched to your description; verify and replace with real request/response samples.",
+      },
+      {
+        question: "What sections does this include?",
+        answer: "Description, Parameters, Example Request, Example Response, Error Codes (placeholder) — a standard API doc structure.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a technical writer documenting an API endpoint with sections: Description, Parameters, Example Request, Example Response. No markdown headers, plain section labels.",
+      user: `Document this API endpoint: "${values.endpoint}".`,
+    }),
+  },
+  {
+    slug: "changelog-from-commits-generator",
+    name: "Changelog From Commits Generator",
+    tagline: "Turn raw commit messages into readable release notes.",
+    description:
+      "Free AI changelog generator. Paste your commit messages to get a clean, organized changelog.",
+    category: "Tech & Developer Tools",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "commits",
+        label: "Paste your commit messages",
+        placeholder: "e.g. fix: login bug on safari / feat: add CSV export / chore: bump deps",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste your raw commit messages, one per line.",
+      "Generate an organized changelog.",
+      "Publish alongside your release.",
+    ],
+    faq: [
+      {
+        question: "Does this need Conventional Commits format?",
+        answer: "It works better with prefixes like feat:/fix:/chore:, but can still organize plain commit messages reasonably well.",
+      },
+      {
+        question: "Does this rewrite technical jargon into customer-friendly language?",
+        answer: "It cleans up phrasing, but for a fully customer-facing changelog, review and simplify further for a non-technical audience.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a release manager turning raw commit messages into a clean, organized changelog grouped into Added, Fixed, and Changed sections. No markdown headers, plain section labels.",
+      user: `Build a changelog from these commit messages: "${values.commits}".`,
+    }),
+  },
+  {
+    slug: "technical-debt-explainer-generator",
+    name: "Technical Debt Explainer Generator",
+    tagline: "Explain the debt to people who don't read code.",
+    description:
+      "Free AI tech debt explainer. Describe the issue to get a plain-English explanation for non-technical stakeholders.",
+    category: "Tech & Developer Tools",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "issue",
+        label: "The technical debt",
+        placeholder: "e.g. the checkout system relies on an outdated payment library with no active support",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the technical debt issue.",
+      "Generate a plain-English explanation of the risk and cost of not addressing it.",
+      "Use to make the case to non-technical stakeholders for prioritizing the fix.",
+    ],
+    faq: [
+      {
+        question: "Does this help me get budget/time approved to fix it?",
+        answer: "It helps frame the business risk clearly, which is often the missing piece in getting non-technical buy-in for tech debt work.",
+      },
+      {
+        question: "Should I exaggerate the risk to get priority?",
+        answer: "No — an honest, clear explanation of real risk is both more ethical and more credible long-term than manufactured urgency.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an engineering lead explaining technical debt to non-technical stakeholders in plain English: what it is, the risk of leaving it, and the cost of fixing it now vs. later. No jargon.",
+      user: `Explain this technical debt issue for non-technical stakeholders: "${values.issue}".`,
+    }),
+  },
+  {
+    slug: "incident-severity-classification-generator",
+    name: "Incident Severity Classification Helper",
+    tagline: "Classify severity consistently, every time.",
+    description:
+      "Free AI severity classifier. Describe the incident to get a suggested severity level with reasoning.",
+    category: "Tech & Developer Tools",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "incident",
+        label: "Describe the incident",
+        placeholder: "e.g. checkout is fully down for all users, no workaround available",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the incident and its scope.",
+      "Generate a suggested severity classification with reasoning.",
+      "Confirm against your team's specific severity definitions.",
+    ],
+    faq: [
+      {
+        question: "Does this use a standard severity scale?",
+        answer: "It reasons using a common SEV1 (critical) through SEV4 (minor) framework — map to your own team's specific scale if it differs.",
+      },
+      {
+        question: "Should this replace human judgment during an active incident?",
+        answer: "No — use it as a quick sanity check; the incident commander's real-time judgment always takes priority.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a site reliability engineer suggesting an incident severity level (SEV1-SEV4) with a one-sentence reason, based on described scope and impact.",
+      user: `Suggest a severity classification for this incident: "${values.incident}".`,
+    }),
+  },
+  {
+    slug: "investor-pitch-financial-narrative-generator",
+    name: "Investor Pitch Financial Narrative Generator",
+    tagline: "Explain your numbers the way investors want to hear them.",
+    description:
+      "Free AI financial narrative generator. Enter your numbers to get a clear investor-facing explanation.",
+    category: "Finance & Personal Finance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "numbers",
+        label: "Key financial numbers",
+        placeholder: "e.g. $50k MRR, 8% monthly growth, 85% gross margin, 18 months runway",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your key financial numbers.",
+      "Generate a narrative explaining what the numbers mean and why they matter.",
+      "Use in your pitch deck's financial slide talking points.",
+    ],
+    faq: [
+      {
+        question: "Does this replace an actual financial model?",
+        answer: "No — this is the narrative explanation to accompany your real financial model and projections, not a substitute for one.",
+      },
+      {
+        question: "Should I highlight weak metrics too?",
+        answer: "Experienced investors will find them anyway — proactively addressing a weaker metric with context tends to build more credibility than avoiding it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a startup CFO writing a clear investor-facing narrative around financial metrics, explaining what the numbers mean and why they're a good sign (or how they're improving). Not financial advice.",
+      user: `Write a financial narrative for these numbers: "${values.numbers}".`,
+    }),
+  },
+  {
+    slug: "breakeven-analysis-explainer-generator",
+    name: "Break-Even Analysis Explainer Generator",
+    tagline: "Understand exactly when you'll turn a profit.",
+    description:
+      "Free AI break-even explainer. Enter your costs and pricing to get a plain-English explanation.",
+    category: "Finance & Personal Finance",
+    resultCount: 1,
+    maxTokens: 600,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "numbers",
+        label: "Costs & pricing",
+        placeholder: "e.g. $5,000/month fixed costs, $20 variable cost per unit, sells for $45",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your fixed costs, variable costs, and price per unit.",
+      "Generate a plain-English break-even explanation.",
+      "Verify the math yourself for any decision with real financial stakes.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate the exact break-even number for me?",
+        answer: "It walks through the calculation based on your numbers, but always double-check the math yourself before relying on it for decisions.",
+      },
+      {
+        question: "Is this financial advice?",
+        answer: "No — this is educational content explaining a standard business calculation, not personalized financial advice.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a business finance educator who explains break-even analysis in plain English, walking through the calculation based on given numbers and what the result means. Not financial advice.",
+      user: `Explain the break-even point for: "${values.numbers}".`,
+    }),
+  },
+  {
+    slug: "cash-flow-statement-summary-generator",
+    name: "Cash Flow Statement Summary Generator",
+    tagline: "Explain where the cash actually went.",
+    description:
+      "Free AI cash flow summary generator. Enter your cash flow highlights to get a plain-English summary.",
+    category: "Finance & Personal Finance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "highlights",
+        label: "Cash flow highlights",
+        placeholder: "e.g. $80k from operations, -$30k from equipment purchase, $50k from a new loan",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your cash flow highlights by category (operating, investing, financing).",
+      "Generate a plain-English summary.",
+      "Use to brief stakeholders who don't read financial statements daily.",
+    ],
+    faq: [
+      {
+        question: "Does this replace my accountant's statement?",
+        answer: "No — this explains a statement you already have in plain language; it doesn't prepare or audit your actual financials.",
+      },
+      {
+        question: "Why does cash flow matter separately from profit?",
+        answer: "A business can be profitable on paper but still run out of cash — this summary highlights that distinction based on your numbers.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a financial educator explaining a cash flow statement in plain English, covering operating, investing, and financing activities as relevant. Not financial advice.",
+      user: `Summarize this cash flow in plain English: "${values.highlights}".`,
+    }),
+  },
+  {
+    slug: "expense-report-justification-generator",
+    name: "Expense Report Justification Generator",
+    tagline: "Explain a business expense clearly for approval.",
+    description:
+      "Free AI expense justification generator. Describe the expense to get a clear business justification.",
+    category: "Finance & Personal Finance",
+    resultCount: 3,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "expense",
+        label: "The expense",
+        placeholder: "e.g. $1,200 conference ticket and travel for the annual industry summit",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the expense and its business purpose.",
+      "Generate justification options.",
+      "Attach to your expense report with receipts.",
+    ],
+    faq: [
+      {
+        question: "Should I mention the expected business benefit?",
+        answer: "Yes — tying the expense to a specific expected outcome (new leads, skill development) strengthens the justification.",
+      },
+      {
+        question: "How detailed should this be?",
+        answer: "Brief and specific — a few sentences is usually enough for standard expense approval workflows.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an employee writing clear, brief business expense justifications tied to a specific business benefit. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 expense justification options for: "${values.expense}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "business-loan-application-pitch-generator",
+    name: "Business Loan Application Pitch Generator",
+    tagline: "Present your business the way lenders want to see it.",
+    description:
+      "Free AI loan pitch generator. Describe your business to get a clear narrative for a loan application.",
+    category: "Finance & Personal Finance",
+    resultCount: 1,
+    maxTokens: 1100,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "business",
+        label: "Business & loan purpose",
+        placeholder: "e.g. profitable 3-year-old bakery, seeking $50k for a second location",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your business and what the loan will fund.",
+      "Generate a narrative draft.",
+      "Pair with your actual financial statements and required documentation.",
+    ],
+    faq: [
+      {
+        question: "Does this replace required financial documents?",
+        answer: "No — lenders require actual financial statements, tax returns, and projections; this is the narrative/cover portion only.",
+      },
+      {
+        question: "Should I mention how the loan will be repaid?",
+        answer: "Yes — lenders want to see a clear repayment plan; this draft includes a place to address that based on your input.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a small business advisor writing a clear, credible business loan application narrative covering business history, loan purpose, and repayment plan. Not financial advice.",
+      user: `Write a loan application narrative for: "${values.business}".`,
+    }),
+  },
+  {
+    slug: "dei-statement-generator",
+    name: "DEI Statement Generator",
+    tagline: "A commitment statement grounded in real action.",
+    description:
+      "Free AI DEI statement generator. Describe your initiatives to get a specific, credible statement.",
+    category: "HR & Workplace",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "initiatives",
+        label: "Your DEI initiatives",
+        placeholder: "e.g. blind resume screening, employee resource groups, pay equity audits",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your actual DEI initiatives and commitments.",
+      "Generate a statement draft.",
+      "Only publish claims grounded in real, ongoing practices.",
+    ],
+    faq: [
+      {
+        question: "Should this include specific programs?",
+        answer: "Yes — specific, named initiatives read as far more credible than general statements of values alone.",
+      },
+      {
+        question: "Is this legal or HR compliance guidance?",
+        answer: "No — this is a communications draft. Consult HR/legal for compliance with employment law in your jurisdiction.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR communications specialist writing a specific, credible DEI statement grounded in the stated real initiatives, avoiding vague, unsubstantiated claims.",
+      user: `Write a DEI statement based on: "${values.initiatives}".`,
+    }),
+  },
+  {
+    slug: "employee-wellness-announcement-generator",
+    name: "Employee Wellness Program Announcement Generator",
+    tagline: "Get people to actually use the benefit.",
+    description:
+      "Free AI wellness announcement generator. Describe your program to get an engaging internal announcement.",
+    category: "HR & Workplace",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "program",
+        label: "Program details",
+        placeholder: "e.g. new mental health app subscription, free for all employees, includes therapy sessions",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the wellness program or benefit.",
+      "Generate announcement options.",
+      "Send via email or your internal communications channel.",
+    ],
+    faq: [
+      {
+        question: "Should I explain how to sign up?",
+        answer: "Yes — add your specific enrollment steps or link wherever you use the announcement.",
+      },
+      {
+        question: "Should this address privacy concerns for mental health benefits?",
+        answer: "Yes, if relevant — briefly noting confidentiality can reduce hesitation to use the benefit.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR communications specialist writing engaging wellness program announcements that make employees want to actually use the benefit. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 wellness program announcement options. Program: "${values.program}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "hybrid-work-policy-summary-generator",
+    name: "Hybrid Work Policy Summary Generator",
+    tagline: "Explain the policy so nobody's confused on Monday.",
+    description:
+      "Free AI hybrid work policy generator. Describe your policy to get a clear employee-facing summary.",
+    category: "HR & Workplace",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "policy",
+        label: "Policy details",
+        placeholder: "e.g. 3 days in office (Tue/Wed/Thu), flexible on the other 2 days",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your hybrid work policy details.",
+      "Generate a clear summary.",
+      "Have HR/legal confirm it aligns with your official written policy.",
+    ],
+    faq: [
+      {
+        question: "Does this replace the formal HR policy document?",
+        answer: "No — this is a friendly, readable summary to pair with (not replace) your official policy document.",
+      },
+      {
+        question: "Should this address exceptions?",
+        answer: "Briefly noting how to request exceptions (and who approves them) helps set clear expectations upfront.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR communications specialist explaining a hybrid work policy in clear, friendly language, including how exceptions are handled. No markdown headers.",
+      user: `Summarize this hybrid work policy for employees: "${values.policy}".`,
+    }),
+  },
+  {
+    slug: "workplace-conflict-resolution-email-generator",
+    name: "Workplace Conflict Resolution Email Generator",
+    tagline: "Address tension professionally, not passive-aggressively.",
+    description:
+      "Free AI conflict resolution generator. Describe the situation to get a calm, professional message.",
+    category: "HR & Workplace",
+    resultCount: 4,
+    maxTokens: 340,
+    inputFields: [
+      {
+        name: "situation",
+        label: "The situation",
+        placeholder: "e.g. two team members disagree publicly in meetings, affecting team morale",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the conflict situation.",
+      "Generate message options.",
+      "Consider whether this needs a live conversation instead of (or alongside) a written message.",
+    ],
+    faq: [
+      {
+        question: "Should conflicts always be addressed over email?",
+        answer: "Not always — for sensitive conflicts, a live conversation is often better; use written communication to set up that conversation or follow up afterward.",
+      },
+      {
+        question: "Should this take sides?",
+        answer: "No — these are written to stay neutral and focus on resolution, not assigning blame to either party.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an HR professional writing calm, neutral, solution-focused messages to address workplace conflict, without assigning blame. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 conflict resolution message options for: "${values.situation}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "term-sheet-explainer-generator",
+    name: "Term Sheet Explainer Generator",
+    tagline: "Understand what you're actually agreeing to.",
+    description:
+      "Free AI term sheet explainer. Paste a term to get a plain-English explanation of what it means.",
+    category: "Startup & Fundraising",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "term",
+        label: "Paste the term/clause",
+        placeholder: "e.g. 1x non-participating liquidation preference",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste the specific term sheet clause you want explained.",
+      "Generate a plain-English explanation.",
+      "Have a startup lawyer review the actual term sheet before signing anything.",
+    ],
+    faq: [
+      {
+        question: "Is this legal or financial advice?",
+        answer: "No — this explains typical meaning in plain English. Always have a qualified startup attorney review your actual term sheet.",
+      },
+      {
+        question: "Does this tell me if a term is founder-friendly?",
+        answer: "It can note if a term is common or unusually aggressive, but a lawyer's judgment on your specific deal is more reliable.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a startup finance educator explaining term sheet clauses in plain English, noting whether the term is standard or unusually founder- or investor-favorable. Not legal or financial advice.",
+      user: `Explain this term sheet clause: "${values.term}".`,
+    }),
+  },
+  {
+    slug: "cap-table-scenario-explainer-generator",
+    name: "Cap Table Scenario Explainer Generator",
+    tagline: "See how a new round changes who owns what.",
+    description:
+      "Free AI cap table explainer. Describe a funding scenario to get a plain-English breakdown of dilution.",
+    category: "Startup & Fundraising",
+    resultCount: 1,
+    maxTokens: 1400,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "scenario",
+        label: "Scenario",
+        placeholder: "e.g. raising $2M at a $10M pre-money valuation, currently 2 founders own 100%",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the current cap table and the new round terms.",
+      "Generate a plain-English explanation of the resulting dilution.",
+      "Verify the exact math with your cap table software or a lawyer/accountant before relying on it.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate exact ownership percentages?",
+        answer: "It walks through the general math conceptually; use dedicated cap table software for precise, current numbers.",
+      },
+      {
+        question: "Is this financial or legal advice?",
+        answer: "No — this is educational content explaining how dilution generally works, not advice on your specific deal.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a startup finance educator explaining how a funding round affects the cap table and ownership dilution, in plain English, walking through the general math. Not financial or legal advice.",
+      user: `Explain the dilution impact of this scenario: "${values.scenario}".`,
+    }),
+  },
+  {
+    slug: "board-update-deck-outline-generator",
+    name: "Board Update Deck Outline Generator",
+    tagline: "Structure the deck before you build the slides.",
+    description:
+      "Free AI board deck generator. Enter your key updates to get a structured board meeting deck outline.",
+    category: "Startup & Fundraising",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "updates",
+        label: "Key updates this period",
+        placeholder: "e.g. hit $60k MRR, launched in 2 new markets, hiring a VP Eng",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your key updates for this board meeting.",
+      "Generate a slide-by-slide outline.",
+      "Build your actual slides and data visuals from this structure.",
+    ],
+    faq: [
+      {
+        question: "How many slides should a board deck have?",
+        answer: "Many effective board decks run 10-15 slides — enough to cover key areas without turning the meeting into a slide read-through.",
+      },
+      {
+        question: "Should challenges be included, not just wins?",
+        answer: "Yes — boards generally want visibility into challenges too, not just good news, to provide useful input.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a startup founder structuring a board update deck outline (Highlights, Metrics, Challenges, Asks, Discussion Topics) as slide titles with a one-line description each. No markdown headers.",
+      user: `Build a board update deck outline based on: "${values.updates}".`,
+    }),
+  },
+  {
+    slug: "acquisition-offer-response-generator",
+    name: "Acquisition Offer Response Generator",
+    tagline: "Respond to an offer thoughtfully, not impulsively.",
+    description:
+      "Free AI acquisition response generator. Describe the offer to get a professional, measured response.",
+    category: "Startup & Fundraising",
+    resultCount: 3,
+    maxTokens: 350,
+    inputFields: [
+      {
+        name: "offer",
+        label: "Offer context & your stance",
+        placeholder: "e.g. received an unsolicited acquisition interest, want more time to consider before responding",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the offer context and your current stance.",
+      "Generate response options.",
+      "Involve your board, co-founders, and legal counsel before any substantive negotiation.",
+    ],
+    faq: [
+      {
+        question: "Should I respond to this without legal counsel?",
+        answer: "For anything beyond an initial acknowledgment, involve a lawyer experienced in M&A — the stakes are too high to navigate alone.",
+      },
+      {
+        question: "Should I reveal my valuation expectations right away?",
+        answer: "Often not in the first response — these options keep the door open without committing to specifics prematurely.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a startup founder writing a professional, measured initial response to an acquisition offer that keeps options open without over-committing. Each result is a complete short email. Not legal advice — involve counsel before real negotiation. You respond only with a numbered list — no preamble.",
+      user: `Generate 3 response options. Offer/stance: "${values.offer}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "churn-prevention-outreach-generator",
+    name: "Churn Prevention Outreach Generator",
+    tagline: "Reach at-risk customers before they leave.",
+    description:
+      "Free AI churn prevention generator. Describe the at-risk signal to get a proactive outreach message.",
+    category: "Customer Support",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "signal",
+        label: "At-risk signal",
+        placeholder: "e.g. usage dropped 70% over the last month, previously a daily active user",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the signal indicating the customer might churn.",
+      "Generate outreach message options.",
+      "Send proactively, before they actually cancel.",
+    ],
+    faq: [
+      {
+        question: "Should I mention that I've noticed their usage drop?",
+        answer: "Yes, gently — being observant (without being creepy about it) shows genuine care and often prompts a helpful conversation.",
+      },
+      {
+        question: "Should I offer a discount right away?",
+        answer: "Not necessarily first — understanding the reason for disengagement often leads to a better fix than jumping straight to a discount.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer success manager writing proactive, genuinely helpful outreach to an at-risk customer, leading with curiosity rather than a sales pitch. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 churn prevention outreach options. Signal: "${values.signal}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "vip-customer-thank-you-generator",
+    name: "VIP Customer Thank-You Generator",
+    tagline: "Make your best customers feel like it.",
+    description:
+      "Free AI VIP thank-you generator. Describe the customer to get a genuine, personal thank-you message.",
+    category: "Customer Support",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "customer",
+        label: "Customer context",
+        placeholder: "e.g. customer for 5 years, just referred 3 new clients",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what makes this customer a VIP.",
+      "Generate thank-you message options.",
+      "Send personally, ideally with a specific perk or gesture attached.",
+    ],
+    faq: [
+      {
+        question: "Should I offer something concrete along with the thanks?",
+        answer: "A specific gesture (discount, early access, handwritten note) makes the appreciation feel more real than words alone.",
+      },
+      {
+        question: "How personal should this be?",
+        answer: "As personal as possible — reference specific details about their relationship with your business, not generic loyalty language.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a customer success manager writing genuine, specific thank-you messages for top customers, referencing real context rather than generic loyalty phrases. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 VIP thank-you message options. Context: "${values.customer}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "support-ticket-triage-note-generator",
+    name: "Support Ticket Priority Triage Note Generator",
+    tagline: "Explain the priority call so nobody has to guess.",
+    description:
+      "Free AI triage note generator. Describe the ticket to get a clear priority classification with reasoning.",
+    category: "Customer Support",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "ticket",
+        label: "Ticket summary",
+        placeholder: "e.g. one enterprise customer can't export invoices, affects month-end billing",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Summarize the support ticket.",
+      "Generate a priority classification with reasoning.",
+      "Confirm against your team's specific priority definitions.",
+    ],
+    faq: [
+      {
+        question: "Does this use a standard priority scale?",
+        answer: "It reasons using a common P1 (urgent) through P4 (low) framework — map to your own team's specific scale if it differs.",
+      },
+      {
+        question: "Should this replace human judgment on ambiguous tickets?",
+        answer: "No — use it as a quick starting point; the support lead's judgment on business impact always takes priority.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a support team lead suggesting a ticket priority level (P1-P4) with a one-sentence reason, based on described impact and urgency.",
+      user: `Suggest a priority classification for this ticket: "${values.ticket}".`,
+    }),
+  },
+  {
+    slug: "product-feedback-request-generator",
+    name: "Product Feedback Request Generator",
+    tagline: "Ask for feedback in a way people actually answer.",
+    description:
+      "Free AI feedback request generator. Describe your product update to get an engaging feedback ask.",
+    category: "Customer Support",
+    resultCount: 4,
+    maxTokens: 280,
+    inputFields: [
+      {
+        name: "context",
+        label: "What you want feedback on",
+        placeholder: "e.g. the new dashboard redesign, live for 2 weeks",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what you want feedback on.",
+      "Generate feedback request options.",
+      "Send via email, in-app message, or a short survey link.",
+    ],
+    faq: [
+      {
+        question: "Should I ask open-ended or specific questions?",
+        answer: "A mix works well — these lead with a specific, easy-to-answer question rather than a vague 'what do you think?'",
+      },
+      {
+        question: "Should I offer an incentive for feedback?",
+        answer: "Optional — many users will respond to a genuine, well-timed ask without needing an incentive.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product manager writing engaging feedback request messages with a specific, easy-to-answer question, not a vague open-ended ask. Each result is a complete short message. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 feedback request options. Context: "${values.context}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "rate-limit-error-copy-generator",
+    name: "API Rate Limit Error Copy Generator",
+    tagline: "Tell developers exactly what to do next.",
+    description:
+      "Free AI error copy generator. Describe your API's limits to get clear, actionable rate-limit error messages.",
+    category: "Website & SaaS",
+    resultCount: 4,
+    maxTokens: 260,
+    inputFields: [
+      {
+        name: "limits",
+        label: "Rate limit details",
+        placeholder: "e.g. 100 requests per minute on the free tier",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your API's rate limits.",
+      "Generate error message options.",
+      "Include the actual retry-after value and upgrade link in your real response.",
+    ],
+    faq: [
+      {
+        question: "Should this include a retry-after value?",
+        answer: "Yes — mention it in your actual API response headers/body; these messages reference it as a placeholder concept.",
+      },
+      {
+        question: "Should the message mention upgrading?",
+        answer: "If you have paid tiers with higher limits, yes — it's a natural, helpful upsell moment rather than a dead end.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a developer experience writer crafting clear, actionable API rate-limit error messages that tell the developer exactly what happened and what to do next. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 rate limit error message options. Limits: "${values.limits}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "feature-deprecation-notice-generator",
+    name: "Feature Deprecation Notice Generator",
+    tagline: "Sunset a feature without blindsiding users.",
+    description:
+      "Free AI deprecation notice generator. Describe the change to get a clear, well-timed notice.",
+    category: "Website & SaaS",
+    resultCount: 1,
+    maxTokens: 600,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "change",
+        label: "What's being deprecated & timeline",
+        placeholder: "e.g. legacy API v1 being retired in 90 days, all users should migrate to v2",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what's being deprecated and the migration timeline.",
+      "Generate a notice draft.",
+      "Send well in advance and include migration resources/links.",
+    ],
+    faq: [
+      {
+        question: "How much notice should I give for a breaking change?",
+        answer: "Longer is generally safer — 60-90 days is common for API deprecations, more for deeply integrated features.",
+      },
+      {
+        question: "Should this include migration instructions?",
+        answer: "Add a link to your specific migration guide — this draft leaves a clear place for it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a developer relations writer crafting a clear, empathetic feature deprecation notice with a specific timeline and a placeholder for migration resources.",
+      user: `Write a deprecation notice for: "${values.change}".`,
+    }),
+  },
+  {
+    slug: "security-incident-user-notification-generator",
+    name: "Security Incident User Notification Generator",
+    tagline: "Inform users clearly without causing panic.",
+    description:
+      "Free AI security notification generator. Describe the incident to get a calm, clear user-facing notice.",
+    category: "Website & SaaS",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "incident",
+        label: "What happened",
+        placeholder: "e.g. detected and blocked a credential-stuffing attempt, recommending a password reset",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what happened and what action users should take, if any.",
+      "Generate a notification draft.",
+      "Have security/legal review before sending — actual breach notifications may have legal requirements.",
+    ],
+    faq: [
+      {
+        question: "Is this the same as a legal data breach notification?",
+        answer: "Not necessarily — if personal data was actually compromised, you likely need a formal breach notification meeting legal requirements. This is a general communications draft.",
+      },
+      {
+        question: "Should I recommend a specific action?",
+        answer: "Yes, if applicable (e.g. reset your password) — a clear, specific action is more reassuring than a vague warning.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a security communications writer drafting a calm, clear, factual user notification about a security event, including a specific recommended action if relevant. Not legal advice.",
+      user: `Write a security incident notification for: "${values.incident}".`,
+    }),
+  },
+  {
+    slug: "changelog-email-digest-generator",
+    name: "Changelog Email Digest Generator",
+    tagline: "A monthly roundup that keeps users engaged.",
+    description:
+      "Free AI changelog digest generator. Enter your month's updates to get a friendly email roundup.",
+    category: "Website & SaaS",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "updates",
+        label: "This period's updates",
+        placeholder: "e.g. new dark mode, faster search, fixed 3 reported bugs",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "List your updates for the period.",
+      "Generate a friendly digest email.",
+      "Send monthly or quarterly to keep users engaged with product progress.",
+    ],
+    faq: [
+      {
+        question: "Should every tiny bug fix be included?",
+        answer: "Group minor fixes together briefly and lead with the changes users will actually notice and care about.",
+      },
+      {
+        question: "Should this include screenshots or GIFs?",
+        answer: "Add your own visuals where relevant — this generates the written copy around them.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a product marketer writing a friendly changelog digest email that highlights the most impactful updates first. Write it as a complete email with greeting and sign-off placeholder.",
+      user: `Write a changelog digest email covering: "${values.updates}".`,
+    }),
+  },
+  {
+    slug: "topic-cluster-content-brief-generator",
+    name: "Topic Cluster Content Brief Generator",
+    tagline: "A writer-ready brief for one piece of a content cluster.",
+    description:
+      "Free AI content brief generator. Enter your target keyword to get a structured writing brief.",
+    category: "SEO & Content Strategy",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "keyword",
+        label: "Target keyword/topic",
+        placeholder: "e.g. how to choose a espresso machine for beginners",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your target keyword or topic.",
+      "Generate a structured content brief.",
+      "Hand off to a writer or use it to guide your own draft.",
+    ],
+    faq: [
+      {
+        question: "Does this include real search volume data?",
+        answer: "No — check volume and difficulty in a keyword research tool; this focuses on the content structure and angle.",
+      },
+      {
+        question: "What sections does the brief include?",
+        answer: "Target Audience, Search Intent, Suggested Headings, Key Points to Cover — a standard SEO content brief structure.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an SEO content strategist writing a content brief with sections: Target Audience, Search Intent, Suggested Headings, Key Points to Cover. No markdown headers, plain section labels.",
+      user: `Build a content brief for the keyword: "${values.keyword}".`,
+    }),
+  },
+  {
+    slug: "content-gap-analysis-generator",
+    name: "Competitor Content Gap Analysis Generator",
+    tagline: "Find what competitors cover that you don't.",
+    description:
+      "Free AI content gap generator. Describe your content vs. competitors to get a prioritized gap list.",
+    category: "SEO & Content Strategy",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "comparison",
+        label: "Your content vs. competitors",
+        placeholder: "e.g. we cover basics of SEO, competitors also cover technical SEO and local SEO which we don't",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe what you cover and what competitors cover that you don't.",
+      "Generate a prioritized gap list.",
+      "Use to plan your next few pieces of content.",
+    ],
+    faq: [
+      {
+        question: "Does this research competitor content for me?",
+        answer: "No — you provide the comparison; this organizes it into a prioritized, actionable list of content opportunities.",
+      },
+      {
+        question: "How does it prioritize the gaps?",
+        answer: "It reasons about which gaps seem most relevant to your existing audience based on what you've described.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an SEO content strategist who turns a content comparison into a prioritized list of content gap opportunities with a one-line rationale each. No markdown headers.",
+      user: `Analyze this content gap comparison and prioritize opportunities: "${values.comparison}".`,
+    }),
+  },
+  {
+    slug: "backlink-outreach-email-generator",
+    name: "Backlink Outreach Email Generator",
+    tagline: "Get links without sounding like spam.",
+    description:
+      "Free AI backlink outreach generator. Enter your content to get a genuine-sounding outreach email.",
+    category: "SEO & Content Strategy",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "content",
+        label: "Your content & why it's relevant",
+        placeholder: "e.g. our guide on remote team management, relevant to their article on hybrid work",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your content and why it's relevant to the site you're contacting.",
+      "Generate outreach email options.",
+      "Personalize by referencing their specific article before sending.",
+    ],
+    faq: [
+      {
+        question: "Should I mass-send this to many sites?",
+        answer: "No — personalized, targeted outreach to genuinely relevant sites performs far better than mass generic link requests.",
+      },
+      {
+        question: "Should I mention I want a backlink directly?",
+        answer: "Being transparent about the ask (while leading with genuine value/relevance) tends to work better than being cagey about it.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an SEO outreach specialist writing genuine, non-spammy backlink outreach emails under 120 words that clearly explain relevance before making the ask. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 backlink outreach email options. Content/relevance: "${values.content}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "content-audit-summary-generator",
+    name: "Content Audit Summary Generator",
+    tagline: "Decide what to keep, update, or kill.",
+    description:
+      "Free AI content audit generator. Describe your content's performance to get a clear action recommendation.",
+    category: "SEO & Content Strategy",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "performance",
+        label: "Content & performance",
+        placeholder: "e.g. 3-year-old blog post, traffic down 60%, outdated statistics and screenshots",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the content piece and its current performance/state.",
+      "Generate a recommendation (keep, update, consolidate, or remove).",
+      "Use across your content library for a full audit.",
+    ],
+    faq: [
+      {
+        question: "Does this analyze real analytics data?",
+        answer: "No — describe your own performance data and observations; this reasons through a recommendation based on what you provide.",
+      },
+      {
+        question: "What are the typical audit outcomes?",
+        answer: "Keep as-is, update/refresh, consolidate with similar content, or remove/redirect — this reasons toward one of those based on your input.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an SEO content strategist reviewing a piece of content's performance and recommending one clear action (keep, update, consolidate, or remove) with reasoning. No markdown headers.",
+      user: `Recommend an action for this content based on: "${values.performance}".`,
+    }),
+  },
+  {
+    slug: "keyboard-navigation-checklist-generator",
+    name: "Keyboard Navigation Testing Checklist Generator",
+    tagline: "Make sure your site works without a mouse.",
+    description:
+      "Free AI keyboard navigation checklist generator. Describe your interface to get a testing checklist.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "interface",
+        label: "Describe your interface",
+        placeholder: "e.g. a multi-step checkout form with a modal for address entry",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the interface or flow you want to test.",
+      "Generate a keyboard navigation checklist.",
+      "Test it yourself using only Tab, Shift+Tab, Enter, and arrow keys — no mouse.",
+    ],
+    faq: [
+      {
+        question: "Why test with a keyboard specifically?",
+        answer: "Many users with motor or visual disabilities navigate entirely by keyboard — if your interface traps focus or skips elements, it becomes unusable for them.",
+      },
+      {
+        question: "Does this replace screen reader testing?",
+        answer: "No — keyboard navigation and screen reader compatibility are related but distinct; test both for full coverage.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an accessibility specialist building a keyboard-navigation testing checklist (focus order, visible focus states, no keyboard traps, modal handling) tailored to the described interface. No markdown headers.",
+      user: `Build a keyboard navigation testing checklist for: "${values.interface}".`,
+    }),
+  },
+  {
+    slug: "color-contrast-explainer-generator",
+    name: "Color Contrast Explainer Generator",
+    tagline: "Understand why a color combo fails accessibility checks.",
+    description:
+      "Free AI color contrast explainer. Describe your colors to get a plain-English explanation of contrast issues.",
+    category: "Accessibility",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "colors",
+        label: "Describe the color combination",
+        placeholder: "e.g. light gray text (#AAAAAA) on a white background for body copy",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the text and background colors you're using.",
+      "Generate a plain-English explanation of likely contrast issues.",
+      "Verify the exact ratio with a contrast checker tool before finalizing.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate the exact contrast ratio?",
+        answer: "No — it explains general risk based on typical color relationships; use a dedicated contrast checker tool for the precise WCAG ratio.",
+      },
+      {
+        question: "What's the WCAG AA requirement?",
+        answer: "Generally a 4.5:1 ratio for normal text and 3:1 for large text — this explainer references that standard.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an accessibility consultant explaining likely color contrast issues in plain English, referencing WCAG AA guidelines (4.5:1 normal text, 3:1 large text) and suggesting a general direction for improvement.",
+      user: `Explain the likely accessibility contrast issue with: "${values.colors}".`,
+    }),
+  },
+  {
+    slug: "insurance-claim-denial-appeal-generator",
+    name: "Insurance Claim Denial Appeal Generator",
+    tagline: "Push back on a denial with a clear, factual case.",
+    description:
+      "Free AI claim appeal generator. Describe the denial to get a clear, professional appeal letter draft.",
+    category: "Insurance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "denial",
+        label: "Denial reason & your case",
+        placeholder: "e.g. claim denied as 'not covered', but policy explicitly lists this type of damage as covered",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the denial reason and why you believe it's incorrect.",
+      "Generate an appeal letter draft.",
+      "Attach supporting documentation and reference your specific policy language.",
+    ],
+    faq: [
+      {
+        question: "Does this guarantee my appeal succeeds?",
+        answer: "No — approval depends on your insurer's review of the facts and policy terms. This drafts a clear, factual case, not a guaranteed outcome.",
+      },
+      {
+        question: "Should I quote my policy directly?",
+        answer: "Yes, if you have specific language supporting your claim — direct quotes strengthen an appeal significantly.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are writing a calm, factual insurance claim appeal letter that clearly states the denial reason and why it should be reconsidered, with a placeholder for policy language citations. Not legal advice.",
+      user: `Write a claim appeal letter for: "${values.denial}".`,
+    }),
+  },
+  {
+    slug: "insurance-comparison-summary-generator",
+    name: "Insurance Policy Comparison Summary Generator",
+    tagline: "See the real differences between two policies.",
+    description:
+      "Free AI insurance comparison generator. Describe two policies to get a plain-English comparison.",
+    category: "Insurance",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "policies",
+        label: "Two policies to compare",
+        placeholder: "e.g. Policy A: $500 deductible, $50/mo; Policy B: $1,000 deductible, $35/mo",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the two policies and their key terms.",
+      "Generate a side-by-side comparison summary.",
+      "Confirm exact terms with each insurer before deciding.",
+    ],
+    faq: [
+      {
+        question: "Does this recommend which policy to choose?",
+        answer: "It highlights the key trade-offs clearly, but the right choice depends on your personal risk tolerance and finances — not financial advice.",
+      },
+      {
+        question: "Should I compare more than price and deductible?",
+        answer: "Yes — coverage limits, exclusions, and claims process reputation matter too; include them in your description if you have them.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are an insurance educator comparing two policies in a clear, structured way (Cost, Coverage, Trade-offs), in plain English. Not financial or insurance advice.",
+      user: `Compare these two policies: "${values.policies}".`,
+    }),
+  },
+  {
+    slug: "ev-charging-listing-description-generator",
+    name: "EV Charging Station Listing Description Generator",
+    tagline: "Describe your charging location clearly for drivers.",
+    description:
+      "Free AI EV charging listing generator. Enter your station details to get a clear listing description.",
+    category: "Automotive",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "station",
+        label: "Station details",
+        placeholder: "e.g. 2 Level 2 chargers, free parking, near a coffee shop, available 24/7",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your charging station's details and amenities.",
+      "Generate description options.",
+      "Use on your charging network app listing or property website.",
+    ],
+    faq: [
+      {
+        question: "Should I mention nearby amenities?",
+        answer: "Yes — drivers often choose a charging stop based on what's nearby to do while waiting.",
+      },
+      {
+        question: "Should I list the connector type?",
+        answer: "Yes, always — connector type (J1772, CCS, NACS, etc.) is critical information for drivers to know before arriving.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are writing clear, useful EV charging station listing descriptions that highlight practical details drivers care about. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 EV charging station listing description options. Details: "${values.station}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "car-warranty-explainer-generator",
+    name: "Car Warranty Explainer Generator",
+    tagline: "Understand what's actually covered.",
+    description:
+      "Free AI warranty explainer. Describe your warranty terms to get a plain-English breakdown.",
+    category: "Automotive",
+    resultCount: 1,
+    maxTokens: 600,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "terms",
+        label: "Warranty terms",
+        placeholder: "e.g. 5-year/60,000-mile powertrain warranty, excludes wear items",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter the warranty terms you want explained.",
+      "Generate a plain-English breakdown.",
+      "Confirm specifics with your dealer or manufacturer before relying on it.",
+    ],
+    faq: [
+      {
+        question: "What's typically excluded from a powertrain warranty?",
+        answer: "Wear items (brakes, tires, wipers) and damage from accidents or poor maintenance are commonly excluded — specifics vary by manufacturer.",
+      },
+      {
+        question: "Is this the same as an extended warranty sales pitch?",
+        answer: "No — this explains your existing warranty terms in plain English; it doesn't sell or recommend any additional coverage.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are explaining car warranty terms in plain English — what's covered, common exclusions, and what to double check with the dealer.",
+      user: `Explain this warranty in plain English: "${values.terms}".`,
+    }),
+  },
+  {
+    slug: "landscaping-project-description-generator",
+    name: "Landscaping Project Description Generator",
+    tagline: "Describe the transformation, not just the plants.",
+    description:
+      "Free AI landscaping description generator. Enter your project details to get a compelling description.",
+    category: "Home & DIY",
+    resultCount: 4,
+    maxTokens: 320,
+    inputFields: [
+      {
+        name: "project",
+        label: "Project details",
+        placeholder: "e.g. front yard xeriscaping, drought-tolerant plants, new stone pathway",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe the landscaping project.",
+      "Generate description options.",
+      "Use for a portfolio, quote, or before/after social post.",
+    ],
+    faq: [
+      {
+        question: "Can landscapers use this for client proposals?",
+        answer: "Yes — this works well for proposal copy, portfolio write-ups, or social media before/after posts.",
+      },
+      {
+        question: "Does this include plant care instructions?",
+        answer: "No — it describes the project itself; use a separate care guide for plant-specific maintenance instructions.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a landscaping business writing compelling project descriptions that emphasize the transformation and end result. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 landscaping project description options for: "${values.project}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "smart-home-setup-guide-generator",
+    name: "Smart Home Setup Guide Generator",
+    tagline: "A clear starting plan for going smart.",
+    description:
+      "Free AI smart home guide generator. Describe your home and goals to get a structured setup plan.",
+    category: "Home & DIY",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "goals",
+        label: "Home & goals",
+        placeholder: "e.g. 2-bed apartment, want better security and lighting automation, budget-conscious",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your home and what you want to automate.",
+      "Generate a suggested setup plan.",
+      "Research specific product compatibility before buying.",
+    ],
+    faq: [
+      {
+        question: "Does this recommend specific products/brands?",
+        answer: "No — it suggests device categories and a rollout order; research specific products compatible with your ecosystem (Google Home, Alexa, Apple HomeKit).",
+      },
+      {
+        question: "Should I automate everything at once?",
+        answer: "Starting with one or two high-value areas (lighting, security) and expanding is generally more manageable than automating everything immediately.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a smart home consultant building a phased setup plan (Phase 1, Phase 2, etc.) matched to stated goals and budget sensitivity, suggesting device categories without brand-specific recommendations. No markdown headers.",
+      user: `Build a smart home setup plan for: "${values.goals}".`,
+    }),
+  },
+  {
+    slug: "green-packaging-description-generator",
+    name: "Green Packaging Description Generator",
+    tagline: "Explain your sustainable packaging choices clearly.",
+    description:
+      "Free AI packaging description generator. Describe your materials to get clear, credible copy.",
+    category: "Sustainability & ESG",
+    resultCount: 4,
+    maxTokens: 300,
+    inputFields: [
+      {
+        name: "materials",
+        label: "Packaging materials",
+        placeholder: "e.g. 100% recycled cardboard, soy-based ink, no plastic fillers",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your actual packaging materials and practices.",
+      "Generate description options.",
+      "Only claim what you can verify — check local regulations on environmental marketing claims.",
+    ],
+    faq: [
+      {
+        question: "Are there rules about environmental packaging claims?",
+        answer: "Yes — many jurisdictions regulate terms like 'recyclable' or 'biodegradable'; verify your specific claims meet local requirements before publishing.",
+      },
+      {
+        question: "Should I mention what's NOT sustainable yet?",
+        answer: "Being transparent about ongoing improvements tends to build more trust than implying everything is already perfect.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a sustainability copywriter describing packaging materials specifically and credibly, avoiding vague greenwashing terms without substantiation. You respond only with a numbered list — no preamble.",
+      user: `Generate 4 packaging description options for: "${values.materials}". Return only a numbered list.`,
+    }),
+  },
+  {
+    slug: "supply-chain-sustainability-summary-generator",
+    name: "Supply Chain Sustainability Summary Generator",
+    tagline: "Explain your sourcing practices credibly.",
+    description:
+      "Free AI supply chain summary generator. Describe your sourcing to get a clear sustainability summary.",
+    category: "Sustainability & ESG",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "sourcing",
+        label: "Sourcing practices",
+        placeholder: "e.g. audited factories, fair trade certified cotton, local suppliers within 200 miles",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your actual sourcing and supply chain practices.",
+      "Generate a summary write-up.",
+      "Only include claims you can back up with real audits or certifications.",
+    ],
+    faq: [
+      {
+        question: "Should I mention specific certifications?",
+        answer: "Yes, if you have them — named certifications (Fair Trade, B Corp, etc.) are far more credible than general claims.",
+      },
+      {
+        question: "Does this verify my suppliers for me?",
+        answer: "No — this writes the summary based on what you tell it; verification is a separate, ongoing responsibility.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a sustainability communications writer summarizing supply chain practices credibly and specifically, based only on stated facts and certifications.",
+      user: `Write a supply chain sustainability summary based on: "${values.sourcing}".`,
+    }),
+  },
+  {
+    slug: "dockerfile-explainer-generator",
+    name: "Dockerfile Explainer Generator",
+    tagline: "Understand what each line actually does.",
+    description:
+      "Free AI Dockerfile explainer. Paste a Dockerfile to get a plain-English, line-by-line explanation.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "dockerfile",
+        label: "Paste your Dockerfile",
+        placeholder: "e.g. your FROM/RUN/COPY/CMD lines",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Paste your Dockerfile contents.",
+      "Generate a line-by-line explanation.",
+      "Use it to review, document, or learn from an existing Dockerfile.",
+    ],
+    faq: [
+      {
+        question: "Will this optimize my Dockerfile?",
+        answer: "No — this explains what it does; use Docker's own best-practice linting tools for optimization suggestions.",
+      },
+      {
+        question: "Does this work for multi-stage builds?",
+        answer: "Yes — it explains each stage and how they relate to each other.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a DevOps engineer explaining a Dockerfile line by line in plain English, noting the purpose of each instruction. No markdown headers.",
+      user: `Explain this Dockerfile:\n\n${values.dockerfile}`,
+    }),
+  },
+  {
+    slug: "sla-uptime-explainer-generator",
+    name: "SLA Uptime Explainer Generator",
+    tagline: "Understand what an uptime guarantee actually means.",
+    description:
+      "Free AI SLA explainer. Enter your uptime percentage to get a plain-English breakdown of allowed downtime.",
+    category: "DevOps & Cloud",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "uptime",
+        label: "Uptime percentage",
+        placeholder: "e.g. 99.9%",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter the uptime percentage from your SLA.",
+      "Generate a plain-English explanation of what it means in real downtime.",
+      "Check your specific SLA for what counts as downtime and any remedy/credit terms.",
+    ],
+    faq: [
+      {
+        question: "Does this calculate exact downtime allowances?",
+        answer: "It gives a general breakdown (per month/year); confirm your specific SLA's measurement period and definition of downtime.",
+      },
+      {
+        question: "Does higher uptime always mean better service?",
+        answer: "Generally yes for reliability, but also check what remedies (credits, refunds) apply if the SLA isn't met.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are explaining SLA uptime percentages in plain English, translating the percentage into approximate allowed downtime per month and year.",
+      user: `Explain what this uptime SLA means in practice: ${values.uptime}`,
+    }),
+  },
+  {
+    slug: "1031-exchange-explainer-generator",
+    name: "1031 Exchange Explainer Generator",
+    tagline: "Understand the basics before you talk to a professional.",
+    description:
+      "Free AI 1031 exchange explainer. Describe your situation to get a plain-English overview of how it works.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "prose",
+    inputFields: [
+      {
+        name: "situation",
+        label: "Your situation",
+        placeholder: "e.g. selling a rental property, considering reinvesting in a larger multifamily property",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Describe your property situation.",
+      "Generate a plain-English overview of how a 1031 exchange might apply.",
+      "This is educational only — a qualified intermediary and tax professional are required for an actual exchange.",
+    ],
+    faq: [
+      {
+        question: "Is this tax advice?",
+        answer: "No — this is general educational content about how 1031 exchanges typically work. Consult a tax professional and qualified intermediary for your actual situation.",
+      },
+      {
+        question: "Are there strict timelines involved?",
+        answer: "Yes — 1031 exchanges have strict identification and closing deadlines; this overview mentions them generally, but confirm exact rules with a professional.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate investment educator explaining how a 1031 exchange generally works in plain English, including the key timeline rules, for the given situation. Not tax or legal advice.",
+      user: `Explain how a 1031 exchange might apply to: "${values.situation}".`,
+    }),
+  },
+  {
+    slug: "brrrr-strategy-explainer-generator",
+    name: "BRRRR Strategy Explainer Generator",
+    tagline: "Understand the buy-rehab-rent-refinance-repeat method.",
+    description:
+      "Free AI BRRRR explainer. Enter your deal to get a plain-English walkthrough of the strategy applied to it.",
+    category: "Real Estate Investment",
+    resultCount: 1,
+    maxTokens: 650,
+    resultKind: "document",
+    documentStyle: "structured",
+    inputFields: [
+      {
+        name: "deal",
+        label: "Deal details",
+        placeholder: "e.g. $150k fixer-upper, estimated $30k rehab, expected $250k ARV",
+        type: "text",
+        required: true,
+      },
+    ],
+    howTo: [
+      "Enter your property's purchase price, rehab estimate, and expected after-repair value.",
+      "Generate a walkthrough of how the BRRRR strategy would apply.",
+      "Verify all numbers independently — this is educational, not investment advice.",
+    ],
+    faq: [
+      {
+        question: "What does BRRRR stand for?",
+        answer: "Buy, Rehab, Rent, Refinance, Repeat — a real estate investment strategy for recycling capital across multiple properties.",
+      },
+      {
+        question: "Is this investment advice?",
+        answer: "No — this is general educational content explaining the strategy applied to your numbers, not personalized investment advice.",
+      },
+    ],
+    buildPrompt: (values) => ({
+      system:
+        "You are a real estate investment educator walking through the BRRRR strategy (Buy, Rehab, Rent, Refinance, Repeat) step by step as applied to the given deal numbers. No markdown headers. Not financial advice.",
+      user: `Walk through the BRRRR strategy for this deal: "${values.deal}".`,
     }),
   },
 ];
