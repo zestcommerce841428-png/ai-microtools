@@ -1,13 +1,17 @@
 # Auth email templates
 
-Branded HTML for every Supabase Auth email type. Supabase's dashboard editor
-is the only way to apply these — there's no Management API token configured
-in this project, so paste each file's contents manually:
+Branded HTML for every Supabase Auth email type. These are live on the
+project already — pushed via the Management API
+(`PATCH /v1/projects/{ref}/config/auth`) using a personal access token, one
+field pair (`mailer_templates_*_content` + `mailer_subjects_*`) per
+template. These files are the source of truth going forward; edit here and
+re-push rather than editing in the dashboard, so the repo doesn't drift from
+what's actually live.
 
-**Dashboard → Authentication → Emails → (each template) → Source**, paste
-the matching file below, then hit Save. Do this for all six.
+If you ever need to redo this by hand instead: **Dashboard → Authentication
+→ Emails → (each template) → Source**, paste the matching file, then Save.
 
-| File | Dashboard template | Subject suggestion |
+| File | Dashboard template | Subject |
 |---|---|---|
 | `confirm-signup.html` | Confirm signup | `Your AI Microtools confirmation code` |
 | `reset-password.html` | Reset Password | `Your AI Microtools password reset code` |
@@ -29,11 +33,14 @@ Supabase regardless.
 since the app has no UI to consume a code for those flows — showing a code
 with nowhere to type it would just confuse recipients.
 
-## Settings worth checking while you're in there
+## Confirmed live project settings (checked via the Management API)
 
-- **Authentication → Emails → SMTP**: already configured per your Hostinger
-  setup earlier — these templates don't change that.
-- **Authentication → Sign In / Providers → Email**: confirm "Confirm email"
-  is enabled (required for the signup code step to matter) and note the
-  configured OTP expiry — these templates say "expires shortly" rather than
-  a specific number so they don't go stale if you change it.
+- `mailer_autoconfirm: false` — signup requires confirmation, so the OTP
+  step in `SignupForm.tsx` is actually load-bearing, not decorative.
+- `mailer_otp_length: 6`, `mailer_otp_exp: 3600` — 6-digit codes, 1 hour
+  expiry. Templates say "expires shortly" rather than a number so they
+  don't go stale if this changes.
+- `security_captcha_enabled: true` (`turnstile`) — every email-sending call
+  (`signUp`, `resend`, `resetPasswordForEmail`) needs a fresh Turnstile
+  token, which is why the code-entry steps re-render `<TurnstileWidget>`
+  before their "Resend code" button.
