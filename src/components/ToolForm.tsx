@@ -110,7 +110,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
             {field.label}
             {field.type === "select" ? (
               <select
-                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
+                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 focus:border-primary-ring focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
                 value={values[field.name]}
                 onChange={(e) => setValues((v) => ({ ...v, [field.name]: e.target.value }))}
               >
@@ -123,7 +123,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
             ) : (
               <input
                 type="text"
-                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
+                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 focus:border-primary-ring focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
                 placeholder={field.placeholder}
                 value={values[field.name]}
                 onChange={(e) => setValues((v) => ({ ...v, [field.name]: e.target.value }))}
@@ -140,7 +140,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
         <button
           type="submit"
           disabled={loading || needsVerification}
-          className="mt-2 rounded-lg bg-zinc-900 px-4 py-2.5 font-semibold text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+          className="mt-2 rounded-lg bg-primary px-4 py-2.5 font-semibold text-primary-content transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate"}
         </button>

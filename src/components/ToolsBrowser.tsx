@@ -42,7 +42,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search tools… e.g. resume, wedding, instagram"
-          className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-900 focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+          className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-900 focus:border-primary-ring focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
         />
 
         <div className="flex flex-wrap gap-2">
@@ -51,7 +51,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
             onClick={() => setActiveCategory(null)}
             className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
               activeCategory === null
-                ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                ? "border-primary bg-primary text-primary-content"
                 : "border-zinc-300 text-zinc-600 hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-400"
             }`}
           >
@@ -64,7 +64,7 @@ export default function ToolsBrowser({ tools, categories, initialCategory = null
               onClick={() => setActiveCategory(category)}
               className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
                 activeCategory === category
-                  ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                  ? "border-primary bg-primary text-primary-content"
                   : "border-zinc-300 text-zinc-600 hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-400"
               }`}
             >

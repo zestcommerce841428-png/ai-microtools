@@ -48,7 +48,7 @@ export default function AuthStatus() {
       </Link>
       <Link
         href="/signup"
-        className="rounded-full bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+        className="rounded-full bg-primary px-3 py-1.5 text-sm font-medium text-primary-content hover:bg-primary-hover"
       >
         Sign up
       </Link>

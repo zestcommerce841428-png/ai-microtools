@@ -31,7 +31,7 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/signup"
-            className="rounded-full bg-zinc-900 px-6 py-3 font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+            className="rounded-full bg-primary px-6 py-3 font-semibold text-primary-content transition hover:bg-primary-hover"
           >
             Sign up free
           </Link>

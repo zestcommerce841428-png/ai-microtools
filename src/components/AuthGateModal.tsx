@@ -29,7 +29,7 @@ export default function AuthGateModal({
         <div className="mt-5 flex flex-col gap-2">
           <Link
             href={`/signup?redirectTo=${redirectParam}`}
-            className="rounded-lg bg-zinc-900 px-4 py-2.5 text-center font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+            className="rounded-lg bg-primary px-4 py-2.5 text-center font-semibold text-primary-content transition hover:bg-primary-hover"
           >
             Sign up free
           </Link>
