@@ -126,7 +126,7 @@ export default async function ToolPage({
 
       <AdSlot />
 
-      <section className="w-full max-w-2xl rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="w-full max-w-2xl rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">How it works</h2>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-zinc-700 dark:text-zinc-300">
           {tool.howTo.map((step, i) => (
@@ -135,7 +135,7 @@ export default async function ToolPage({
         </ol>
       </section>
 
-      <section className="w-full max-w-2xl rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="w-full max-w-2xl rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">FAQ</h2>
         <div className="mt-3 flex flex-col gap-4">
           {tool.faq.map((item, i) => (

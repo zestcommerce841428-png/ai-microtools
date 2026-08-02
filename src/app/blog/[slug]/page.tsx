@@ -113,7 +113,7 @@ export default async function BlogPostPage({
       </div>
 
       {relatedTools.length > 0 && (
-        <section className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-800 dark:bg-zinc-900">
+        <section className="rounded-xl border border-surface-border bg-surface p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
             Try the tools mentioned here
           </h2>

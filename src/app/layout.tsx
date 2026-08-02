@@ -21,6 +21,7 @@ import "./globals.css";
 const THEME_INIT_SCRIPT = `(function(){
 try{var s=localStorage.getItem('theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}
 try{var t=localStorage.getItem('theme-color');if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t);}catch(e){}
+try{var bg=localStorage.getItem('bg-theme');if(bg&&bg!=='default')document.documentElement.setAttribute('data-bg-theme',bg);}catch(e){}
 try{
 var raw=localStorage.getItem('a11y-settings');
 if(raw){
@@ -113,7 +114,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-black">
+      <body className="min-h-full flex flex-col bg-background">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <JsonLd data={websiteJsonLd} />
         <JsonLd data={organizationJsonLd} />
@@ -128,7 +129,7 @@ export default function RootLayout({
             AccessibilityRuntime's overlays and the settings modal (portaled
             to document.body) outside this wrapper avoids that trap. */}
         <div id="a11y-filter-scope" className="flex flex-1 flex-col">
-        <header className="sticky top-0 z-10 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
+        <header className="sticky top-0 z-10 border-b border-surface-border bg-surface/80 backdrop-blur">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
             <Link href="/" className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
               <span className="flex h-8 w-8 items-center justify-center rounded-md bg-white p-1 shadow-sm ring-1 ring-black/5">
@@ -158,7 +159,7 @@ export default function RootLayout({
 
         <main className="flex flex-1 flex-col">{children}</main>
 
-        <footer className="border-t border-zinc-200 px-4 py-10 dark:border-zinc-800">
+        <footer className="border-t border-surface-border px-4 py-10">
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
             <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
               <div className="max-w-sm">
@@ -203,7 +204,7 @@ export default function RootLayout({
                 </Link>
               </nav>
             </div>
-            <p className="border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
+            <p className="border-t border-surface-border pt-6 text-xs text-zinc-500 dark:text-zinc-500">
               &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
             </p>
           </div>

@@ -117,7 +117,7 @@ export default function SignupForm() {
         </button>
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
-        <div className="flex flex-col gap-3 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <div className="flex flex-col gap-3 border-t border-surface-border pt-4">
           <p className="text-xs text-zinc-500 dark:text-zinc-500">
             Didn&apos;t get it? Check spam, or complete the check below and resend.
           </p>

@@ -18,7 +18,7 @@ export default function AuthGateModal({
       aria-modal="true"
       aria-labelledby="auth-gate-title"
     >
-      <div className="w-full max-w-sm rounded-xl border border-zinc-200 bg-white p-6 shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="w-full max-w-sm rounded-xl border border-surface-border bg-surface p-6 shadow-lg">
         <h2 id="auth-gate-title" className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           Free account required
         </h2>

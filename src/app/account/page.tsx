@@ -43,7 +43,7 @@ export default async function AccountPage() {
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">{user.email}</p>
       </div>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Perks of being signed in</h2>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-zinc-700 dark:text-zinc-300">
           <li>A higher daily generation limit per tool than anonymous visitors</li>
@@ -51,7 +51,7 @@ export default async function AccountPage() {
         </ul>
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Recent generations</h2>
         {!history || history.length === 0 ? (
           <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-500">
@@ -66,7 +66,7 @@ export default async function AccountPage() {
             {history.map((item) => (
               <div
                 key={item.id}
-                className="rounded-lg border border-zinc-200 p-3 text-sm dark:border-zinc-800"
+                className="rounded-lg border border-surface-border p-3 text-sm"
               >
                 <div className="flex items-center justify-between gap-2">
                   <Link href={`/tools/${item.tool_slug}`} className="font-medium hover:underline">
@@ -85,7 +85,7 @@ export default async function AccountPage() {
         )}
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="rounded-xl border border-surface-border bg-surface p-6">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Account</h2>
         <div className="mt-3 flex flex-col gap-3">
           <Link href="/forgot-password" className="text-sm font-medium underline">

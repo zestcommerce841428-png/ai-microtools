@@ -100,7 +100,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+        className="flex flex-col gap-4 rounded-2xl border border-surface-border bg-surface p-6 shadow-sm"
       >
         {tool.inputFields.map((field) => (
           <label
@@ -153,7 +153,7 @@ export default function ToolForm({ tool }: ToolFormProps) {
           {results.map((result, index) => (
             <li
               key={index}
-              className="flex items-start justify-between gap-3 rounded-lg border border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900"
+              className="flex items-start justify-between gap-3 rounded-lg border border-surface-border bg-surface px-4 py-3"
             >
               <span className="whitespace-pre-wrap text-zinc-900 dark:text-zinc-100">{result}</span>
               <button

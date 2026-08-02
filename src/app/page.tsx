@@ -66,7 +66,7 @@ export default function Home() {
             <Link
               key={category}
               href={`/tools?category=${encodeURIComponent(category)}`}
-              className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-primary-ring dark:border-zinc-800 dark:bg-zinc-900"
+              className="rounded-xl border border-surface-border bg-surface p-5 transition hover:border-primary-ring"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{category}</h3>

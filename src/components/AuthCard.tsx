@@ -13,7 +13,7 @@ export default function AuthCard({
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{title}</h1>
         {subtitle && <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">{subtitle}</p>}
       </div>
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="rounded-xl border border-surface-border bg-surface p-6">
         {children}
       </div>
     </div>

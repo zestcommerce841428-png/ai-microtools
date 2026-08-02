@@ -112,6 +112,7 @@ export const DEFAULT_A11Y_SETTINGS: A11ySettings = {
 
 export const A11Y_STORAGE_KEY = "a11y-settings";
 export const THEME_STORAGE_KEY = "theme-color";
+export const BG_THEME_STORAGE_KEY = "bg-theme";
 
 type BoolKey = {
   [K in keyof A11ySettings]: A11ySettings[K] extends boolean ? K : never;

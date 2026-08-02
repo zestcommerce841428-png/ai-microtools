@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { THEMES } from "@/lib/themes";
+import { BACKGROUND_THEMES } from "@/lib/backgroundThemes";
 import {
   A11Y_FEATURES,
   A11Y_PROFILES,
@@ -12,6 +13,7 @@ import {
   subscribeA11y,
   updateA11ySettings,
   THEME_STORAGE_KEY,
+  BG_THEME_STORAGE_KEY,
   type A11ySettings,
 } from "@/lib/accessibility";
 
@@ -36,6 +38,15 @@ function getThemeServerSnapshot() {
   return "default";
 }
 
+function subscribeBgTheme(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-bg-theme"] });
+  return () => observer.disconnect();
+}
+function getBgThemeSnapshot() {
+  return document.documentElement.getAttribute("data-bg-theme") ?? "default";
+}
+
 const numberSteps = {
   fontSize: [100, 110, 120, 130, 150],
   pageZoom: [100, 125, 150, 175, 200],
@@ -48,9 +59,10 @@ const enumSteps = {
 
 export default function SettingsPanel() {
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<"themes" | "accessibility">("themes");
+  const [tab, setTab] = useState<"themes" | "background" | "accessibility">("themes");
   const [speaking, setSpeaking] = useState(false);
   const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getThemeServerSnapshot);
+  const bgTheme = useSyncExternalStore(subscribeBgTheme, getBgThemeSnapshot, getThemeServerSnapshot);
   const settings = useSyncExternalStore<A11ySettings>(subscribeA11y, getA11ySettings, getA11ySettings);
 
   useEffect(() => {
@@ -71,6 +83,11 @@ export default function SettingsPanel() {
   function selectTheme(id: string) {
     document.documentElement.setAttribute("data-theme", id);
     localStorage.setItem(THEME_STORAGE_KEY, id);
+  }
+
+  function selectBgTheme(id: string) {
+    document.documentElement.setAttribute("data-bg-theme", id);
+    localStorage.setItem(BG_THEME_STORAGE_KEY, id);
   }
 
   function toggleReadAloud() {
@@ -118,10 +135,10 @@ export default function SettingsPanel() {
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-2xl rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
+            className="w-full max-w-2xl rounded-2xl border border-surface-border bg-surface shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
+            <div className="flex items-center justify-between border-b border-surface-border px-5 py-4">
               <h2 id="settings-panel-title" className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                 Display &amp; Accessibility
               </h2>
@@ -137,9 +154,12 @@ export default function SettingsPanel() {
               </button>
             </div>
 
-            <div className="flex gap-1 border-b border-zinc-200 px-5 dark:border-zinc-800">
+            <div className="flex gap-1 border-b border-surface-border px-5">
               <button type="button" onClick={() => setTab("themes")} className={tabClass(tab === "themes")}>
-                Themes ({THEMES.length})
+                Accent ({THEMES.length})
+              </button>
+              <button type="button" onClick={() => setTab("background")} className={tabClass(tab === "background")}>
+                Background ({BACKGROUND_THEMES.length})
               </button>
               <button type="button" onClick={() => setTab("accessibility")} className={tabClass(tab === "accessibility")}>
                 Accessibility ({A11Y_FEATURES.length + 5})
@@ -160,6 +180,36 @@ export default function SettingsPanel() {
                           key={t.id}
                           type="button"
                           onClick={() => selectTheme(t.id)}
+                          aria-pressed={active}
+                          className={`flex flex-col items-center gap-1.5 rounded-lg border p-2 text-xs transition ${
+                            active
+                              ? "border-primary-ring ring-2 ring-primary-ring"
+                              : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500"
+                          }`}
+                        >
+                          <span
+                            className="h-6 w-6 rounded-full border border-black/10 dark:border-white/10"
+                            style={{ backgroundColor: t.swatch }}
+                          />
+                          <span className="text-zinc-700 dark:text-zinc-300">{t.name}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : tab === "background" ? (
+                <div>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    Tint the page background and cards — works independently of the accent color and light/dark mode.
+                  </p>
+                  <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">
+                    {BACKGROUND_THEMES.map((t) => {
+                      const active = bgTheme === t.id;
+                      return (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => selectBgTheme(t.id)}
                           aria-pressed={active}
                           className={`flex flex-col items-center gap-1.5 rounded-lg border p-2 text-xs transition ${
                             active

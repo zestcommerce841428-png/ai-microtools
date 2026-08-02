@@ -13,7 +13,7 @@ export default function ToolCard({ slug, name, tagline, category }: ToolCardProp
   return (
     <Link
       href={`/tools/${slug}`}
-      className="rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-primary-ring dark:border-zinc-800 dark:bg-zinc-900"
+      className="rounded-xl border border-surface-border bg-surface p-5 transition hover:border-primary-ring"
     >
       {category && (
         <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">{category}</p>
