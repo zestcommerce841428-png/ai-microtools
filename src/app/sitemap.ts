@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { tools } from "@/lib/tools/registry";
-import { posts } from "@/lib/blog/registry";
+import { listPostSummaries } from "@/lib/blog/db";
 import { SITE_URL } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const toolPages: MetadataRoute.Sitemap = tools.map((tool) => ({
     url: `${SITE_URL}/tools/${tool.slug}`,
     lastModified: new Date(),
@@ -11,9 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const posts = await listPostSummaries();
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(post.published_at),
     changeFrequency: "yearly",
     priority: 0.6,
   }));

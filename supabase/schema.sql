@@ -62,3 +62,34 @@ create policy "Users can insert their own generations"
 create policy "Users can delete their own generations"
   on saved_generations for delete
   using (auth.uid() = user_id);
+
+-- Blog posts, DB-backed so /blog can offer real search (via search_vector)
+-- and category filtering instead of a static in-repo array. Public read
+-- only — posts are written by an admin/seed script using the service role
+-- key, which bypasses RLS, so no insert/update policy is needed here.
+create table if not exists blog_posts (
+  id bigint generated always as identity primary key,
+  slug text unique not null,
+  title text not null,
+  description text not null,
+  category text not null,
+  content jsonb not null,
+  related_tools text[] not null default '{}',
+  published_at timestamptz not null default now(),
+  search_vector tsvector generated always as (
+    setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
+    setweight(to_tsvector('english', coalesce(description, '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(content #>> '{}', '')), 'C')
+  ) stored
+);
+
+create index if not exists blog_posts_search_idx on blog_posts using gin(search_vector);
+create index if not exists blog_posts_category_idx on blog_posts (category);
+create index if not exists blog_posts_published_at_idx on blog_posts (published_at desc);
+
+alter table blog_posts enable row level security;
+
+create policy "Public can read blog posts"
+  on blog_posts for select
+  to anon, authenticated
+  using (true);

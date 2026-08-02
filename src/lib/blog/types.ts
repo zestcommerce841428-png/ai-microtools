@@ -3,12 +3,15 @@ export interface BlogSection {
   paragraphs: string[];
 }
 
-export interface BlogPost {
+export interface BlogPostSummary {
   slug: string;
   title: string;
   description: string;
-  date: string;
-  sections: BlogSection[];
-  /** Tool slugs (from the tools registry) to link at the end of the post. */
-  relatedTools: string[];
+  category: string;
+  published_at: string;
+}
+
+export interface BlogPost extends BlogPostSummary {
+  content: BlogSection[];
+  related_tools: string[];
 }

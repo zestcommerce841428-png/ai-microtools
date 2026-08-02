@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { posts, getPostBySlug } from "@/lib/blog/registry";
+import { getPostBySlug, listAllSlugs } from "@/lib/blog/db";
 import { getToolBySlug } from "@/lib/tools/registry";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = await listAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -16,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
 
   const url = `${SITE_URL}/blog/${post.slug}`;
@@ -30,7 +33,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       url,
-      publishedTime: post.date,
+      publishedTime: post.published_at,
     },
     twitter: {
       card: "summary_large_image",
@@ -46,11 +49,11 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const relatedTools = post.relatedTools
+  const relatedTools = post.related_tools
     .map((toolSlug) => getToolBySlug(toolSlug))
     .filter((tool): tool is NonNullable<typeof tool> => Boolean(tool));
 
@@ -59,7 +62,7 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    datePublished: post.date,
+    datePublished: post.published_at,
     author: { "@type": "Organization", name: SITE_NAME },
     url,
   };
@@ -85,18 +88,24 @@ export default async function BlogPostPage({
       </nav>
 
       <div>
-        <p className="text-sm text-zinc-500 dark:text-zinc-500">
-          {new Date(post.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
+        <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-500">
+          <span>
+            {new Date(post.published_at).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+          <span aria-hidden="true">·</span>
+          <Link href={`/blog?category=${encodeURIComponent(post.category)}`} className="font-medium uppercase tracking-wide hover:text-primary">
+            {post.category}
+          </Link>
+        </div>
         <h1 className="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-50">{post.title}</h1>
       </div>
 
       <div className="flex flex-col gap-5 text-zinc-700 dark:text-zinc-300">
-        {post.sections.map((section, i) => (
+        {post.content.map((section, i) => (
           <div key={i}>
             {section.heading && (
               <h2 className="mb-2 text-xl font-semibold text-zinc-900 dark:text-zinc-50">
